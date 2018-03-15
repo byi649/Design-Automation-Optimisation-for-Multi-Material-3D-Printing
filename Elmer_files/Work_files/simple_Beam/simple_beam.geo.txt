@@ -1,0 +1,32 @@
+//Inputs
+n_z = 3;
+b = 1; //Width into page of beam
+h = 10; //Height of beam
+L = 100; //Length of beam
+
+gridsize = L/10;
+
+Point(1) = {0,-h/2,0,gridsize};
+Point(2) = {L,-h/2,0,gridsize};
+Point(3) = {L,h/2,0,gridsize};
+Point(4) = {0,h/2,0,gridsize};
+
+Line(5) = {1,2};
+Line(6) = {2,3};
+Line(7) = {3,4};
+Line(8) = {4,1};
+
+Line Loop(9) = {5,6,7,8};
+Plane Surface(10) = 9;
+
+Transfinite Line{5,6,7,8} = gridsize;
+Transfinite Surface{10};
+Recombine Surface{10};
+
+newEntities[] =
+Extrude{0,0,1}
+{
+	Surface{10};
+	Layers{n_z};
+	Recombine;
+};
