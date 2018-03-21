@@ -686,7 +686,284 @@
          </widget>
       </item>
    </equation>
-   <material/>
+   <material>
+      <item index="0">
+         <active>1</active>
+         <name>Material 1</name>
+         <widget type="Edit">
+            <key>/Heat Equation/Material/Pressure Coefficient/0</key>
+            <value></value>
+         </widget>
+         <widget type="Label">
+            <key>/Mesh Update/Material/Free text input/0</key>
+            <value>Free text input</value>
+         </widget>
+         <widget type="TextEdit">
+            <key>/Heat Equation/Material/Free text/0</key>
+            <value></value>
+         </widget>
+         <widget type="Label">
+            <key>/Linear elasticity/Material/Material pricipal directions/0</key>
+            <value>Material pricipal directions</value>
+         </widget>
+         <widget type="Label">
+            <key>/Linear elasticity/Material/Properties/0</key>
+            <value>Properties</value>
+         </widget>
+         <widget type="Combo">
+            <key>/Navier-Stokes/Material/Viscosity Model/0</key>
+            <value>None</value>
+         </widget>
+         <widget type="Edit">
+            <key>/Linear elasticity/Material/Stress 6-vector/0</key>
+            <value></value>
+         </widget>
+         <widget type="Label">
+            <key>/Helmholtz Equation/Material/Free text input/0</key>
+            <value>Free text input</value>
+         </widget>
+         <widget type="Label">
+            <key>/Navier-Stokes/Material/Porous media settings/0</key>
+            <value>Porous media settings</value>
+         </widget>
+         <widget type="Edit">
+            <key>/Navier-Stokes/Material/Artificial Compressibility/0</key>
+            <value></value>
+         </widget>
+         <widget type="Edit">
+            <key>/Heat Equation/Material/Enthalpy/0</key>
+            <value></value>
+         </widget>
+         <widget type="Edit">
+            <key>/General/Material/Reference Temperature/0</key>
+            <value></value>
+         </widget>
+         <widget type="Edit">
+            <key>/Navier-Stokes/Material/Viscosity Difference/0</key>
+            <value></value>
+         </widget>
+         <widget type="Label">
+            <key>/Heat Equation/Material/Properties/0</key>
+            <value>Properties</value>
+         </widget>
+         <widget type="Edit">
+            <key>/Navier-Stokes/Material/Viscosity Transition/0</key>
+            <value></value>
+         </widget>
+         <widget type="Edit">
+            <key>/Linear elasticity/Material/Damping coefficient/0</key>
+            <value></value>
+         </widget>
+         <widget type="Edit">
+            <key>/Navier-Stokes/Material/Viscosity/0</key>
+            <value></value>
+         </widget>
+         <widget type="Edit">
+            <key>/General/Material/Heat expansion Coeff./0</key>
+            <value></value>
+         </widget>
+         <widget type="Edit">
+            <key>/Navier-Stokes/Material/Viscosity Temp Exp/0</key>
+            <value></value>
+         </widget>
+         <widget type="Edit">
+            <key>/Heat Equation/Material/Specific Enthalpy/0</key>
+            <value></value>
+         </widget>
+         <widget type="Edit">
+            <key>/Navier-Stokes/Material/Viscosity Temp Ref/0</key>
+            <value></value>
+         </widget>
+         <widget type="Edit">
+            <key>/Linear elasticity/Material/Rayleigh beta/0</key>
+            <value></value>
+         </widget>
+         <widget type="Combo">
+            <key>/Heat Equation/Material/Heat Conductivity Model/0</key>
+            <value>None</value>
+         </widget>
+         <widget type="Label">
+            <key>/Navier-Stokes/Material/Visocity Settings/0</key>
+            <value>Visocity Settings</value>
+         </widget>
+         <widget type="Combo">
+            <key>/Navier-Stokes/Material/Compressibility Model/0</key>
+            <value>None</value>
+         </widget>
+         <widget type="Edit">
+            <key>/Mesh Update/Material/Elastic modulus/0</key>
+            <value></value>
+         </widget>
+         <widget type="Label">
+            <key>/Electrostatics/Material/Properties/0</key>
+            <value>Properties</value>
+         </widget>
+         <widget type="Label">
+            <key>/Heat Equation/Material/Free text input/0</key>
+            <value>Free text input</value>
+         </widget>
+         <widget type="Label">
+            <key>/Mesh Update/Material/Properties/0</key>
+            <value>Properties</value>
+         </widget>
+         <widget type="TextEdit">
+            <key>/General/Material/Free text/0</key>
+            <value></value>
+         </widget>
+         <widget type="CheckBox">
+            <key>/Navier-Stokes/Material/Porous Media/0</key>
+            <value>0</value>
+         </widget>
+         <widget type="TextEdit">
+            <key>/Linear elasticity/Material/Free text/0</key>
+            <value></value>
+         </widget>
+         <widget type="Edit">
+            <key>/Linear elasticity/Material/Unit Vector 1/0</key>
+            <value></value>
+         </widget>
+         <widget type="TextEdit">
+            <key>/Helmholtz Equation/Material/Free text/0</key>
+            <value></value>
+         </widget>
+         <widget type="CheckBox">
+            <key>/Linear elasticity/Material/Rotate Elasticity Tensor/0</key>
+            <value>0</value>
+         </widget>
+         <widget type="Label">
+            <key>/Navier-Stokes/Material/Free text input/0</key>
+            <value>Free text input</value>
+         </widget>
+         <widget type="Edit">
+            <key>/Linear elasticity/Material/Rayleigh alpha/0</key>
+            <value></value>
+         </widget>
+         <widget type="Edit">
+            <key>/Navier-Stokes/Material/Yasuda Coefficient/0</key>
+            <value>2</value>
+         </widget>
+         <widget type="Edit">
+            <key>/Navier-Stokes/Material/Porous Resistivity/0</key>
+            <value></value>
+         </widget>
+         <widget type="Edit">
+            <key>/General/Material/Reference Pressure/0</key>
+            <value></value>
+         </widget>
+         <widget type="Label">
+            <key>/Linear elasticity/Material/Free text input/0</key>
+            <value>Free text input</value>
+         </widget>
+         <widget type="Edit">
+            <key>/Navier-Stokes/Material/Critical Shear Rate/0</key>
+            <value></value>
+         </widget>
+         <widget type="Edit">
+            <key>/General/Material/Specific Heat Ratio/0</key>
+            <value></value>
+         </widget>
+         <widget type="TextEdit">
+            <key>/Navier-Stokes/Material/Free text/0</key>
+            <value></value>
+         </widget>
+         <widget type="Edit">
+            <key>/Heat Equation/Material/Heat Conductivity/0</key>
+            <value></value>
+         </widget>
+         <widget type="TextEdit">
+            <key>/Mesh Update/Material/Free text/0</key>
+            <value></value>
+         </widget>
+         <widget type="Edit">
+            <key>/Linear elasticity/Material/Unit Vector 3/0</key>
+            <value></value>
+         </widget>
+         <widget type="Edit">
+            <key>/Electrostatics/Material/Relative Permittivity/0</key>
+            <value></value>
+         </widget>
+         <widget type="Edit">
+            <key>/Navier-Stokes/Material/Smagorinsky Constant/0</key>
+            <value></value>
+         </widget>
+         <widget type="Label">
+            <key>/General/Material/Free text input/0</key>
+            <value>Free text input</value>
+         </widget>
+         <widget type="Edit">
+            <key>/Helmholtz Equation/Material/Sound speed/0</key>
+            <value></value>
+         </widget>
+         <widget type="Edit">
+            <key>/General/Material/Heat Capacity/0</key>
+            <value></value>
+         </widget>
+         <widget type="Edit">
+            <key>/Mesh Update/Material/Poisson ratio/0</key>
+            <value></value>
+         </widget>
+         <widget type="Edit">
+            <key>/Linear elasticity/Material/Unit Vector 2/0</key>
+            <value></value>
+         </widget>
+         <widget type="Edit">
+            <key>/Heat Equation/Material/Turbulent Prandtl Number/0</key>
+            <value>0.85</value>
+         </widget>
+         <widget type="Edit">
+            <key>/Navier-Stokes/Material/Viscosity Exponent/0</key>
+            <value></value>
+         </widget>
+         <widget type="Label">
+            <key>/Navier-Stokes/Material/Compressibility models/0</key>
+            <value>Compressibility models</value>
+         </widget>
+         <widget type="Edit">
+            <key>/General/Material/Density/0</key>
+            <value>2330</value>
+         </widget>
+         <widget type="CheckBox">
+            <key>/Linear elasticity/Material/Rayleigh Damping/0</key>
+            <value>0</value>
+         </widget>
+         <widget type="Edit">
+            <key>/Linear elasticity/Material/Strain 6-vector/0</key>
+            <value></value>
+         </widget>
+         <widget type="Label">
+            <key>/Helmholtz Equation/Material/Properties/0</key>
+            <value>Properties</value>
+         </widget>
+         <widget type="Edit">
+            <key>/Linear elasticity/Material/Poisson ratio/0</key>
+            <value>0.25</value>
+         </widget>
+         <widget type="Edit">
+            <key>/Heat Equation/Material/Emissivity/0</key>
+            <value></value>
+         </widget>
+         <widget type="Edit">
+            <key>/Linear elasticity/Material/Youngs modulus/0</key>
+            <value>100e9</value>
+         </widget>
+         <widget type="Edit">
+            <key>/Navier-Stokes/Material/Levelset Bandwidth/0</key>
+            <value></value>
+         </widget>
+         <widget type="Label">
+            <key>/General/Material/Properties/0</key>
+            <value>Properties</value>
+         </widget>
+         <widget type="Edit">
+            <key>/Helmholtz Equation/Material/Damping coefficient/0</key>
+            <value></value>
+         </widget>
+         <widget type="Edit">
+            <key>/Navier-Stokes/Material/Artificial Pressure/0</key>
+            <value></value>
+         </widget>
+      </item>
+   </material>
    <bodyforce/>
    <initialcondition/>
    <boundarycondition>
@@ -1727,7 +2004,7 @@
          </widget>
          <widget type="ComboBox">
             <objectName>materialCombo</objectName>
-            <currentIndex>0</currentIndex>
+            <currentIndex>1</currentIndex>
          </widget>
          <widget type="ComboBox">
             <objectName>bodyForceCombo</objectName>
