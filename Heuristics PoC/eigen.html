@@ -11868,18 +11868,17 @@ div#notebook {
 
 <span class="c1"># Compute all eigenvalues of A x = \lambda x</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Computing eigenvalues. This can take a minute.&quot;</span><span class="p">)</span>
-<span class="c1">#eigensolver.parameters[&#39;spectrum&#39;] = &#39;smallest real&#39;</span>
+<span class="n">eigensolver</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;spectrum&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;smallest magnitude&#39;</span>
 <span class="n">eigensolver</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
-<span class="c1">#eigensolver.get_eigenvalue(1)</span>
+<span class="n">eigensolver</span><span class="o">.</span><span class="n">get_number_converged</span><span class="p">()</span>
 
 <span class="c1"># Extract largest (first) eigenpair</span>
 <span class="n">eigens</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">15</span><span class="p">):</span>
-    <span class="n">eigens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">eigensolver</span><span class="o">.</span><span class="n">get_eigenpair</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">eigens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">eigensolver</span><span class="o">.</span><span class="n">get_eigenpair</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
     
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">eigens</span><span class="p">)):</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Eigenvalue&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="s2">&quot;: &quot;</span><span class="p">,</span> <span class="n">eigens</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot; | Frequency&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="s2">&quot;: &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">eigens</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span>
-    
 </pre></div>
 
 </div>
@@ -11897,7 +11896,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
@@ -12010,7 +12009,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[46]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">deflections</span> <span class="o">=</span> <span class="n">run_solver</span><span class="p">([</span><span class="mf">1e6</span><span class="p">,</span> <span class="mf">1e7</span><span class="p">,</span> <span class="mf">1e8</span><span class="p">,</span> <span class="mf">1e7</span><span class="p">,</span> <span class="mf">1e6</span><span class="p">])</span>
@@ -12039,7 +12038,12 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>-5.89504728071e-06
+<pre>Calling FFC just-in-time (JIT) compiler, this may take some time.
+Calling FFC just-in-time (JIT) compiler, this may take some time.
+Calling FFC just-in-time (JIT) compiler, this may take some time.
+Calling FFC just-in-time (JIT) compiler, this may take some time.
+Calling FFC just-in-time (JIT) compiler, this may take some time.
+-5.89504728071e-06
 0.0908443021264
 0.206902659139
 0.330447429145
@@ -12050,13 +12054,193 @@ div#notebook {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[46]:</div>
+<div class="prompt output_prompt">Out[5]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[&lt;matplotlib.lines.Line2D at 0x7f020edc5a20&gt;]</pre>
+<pre>[&lt;matplotlib.lines.Line2D at 0x7fc0c1150898&gt;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Displacement-(binary-material)">Displacement (binary material)<a class="anchor-link" href="#Displacement-(binary-material)">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">FEniCS tutorial demo program: Linear elastic problem.</span>
+
+<span class="sd">  -div(sigma(u)) = f</span>
+
+<span class="sd">The model is used to simulate an elastic beam clamped at</span>
+<span class="sd">its left end and deformed under its own weight.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">fenics</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">dolfin</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">run_solver_binary</span><span class="p">(</span><span class="n">moduli</span><span class="p">):</span>
+    
+    <span class="n">moduli_array</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1e6</span><span class="p">,</span> <span class="mf">1e8</span><span class="p">]</span>
+    
+    <span class="c1"># Create n different materials</span>
+    <span class="k">class</span> <span class="nc">K</span><span class="p">(</span><span class="n">Expression</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">set_k_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k_array</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">k_array</span> <span class="o">=</span> <span class="n">k_array</span>
+        <span class="k">def</span> <span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+            <span class="c1"># Cantilever is split into n materials serially along length</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">k_array</span><span class="p">))</span>
+            <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">k_array</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">index</span><span class="p">)]</span>
+            
+    <span class="c1"># Initialize kappa</span>
+    <span class="n">kappa</span> <span class="o">=</span> <span class="n">K</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">kappa</span><span class="o">.</span><span class="n">set_k_values</span><span class="p">([</span><span class="n">moduli_array</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">moduli</span><span class="p">])</span>
+    
+    <span class="c1"># Scaled variables</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># Length</span>
+    <span class="n">W</span> <span class="o">=</span> <span class="mf">0.2</span> <span class="c1"># Width</span>
+    
+    <span class="n">Young</span> <span class="o">=</span> <span class="n">kappa</span>
+    <span class="n">poisson</span> <span class="o">=</span> <span class="mf">0.3</span>
+    
+    <span class="n">lambda_</span> <span class="o">=</span> <span class="n">Young</span> <span class="o">*</span> <span class="n">poisson</span> <span class="o">/</span> <span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="n">poisson</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">poisson</span><span class="p">))</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="n">Young</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">poisson</span><span class="p">))</span>
+    
+    <span class="n">rho</span> <span class="o">=</span> <span class="mf">2.7e3</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="mf">9.8</span>
+    
+    <span class="c1"># Create mesh and define function space</span>
+    <span class="n">mesh</span> <span class="o">=</span> <span class="n">BoxMesh</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">W</span><span class="p">),</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="n">VectorFunctionSpace</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    
+    <span class="c1"># Define boundary condition</span>
+    <span class="n">tol</span> <span class="o">=</span> <span class="mf">1E-14</span>
+    
+    <span class="k">def</span> <span class="nf">clamped_boundary</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">on_boundary</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">on_boundary</span> <span class="ow">and</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">tol</span>
+    
+    <span class="n">bc</span> <span class="o">=</span> <span class="n">DirichletBC</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">Constant</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)),</span> <span class="n">clamped_boundary</span><span class="p">)</span>
+    
+    <span class="c1"># Define strain and stress</span>
+    <span class="k">def</span> <span class="nf">epsilon</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">nabla_grad</span><span class="p">(</span><span class="n">u</span><span class="p">)</span> <span class="o">+</span> <span class="n">nabla_grad</span><span class="p">(</span><span class="n">u</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+        <span class="c1">#return sym(nabla_grad(u))</span>
+    
+    <span class="k">def</span> <span class="nf">sigma</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">lambda_</span><span class="o">*</span><span class="n">nabla_div</span><span class="p">(</span><span class="n">u</span><span class="p">)</span><span class="o">*</span><span class="n">Identity</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">mu</span><span class="o">*</span><span class="n">epsilon</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+    
+    <span class="c1"># Define variational problem</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">TrialFunction</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">geometric_dimension</span><span class="p">()</span>  <span class="c1"># space dimension</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">TestFunction</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">Constant</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">rho</span><span class="o">*</span><span class="n">g</span><span class="p">))</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">Constant</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">inner</span><span class="p">(</span><span class="n">sigma</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="n">epsilon</span><span class="p">(</span><span class="n">v</span><span class="p">))</span><span class="o">*</span><span class="n">dx</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">dot</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span><span class="o">*</span><span class="n">dx</span> <span class="o">+</span> <span class="n">dot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span><span class="o">*</span><span class="n">ds</span>
+    
+    <span class="c1"># Compute solution</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+    <span class="n">solve</span><span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">L</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">bc</span><span class="p">)</span>
+    
+    <span class="c1"># Save solution</span>
+    <span class="c1">#vtkfile = File(&#39;poisson/solution.pvd&#39;)</span>
+    <span class="c1">#vtkfile &lt;&lt; u</span>
+    
+    <span class="c1"># Compute magnitude of displacement</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="n">FunctionSpace</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">u_magnitude</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">dot</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">u</span><span class="p">))</span>
+    <span class="n">u_magnitude</span> <span class="o">=</span> <span class="n">project</span><span class="p">(</span><span class="n">u_magnitude</span><span class="p">,</span> <span class="n">V</span><span class="p">)</span>
+    <span class="c1">#plot(u_magnitude, &#39;Displacement magnitude&#39;)</span>
+    <span class="c1">#print(&#39;min/max u:&#39;,</span>
+    <span class="c1">#      u_magnitude.vector().get_local().min(),</span>
+    <span class="c1">#      u_magnitude.vector().get_local().max())</span>
+    <span class="c1">#import matplotlib</span>
+    <span class="n">vertical</span> <span class="o">=</span> <span class="n">u_magnitude</span><span class="o">.</span><span class="n">vector</span><span class="p">()</span><span class="o">.</span><span class="n">get_local</span><span class="p">()[::</span><span class="mi">4</span><span class="p">]</span>
+    <span class="c1">#matplotlib.pyplot.plot(-vertical)</span>
+    
+    <span class="k">return</span> <span class="n">vertical</span>
+
+
+<span class="k">def</span> <span class="nf">get_fitness_binary</span><span class="p">(</span><span class="n">moduli</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+    <span class="n">deflections</span> <span class="o">=</span> <span class="n">run_solver_binary</span><span class="p">(</span><span class="n">moduli</span><span class="p">)</span>
+    <span class="n">interestPoints</span> <span class="o">=</span> <span class="p">[</span><span class="n">deflections</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">deflections</span><span class="p">[</span><span class="mi">100</span><span class="p">],</span> <span class="n">deflections</span><span class="p">[</span><span class="mi">200</span><span class="p">],</span> <span class="n">deflections</span><span class="p">[</span><span class="mi">300</span><span class="p">],</span> <span class="n">deflections</span><span class="p">[</span><span class="mi">400</span><span class="p">]]</span>
+    <span class="n">differences</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">interestPoints</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+    <span class="n">fitness</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">differences</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">fitness</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">deflections</span> <span class="o">=</span> <span class="n">run_solver</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">deflections</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">deflections</span><span class="p">[</span><span class="mi">100</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">deflections</span><span class="p">[</span><span class="mi">200</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">deflections</span><span class="p">[</span><span class="mi">300</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">deflections</span><span class="p">[</span><span class="mi">400</span><span class="p">])</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="o">-</span><span class="n">deflections</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>-5.99702377642e-08
+0.000999417416962
+0.0563692217035
+0.148797269843
+0.249195328154
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[40]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&lt;matplotlib.lines.Line2D at 0x7fc0c32c8208&gt;]</pre>
 </div>
 
 </div>
@@ -12069,7 +12253,7 @@ div#notebook {
 
 
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,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
+<img src="data:image/png;base64,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
 "
 >
 </div>
@@ -12090,7 +12274,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[47]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Presolved target</span>
@@ -12099,7 +12283,18 @@ div#notebook {
     
     <span class="k">return</span> <span class="n">get_fitness</span><span class="p">(</span><span class="n">moduli</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
 
+<span class="c1"># Presolved target</span>
+<span class="k">def</span> <span class="nf">get_fitness_wrapper_binary</span><span class="p">(</span><span class="n">moduli</span><span class="p">):</span>
+    <span class="n">target</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.09</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">,</span> <span class="mf">0.33</span><span class="p">,</span> <span class="mf">0.46</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">get_fitness_binary</span><span class="p">(</span><span class="n">moduli</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="n">fitness</span> <span class="o">=</span> <span class="n">get_fitness_wrapper</span><span class="p">([</span><span class="mf">1e6</span><span class="p">,</span> <span class="mf">1e7</span><span class="p">,</span> <span class="mf">1e8</span><span class="p">,</span> <span class="mf">1e7</span><span class="p">,</span> <span class="mf">1e6</span><span class="p">])</span>
+<span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Time taken =&quot;</span><span class="p">,</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">,</span> <span class="s2">&quot;seconds&quot;</span><span class="p">)</span>
+
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fitness =&quot;</span><span class="p">,</span> <span class="n">fitness</span><span class="p">)</span>
 </pre></div>
 
@@ -12117,7 +12312,13 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Fitness = 0.00702864769683
+<pre>Calling FFC just-in-time (JIT) compiler, this may take some time.
+Calling FFC just-in-time (JIT) compiler, this may take some time.
+Calling FFC just-in-time (JIT) compiler, this may take some time.
+Calling FFC just-in-time (JIT) compiler, this may take some time.
+Calling FFC just-in-time (JIT) compiler, this may take some time.
+Time taken = 5.366480827331543 seconds
+Fitness = 0.00702864769683
 </pre>
 </div>
 </div>
@@ -12136,7 +12337,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[54]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">scipy.optimize</span>
@@ -12211,7 +12412,7 @@ Function evaluations = 897
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># ???</span>
-<span class="n">solution</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">basinhopping</span><span class="p">(</span><span class="n">get_fitness_wrapper</span><span class="p">,</span> <span class="n">x0</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1e7</span><span class="p">,</span> <span class="mf">1e7</span><span class="p">,</span> <span class="mf">1e7</span><span class="p">,</span> <span class="mf">1e7</span><span class="p">,</span> <span class="mf">1e7</span><span class="p">],</span> <span class="n">niter</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">stepsize</span><span class="o">=</span> <span class="mf">1e7</span><span class="p">)</span>
+<span class="n">solution</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">basinhopping</span><span class="p">(</span><span class="n">get_fitness_wrapper</span><span class="p">,</span> <span class="n">x0</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1e7</span><span class="p">,</span> <span class="mf">1e7</span><span class="p">,</span> <span class="mf">1e7</span><span class="p">,</span> <span class="mf">1e7</span><span class="p">,</span> <span class="mf">1e7</span><span class="p">],</span> <span class="n">niter</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">stepsize</span><span class="o">=</span> <span class="mf">1e6</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Solution =&quot;</span><span class="p">,</span> <span class="n">solution</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Objective function (min) =&quot;</span><span class="p">,</span> <span class="n">solution</span><span class="o">.</span><span class="n">fun</span><span class="p">)</span>
@@ -12293,10 +12494,12 @@ Function evaluations = 1024
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[75]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">array</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">multiprocessing</span>
+
+<span class="kn">import</span> <span class="nn">array</span>
 <span class="kn">import</span> <span class="nn">random</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span>
@@ -12311,6 +12514,9 @@ Function evaluations = 1024
 
 <span class="n">toolbox</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">Toolbox</span><span class="p">()</span>
 
+<span class="n">pool</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Pool</span><span class="p">()</span>
+<span class="n">toolbox</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;map&quot;</span><span class="p">,</span> <span class="n">pool</span><span class="o">.</span><span class="n">map</span><span class="p">)</span>
+
 <span class="n">toolbox</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;attr_float&quot;</span><span class="p">,</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">,</span> <span class="mf">1e6</span><span class="p">,</span> <span class="mf">1e8</span><span class="p">)</span>
 
 <span class="c1"># Structure initializers</span>
@@ -12322,7 +12528,7 @@ Function evaluations = 1024
 
 <span class="n">toolbox</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;evaluate&quot;</span><span class="p">,</span> <span class="n">evalOneMax</span><span class="p">)</span>
 <span class="n">toolbox</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;mate&quot;</span><span class="p">,</span> <span class="n">tools</span><span class="o">.</span><span class="n">cxTwoPoint</span><span class="p">)</span>
-<span class="n">toolbox</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;mutate&quot;</span><span class="p">,</span> <span class="n">tools</span><span class="o">.</span><span class="n">mutGaussian</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">1e7</span><span class="p">,</span> <span class="n">indpb</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">toolbox</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;mutate&quot;</span><span class="p">,</span> <span class="n">tools</span><span class="o">.</span><span class="n">mutGaussian</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">1e6</span><span class="p">,</span> <span class="n">indpb</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
 <span class="n">toolbox</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;select&quot;</span><span class="p">,</span> <span class="n">tools</span><span class="o">.</span><span class="n">selTournament</span><span class="p">,</span> <span class="n">tournsize</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
     
 <span class="n">pop</span> <span class="o">=</span> <span class="n">toolbox</span><span class="o">.</span><span class="n">population</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
@@ -12333,7 +12539,7 @@ Function evaluations = 1024
 <span class="n">stats</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;min&quot;</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">min</span><span class="p">)</span>
 <span class="n">stats</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;max&quot;</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">max</span><span class="p">)</span>
 
-<span class="n">pop</span><span class="p">,</span> <span class="n">log</span> <span class="o">=</span> <span class="n">algorithms</span><span class="o">.</span><span class="n">eaSimple</span><span class="p">(</span><span class="n">pop</span><span class="p">,</span> <span class="n">toolbox</span><span class="p">,</span> <span class="n">cxpb</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">mutpb</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">ngen</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> 
+<span class="n">pop</span><span class="p">,</span> <span class="n">log</span> <span class="o">=</span> <span class="n">algorithms</span><span class="o">.</span><span class="n">eaSimple</span><span class="p">(</span><span class="n">pop</span><span class="p">,</span> <span class="n">toolbox</span><span class="p">,</span> <span class="n">cxpb</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">mutpb</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">ngen</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> 
                                <span class="n">stats</span><span class="o">=</span><span class="n">stats</span><span class="p">,</span> <span class="n">halloffame</span><span class="o">=</span><span class="n">hof</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">log</span><span class="p">)</span>
@@ -12367,108 +12573,565 @@ Function evaluations = 1024
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>gen	nevals	avg     	std        	min     	max     
-0  	15    	0.564619	0.0473579  	0.415095	0.592952
-1  	1     	0.53086 	0.0632693  	0.415095	0.585933
-2  	12    	0.494846	0.0697239  	0.361255	0.592785
-3  	9     	0.430488	0.0524562  	0.361255	0.54414 
-4  	9     	0.393603	0.0253354  	0.361255	0.415806
-5  	7     	0.386152	0.0251722  	0.361255	0.414957
-6  	3     	0.369162	0.0170733  	0.361255	0.412575
-7  	6     	0.364806	0.0127761  	0.361255	0.412575
-8  	6     	0.358829	0.0095979  	0.322962	0.363196
-9  	6     	0.353591	0.0153141  	0.322962	0.361255
-10 	9     	0.343384	0.0190933  	0.322962	0.361255
-11 	12    	0.330624	0.0152926  	0.322948	0.361209
-12 	10    	0.334124	0.0412554  	0.322948	0.488478
-13 	9     	0.322941	5.29845e-05	0.322745	0.322962
-14 	11    	0.322887	0.000183055	0.322229	0.322948
-15 	9     	0.323203	0.0018556  	0.322229	0.330052
-16 	8     	0.324927	0.00915387 	0.322229	0.359165
-17 	5     	0.322304	0.000224512	0.322229	0.323113
-18 	6     	0.334025	0.0440712  	0.322229	0.498924
-19 	9     	0.336337	0.0525423  	0.322229	0.532931
-20 	8     	0.322229	5.55112e-17	0.322229	0.322229
-21 	9     	0.332462	0.0378291  	0.322229	0.473997
-22 	8     	0.329687	0.0274847  	0.322229	0.432521
-23 	8     	0.322229	5.55112e-17	0.322229	0.322229
-24 	7     	0.322229	5.55112e-17	0.322229	0.322229
-25 	8     	0.322191	0.000162927	0.321586	0.322307
-26 	12    	0.321972	0.00031496 	0.321586	0.322229
-27 	12    	0.321712	0.000305984	0.321455	0.322359
-28 	6     	0.321594	0.000226519	0.321414	0.322229
-29 	10    	0.321527	0.000167605	0.321414	0.322112
-30 	4     	0.321458	3.67824e-05	0.321414	0.321586
-31 	9     	0.338147	0.0625419  	0.321414	0.572157
-32 	11    	0.348066	0.0705242  	0.321204	0.572716
-33 	9     	0.321372	8.40978e-05	0.321204	0.321414
-34 	10    	0.337206	0.045435   	0.321204	0.497628
-35 	3     	0.321334	9.89703e-05	0.321204	0.321414
-36 	9     	0.321309	0.000254587	0.321204	0.322224
-37 	12    	0.320832	0.00139247 	0.315622	0.321204
-38 	9     	0.319072	0.00263581 	0.315622	0.321204
-39 	5     	0.317773	0.00273121 	0.314962	0.321204
-40 	10    	0.344389	0.0740718  	0.314962	0.568007
-41 	11    	0.328099	0.0484829  	0.313516	0.509494
-42 	5     	0.318528	0.0149401  	0.313516	0.374355
-43 	8     	0.324436	0.0404794  	0.309271	0.475815
-44 	13    	0.330721	0.0677758  	0.309271	0.584194
-45 	9     	0.380076	0.221663   	0.309229	1.19648 
-46 	5     	0.309453	0.000673197	0.309229	0.311969
-47 	9     	0.322962	0.0785894  	0.160515	0.560946
-48 	5     	0.279492	0.0594883  	0.160515	0.309271
-49 	7     	0.261226	0.0714459  	0.160515	0.332751
-50 	7     	0.170429	0.0370957  	0.160515	0.309229
-51 	10    	0.171899	0.0426969  	0.160133	0.331656
-52 	7     	0.1607  	0.00100994 	0.160133	0.164436
-53 	8     	0.160311	0.000190726	0.160133	0.160515
-54 	7     	0.174821	0.0549593  	0.160133	0.38046 
-55 	9     	0.160221	0.000329713	0.160133	0.161455
-56 	8     	0.160133	0          	0.160133	0.160133
-57 	11    	0.193031	0.0841546  	0.160133	0.425684
-58 	5     	0.15891 	0.00431561 	0.142789	0.160133
-59 	8     	0.185412	0.105079   	0.142789	0.577989
-60 	7     	0.168004	0.0591332  	0.142789	0.387224
-61 	9     	0.150552	0.00831222 	0.142789	0.16113 
-62 	5     	0.142789	0          	0.142789	0.142789
-63 	4     	0.142789	0          	0.142789	0.142789
-64 	11    	0.142789	0          	0.142789	0.142789
-65 	10    	0.161989	0.0587606  	0.142789	0.375811
-66 	8     	0.17804 	0.131895   	0.142789	0.671547
-67 	9     	0.183081	0.131019   	0.142789	0.670091
-68 	6     	0.142789	0          	0.142789	0.142789
-69 	7     	0.158746	0.059704   	0.142789	0.382138
-70 	11    	0.167982	0.0642581  	0.142789	0.337049
-71 	4     	0.15792 	0.056614   	0.142789	0.36975 
-72 	4     	0.162481	0.0557864  	0.142789	0.357091
-73 	10    	0.142789	0          	0.142789	0.142789
-74 	9     	0.158028	0.0570167  	0.142789	0.371365
-75 	10    	0.143713	0.00345609 	0.142789	0.156644
-76 	4     	0.142789	0          	0.142789	0.142789
-77 	8     	0.292124	0.55876    	0.142789	2.38281 
-78 	9     	0.142789	0          	0.142789	0.142789
-79 	10    	0.157453	0.0519561  	0.142789	0.351577
-80 	10    	0.17276 	0.112141   	0.142789	0.592353
-81 	7     	0.160309	0.0447853  	0.142789	0.283069
-82 	7     	0.142789	0          	0.142789	0.142789
-83 	11    	0.231352	0.214472   	0.142789	0.967832
-84 	5     	0.156509	0.0513354  	0.142789	0.348589
-85 	9     	0.142789	0          	0.142789	0.142789
-86 	5     	0.142789	0          	0.142789	0.142789
-87 	9     	0.142789	0          	0.142789	0.142789
-88 	7     	0.162973	0.0755224  	0.142789	0.445552
-89 	5     	0.144008	0.00456092 	0.142789	0.161074
-90 	11    	0.178985	0.100742   	0.142789	0.524926
-91 	6     	0.158443	0.0585722  	0.142789	0.3776  
-92 	8     	0.171154	0.0726977  	0.142789	0.375895
-93 	8     	0.14303 	0.00090228 	0.142789	0.146406
-94 	8     	0.152334	0.0313354  	0.142789	0.26844 
-95 	7     	0.152421	0.0360391  	0.142789	0.287267
-96 	7     	0.142789	0          	0.142789	0.142789
-97 	8     	0.142789	0          	0.142789	0.142789
-98 	9     	0.220321	0.290097   	0.142789	1.30576 
-99 	7     	0.144064	0.00477009 	0.142789	0.161912
-100	6     	0.143632	0.00315171 	0.142789	0.155424
+<pre>gen	nevals	avg      	std        	min      	max      
+0  	15    	0.558998 	0.0344194  	0.452143 	0.589891 
+1  	6     	0.508059 	0.0486482  	0.452135 	0.573023 
+2  	13    	0.47219  	0.0469959  	0.373284 	0.591114 
+3  	9     	0.431368 	0.0350395  	0.373284 	0.456033 
+4  	8     	0.410056 	0.0393108  	0.373284 	0.452143 
+5  	8     	0.371409 	0.00559982 	0.351231 	0.373284 
+6  	11    	0.369607 	0.0121503  	0.351231 	0.402446 
+7  	9     	0.367135 	0.0168539  	0.351231 	0.40972  
+8  	6     	0.356967 	0.00821737 	0.351231 	0.373284 
+9  	8     	0.351547 	0.00503392 	0.339971 	0.367194 
+10 	9     	0.350481 	0.00280883 	0.339971 	0.351231 
+11 	9     	0.348978 	0.00450387 	0.33997  	0.351231 
+12 	7     	0.342974 	0.00497893 	0.33997  	0.351231 
+13 	10    	0.338896 	0.00402232 	0.323845 	0.339972 
+14 	12    	0.33567  	0.00713066 	0.323845 	0.339971 
+15 	8     	0.330295 	0.00789939 	0.323845 	0.33997  
+16 	11    	0.32618  	0.00598417 	0.323795 	0.342791 
+17 	11    	0.323839 	1.70466e-05	0.323795 	0.323846 
+18 	12    	0.32383  	2.51936e-05	0.323795 	0.323868 
+19 	14    	0.325892 	0.00775586 	0.323793 	0.354912 
+20 	10    	0.324266 	0.00175839 	0.323779 	0.330845 
+21 	6     	0.32379  	5.67116e-06	0.323779 	0.323793 
+22 	10    	0.325631 	0.00691097 	0.323779 	0.351489 
+23 	7     	0.323781 	5.92673e-06	0.323775 	0.323793 
+24 	7     	0.323724 	0.0134333  	0.28659  	0.360163 
+25 	8     	0.315578 	0.0151615  	0.28659  	0.329069 
+26 	11    	0.29213  	0.0476132  	0.126121 	0.323779 
+27 	10    	0.26788  	0.0567744  	0.126121 	0.323775 
+28 	9     	0.200997 	0.0800482  	0.126102 	0.28659  
+29 	8     	0.136815 	0.0400224  	0.126102 	0.286565 
+30 	9     	0.142862 	0.0626616  	0.126102 	0.37732  
+31 	11    	0.130762 	0.0174188  	0.126102 	0.195937 
+32 	9     	0.126102 	7.76785e-06	0.126079 	0.126121 
+33 	10    	0.139893 	0.0516256  	0.126079 	0.333059 
+34 	11    	0.126087 	1.09716e-05	0.126079 	0.126102 
+35 	12    	0.126081 	5.7321e-06 	0.126079 	0.126102 
+36 	9     	0.328845 	0.741453   	0.126079 	3.1028   
+37 	9     	0.129194 	0.0116548  	0.126079 	0.172802 
+38 	5     	0.151664 	0.0957315  	0.126066 	0.509859 
+39 	8     	0.126077 	4.51997e-06	0.126066 	0.126079 
+40 	11    	0.133124 	0.0263903  	0.126038 	0.231868 
+41 	4     	0.120811 	0.0196508  	0.0472844	0.126079 
+42 	12    	0.120797 	0.0196472  	0.0472844	0.126067 
+43 	9     	0.120792 	0.0196456  	0.0472844	0.126066 
+44 	6     	0.120789 	0.0196448  	0.0472844	0.126046 
+45 	10    	0.108301 	0.053286   	0.0472807	0.253706 
+46 	6     	0.0840379	0.0392931  	0.0472807	0.12608  
+47 	6     	0.0597528	0.0322509  	0.0472767	0.155597 
+48 	13    	0.142621 	0.324692   	0.0472767	1.35408  
+49 	9     	0.0472786	1.9829e-06 	0.0472767	0.0472807
+50 	9     	0.0819569	0.09343    	0.0472767	0.395317 
+51 	10    	0.0759171	0.094938   	0.0472767	0.428245 
+52 	8     	0.0803745	0.123841   	0.0472767	0.543743 
+53 	7     	0.060801 	0.0391701  	0.0472767	0.199606 
+54 	13    	0.0579863	0.0400718  	0.0472767	0.207921 
+55 	12    	0.0676353	0.0571193  	0.0466359	0.26483  
+56 	7     	0.052544 	0.0207386  	0.0466343	0.130132 
+57 	8     	0.0467637	0.000256502	0.0466343	0.0472767
+58 	14    	0.0466775	0.000159222	0.0466343	0.0472732
+59 	10    	0.295497 	0.931159   	0.0466342	3.77958  
+60 	11    	0.0831947	0.101233   	0.046634 	0.428999 
+61 	11    	0.0479881	0.00506554 	0.046634 	0.0669416
+62 	6     	0.142664 	0.35931    	0.0466339	1.48708  
+63 	10    	0.0786582	0.1169     	0.0466339	0.515938 
+64 	8     	0.055316 	0.0324852  	0.0466339	0.176864 
+65 	13    	0.0566824	0.037598   	0.0466339	0.197361 
+66 	12    	0.0466339	6.93889e-18	0.0466339	0.0466339
+67 	6     	0.0466339	1.10116e-08	0.0466339	0.0466339
+68 	5     	0.0466339	1.76579e-08	0.0466339	0.0466339
+69 	12    	0.0466339	2.68053e-08	0.0466338	0.0466339
+70 	6     	0.0466339	2.36811e-08	0.0466338	0.0466339
+71 	12    	0.0466339	3.41421e-08	0.0466338	0.0466339
+72 	10    	0.0522679	0.0210806  	0.0466338	0.131144 
+73 	10    	0.0466338	1.61832e-09	0.0466338	0.0466339
+74 	6     	0.0466338	1.38778e-17	0.0466338	0.0466338
+75 	11    	0.0466338	1.38778e-17	0.0466338	0.0466338
+76 	7     	0.0491431	0.00531111 	0.0466338	0.0636467
+77 	8     	0.0499942	0.0107243  	0.0466338	0.0895029
+78 	9     	0.0495199	0.0113592  	0.0445799	0.0919791
+79 	11    	0.0532965	0.0254831  	0.0445793	0.148626 
+80 	10    	0.0583504	0.0465945  	0.0445793	0.232655 
+81 	7     	0.0483481	0.00922155 	0.0445793	0.0810775
+82 	8     	0.0445793	1.38778e-17	0.0445793	0.0445793
+83 	10    	0.0446201	0.0001535  	0.0445768	0.0451944
+84 	10    	0.145247 	0.268585   	0.0445766	1.01637  
+85 	8     	0.0445784	1.17313e-06	0.0445766	0.0445793
+86 	12    	0.0445774	1.11347e-06	0.0445766	0.0445793
+87 	5     	0.0639932	0.0672595  	0.0445766	0.315307 
+88 	13    	0.0456586	0.00404095 	0.0445766	0.0607785
+89 	7     	0.0445772	1.99703e-06	0.0445766	0.0445846
+90 	10    	0.0445766	2.97511e-07	0.0445757	0.0445773
+91 	7     	0.0484841	0.0146217  	0.0445757	0.103194 
+92 	8     	0.0445758	1.34611e-06	0.044571 	0.0445766
+93 	8     	0.0483769	0.014222   	0.0445757	0.101591 
+94 	12    	0.0445757	3.71954e-09	0.0445757	0.0445757
+95 	6     	0.0445757	1.04207e-07	0.0445757	0.0445761
+96 	9     	0.0445757	6.93889e-18	0.0445757	0.0445757
+97 	9     	0.0488207	0.0158832  	0.0445755	0.10825  
+98 	10    	0.0445758	3.45731e-07	0.0445755	0.044577 
+99 	9     	0.0445754	6.94222e-07	0.0445728	0.0445757
+100	13    	0.0445752	9.25425e-07	0.0445728	0.0445757
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Process ForkPoolWorker-3:
+Process ForkPoolWorker-4:
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File &#34;/home/nbuser/anaconda3_501/lib/python3.6/multiprocessing/process.py&#34;, line 258, in _bootstrap
+    self.run()
+  File &#34;/home/nbuser/anaconda3_501/lib/python3.6/multiprocessing/process.py&#34;, line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;/home/nbuser/anaconda3_501/lib/python3.6/multiprocessing/process.py&#34;, line 258, in _bootstrap
+    self.run()
+  File &#34;/home/nbuser/anaconda3_501/lib/python3.6/multiprocessing/process.py&#34;, line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;/home/nbuser/anaconda3_501/lib/python3.6/multiprocessing/pool.py&#34;, line 108, in worker
+    task = get()
+  File &#34;/home/nbuser/anaconda3_501/lib/python3.6/multiprocessing/queues.py&#34;, line 335, in get
+    res = self._reader.recv_bytes()
+  File &#34;/home/nbuser/anaconda3_501/lib/python3.6/multiprocessing/pool.py&#34;, line 108, in worker
+    task = get()
+  File &#34;/home/nbuser/anaconda3_501/lib/python3.6/multiprocessing/queues.py&#34;, line 334, in get
+    with self._rlock:
+  File &#34;/home/nbuser/anaconda3_501/lib/python3.6/multiprocessing/connection.py&#34;, line 216, in recv_bytes
+    buf = self._recv_bytes(maxlength)
+  File &#34;/home/nbuser/anaconda3_501/lib/python3.6/multiprocessing/synchronize.py&#34;, line 96, in __enter__
+    return self._semlock.__enter__()
+  File &#34;/home/nbuser/anaconda3_501/lib/python3.6/multiprocessing/connection.py&#34;, line 407, in _recv_bytes
+    buf = self._recv(4)
+KeyboardInterrupt
+  File &#34;/home/nbuser/anaconda3_501/lib/python3.6/multiprocessing/connection.py&#34;, line 379, in _recv
+    chunk = read(handle, remaining)
+KeyboardInterrupt
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">array</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span>
+
+<span class="kn">from</span> <span class="nn">deap</span> <span class="k">import</span> <span class="n">algorithms</span>
+<span class="kn">from</span> <span class="nn">deap</span> <span class="k">import</span> <span class="n">base</span>
+<span class="kn">from</span> <span class="nn">deap</span> <span class="k">import</span> <span class="n">creator</span>
+<span class="kn">from</span> <span class="nn">deap</span> <span class="k">import</span> <span class="n">tools</span>
+
+<span class="n">creator</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s2">&quot;FitnessMin&quot;</span><span class="p">,</span> <span class="n">base</span><span class="o">.</span><span class="n">Fitness</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,))</span>
+<span class="n">creator</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s2">&quot;Individual&quot;</span><span class="p">,</span> <span class="n">array</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">typecode</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">fitness</span><span class="o">=</span><span class="n">creator</span><span class="o">.</span><span class="n">FitnessMin</span><span class="p">)</span>
+
+<span class="n">toolbox</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">Toolbox</span><span class="p">()</span>
+
+<span class="n">toolbox</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;attr_bool&quot;</span><span class="p">,</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Structure initializers</span>
+<span class="n">toolbox</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;individual&quot;</span><span class="p">,</span> <span class="n">tools</span><span class="o">.</span><span class="n">initRepeat</span><span class="p">,</span> <span class="n">creator</span><span class="o">.</span><span class="n">Individual</span><span class="p">,</span> <span class="n">toolbox</span><span class="o">.</span><span class="n">attr_bool</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">toolbox</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;population&quot;</span><span class="p">,</span> <span class="n">tools</span><span class="o">.</span><span class="n">initRepeat</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="n">toolbox</span><span class="o">.</span><span class="n">individual</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">evalOneMax</span><span class="p">(</span><span class="n">individual</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">get_fitness_wrapper_binary</span><span class="p">(</span><span class="n">individual</span><span class="p">),</span>
+
+<span class="n">toolbox</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;evaluate&quot;</span><span class="p">,</span> <span class="n">evalOneMax</span><span class="p">)</span>
+<span class="n">toolbox</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;mate&quot;</span><span class="p">,</span> <span class="n">tools</span><span class="o">.</span><span class="n">cxTwoPoint</span><span class="p">)</span>
+<span class="n">toolbox</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;mutate&quot;</span><span class="p">,</span> <span class="n">tools</span><span class="o">.</span><span class="n">mutFlipBit</span><span class="p">,</span> <span class="n">indpb</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="n">toolbox</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;select&quot;</span><span class="p">,</span> <span class="n">tools</span><span class="o">.</span><span class="n">selTournament</span><span class="p">,</span> <span class="n">tournsize</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    
+<span class="n">pop</span> <span class="o">=</span> <span class="n">toolbox</span><span class="o">.</span><span class="n">population</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">hof</span> <span class="o">=</span> <span class="n">tools</span><span class="o">.</span><span class="n">HallOfFame</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">stats</span> <span class="o">=</span> <span class="n">tools</span><span class="o">.</span><span class="n">Statistics</span><span class="p">(</span><span class="k">lambda</span> <span class="n">ind</span><span class="p">:</span> <span class="n">ind</span><span class="o">.</span><span class="n">fitness</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">stats</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;avg&quot;</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">mean</span><span class="p">)</span>
+<span class="n">stats</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;std&quot;</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">std</span><span class="p">)</span>
+<span class="n">stats</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;min&quot;</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">min</span><span class="p">)</span>
+<span class="n">stats</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;max&quot;</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">max</span><span class="p">)</span>
+
+<span class="n">pop</span><span class="p">,</span> <span class="n">log</span> <span class="o">=</span> <span class="n">algorithms</span><span class="o">.</span><span class="n">eaSimple</span><span class="p">(</span><span class="n">pop</span><span class="p">,</span> <span class="n">toolbox</span><span class="p">,</span> <span class="n">cxpb</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">mutpb</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">ngen</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> 
+                               <span class="n">stats</span><span class="o">=</span><span class="n">stats</span><span class="p">,</span> <span class="n">halloffame</span><span class="o">=</span><span class="n">hof</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">log</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/home/nbuser/anaconda3_501/lib/python3.6/site-packages/deap/tools/_hypervolume/pyhv.py:33: ImportWarning: Falling back to the python version of hypervolume module. Expect this to be very slow.
+  &#34;module. Expect this to be very slow.&#34;, ImportWarning)
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>gen	nevals	avg      	std       	min      	max      
+0  	15    	0.434249 	0.03494   	0.371606 	0.519972 
+1  	7     	0.410397 	0.0285824 	0.371606 	0.459556 
+2  	10    	0.385787 	0.0137199 	0.367699 	0.405667 
+3  	10    	0.376268 	0.0196575 	0.324349 	0.404183 
+4  	10    	0.368458 	0.0162866 	0.326163 	0.404248 
+5  	10    	0.353092 	0.0235832 	0.315531 	0.397781 
+6  	8     	0.339848 	0.0315853 	0.292618 	0.420199 
+7  	8     	0.319381 	0.019107  	0.292618 	0.358691 
+8  	11    	0.311231 	0.026969  	0.2723   	0.373524 
+9  	9     	0.293624 	0.0200815 	0.270765 	0.3326   
+10 	11    	0.286087 	0.0190502 	0.270569 	0.324779 
+11 	8     	0.270778 	0.0112123 	0.237841 	0.292056 
+12 	9     	0.276463 	0.0318293 	0.235725 	0.352789 
+13 	11    	0.260014 	0.029575  	0.201898 	0.331326 
+14 	13    	0.24882  	0.0266176 	0.193713 	0.292529 
+15 	4     	0.227902 	0.0281947 	0.179113 	0.300034 
+16 	12    	0.215613 	0.0255731 	0.179113 	0.281924 
+17 	7     	0.210633 	0.0340303 	0.179113 	0.301694 
+18 	11    	0.198222 	0.0233695 	0.172371 	0.258291 
+19 	9     	0.194721 	0.03285   	0.172371 	0.297168 
+20 	6     	0.184843 	0.0178621 	0.172371 	0.235706 
+21 	11    	0.179802 	0.0136864 	0.155548 	0.217109 
+22 	8     	0.177799 	0.0125739 	0.154752 	0.212248 
+23 	14    	0.181785 	0.0233281 	0.141646 	0.238847 
+24 	6     	0.165969 	0.0167368 	0.129856 	0.201144 
+25 	10    	0.176243 	0.035655  	0.129856 	0.263029 
+26 	10    	0.160065 	0.0355632 	0.107672 	0.240785 
+27 	9     	0.141006 	0.0369887 	0.107672 	0.232017 
+28 	12    	0.123135 	0.0243051 	0.0849414	0.177502 
+29 	10    	0.107098 	0.0217545 	0.0614124	0.146134 
+30 	12    	0.112201 	0.0339031 	0.0614124	0.18321  
+31 	6     	0.0964022	0.0293433 	0.0614124	0.163909 
+32 	8     	0.0868519	0.0195073 	0.0612803	0.131305 
+33 	8     	0.0680788	0.00931475	0.0612803	0.0886176
+34 	11    	0.0859843	0.0350084 	0.0612803	0.187997 
+35 	10    	0.0882058	0.0341942 	0.0612803	0.168151 
+36 	10    	0.0738761	0.0199439 	0.0612803	0.118785 
+37 	13    	0.0842039	0.0298682 	0.0579721	0.146479 
+38 	10    	0.0906702	0.0444873 	0.059598 	0.175742 
+39 	10    	0.0822082	0.0343529 	0.059598 	0.165308 
+40 	8     	0.0793213	0.0373144 	0.059598 	0.177556 
+41 	7     	0.0743712	0.0310636 	0.0595774	0.17741  
+42 	11    	0.0820704	0.0317413 	0.0540859	0.16032  
+43 	12    	0.0757499	0.0286613 	0.0421638	0.132346 
+44 	11    	0.0701215	0.0345507 	0.0403147	0.175324 
+45 	9     	0.0529055	0.013693  	0.0402957	0.0961248
+46 	9     	0.0528242	0.0202958 	0.0402698	0.121764 
+47 	9     	0.0546638	0.0205484 	0.0402405	0.0958544
+48 	10    	0.0478353	0.0248466 	0.0402405	0.140218 
+49 	8     	0.0476266	0.0161297 	0.0402405	0.0912155
+50 	5     	0.0601382	0.03304   	0.0402405	0.147043 
+51 	8     	0.0644245	0.0342899 	0.0402405	0.144413 
+52 	6     	0.0537008	0.0235687 	0.0402405	0.12398  
+53 	10    	0.0700249	0.0367901 	0.0402405	0.14065  
+54 	11    	0.061159 	0.0233985 	0.0343008	0.109214 
+55 	4     	0.0470659	0.0183978 	0.0343008	0.103608 
+56 	9     	0.0517062	0.0288922 	0.0342976	0.134606 
+57 	13    	0.0873132	0.0476155 	0.0342976	0.184497 
+58 	9     	0.0650656	0.0293425 	0.0306166	0.106638 
+59 	10    	0.0577233	0.0364966 	0.0306166	0.13957  
+60 	14    	0.0564792	0.0230828 	0.0306166	0.0999479
+61 	7     	0.0445583	0.0229175 	0.0306166	0.114404 
+62 	12    	0.0416637	0.0142777 	0.0272883	0.0773235
+63 	8     	0.0444826	0.0311873 	0.0272883	0.141599 
+64 	8     	0.0339553	0.0187107 	0.0272883	0.103687 
+65 	9     	0.0359447	0.0183478 	0.0245207	0.083908 
+66 	10    	0.039861 	0.0252017 	0.0245207	0.123427 
+67 	9     	0.0445301	0.0202833 	0.0245207	0.0807897
+68 	9     	0.044365 	0.0359034 	0.0245128	0.120777 
+69 	8     	0.034053 	0.0144099 	0.0244955	0.0680687
+70 	10    	0.0445774	0.0264981 	0.0244872	0.0938953
+71 	9     	0.0367013	0.0300325 	0.0212184	0.13953  
+72 	10    	0.0437645	0.0351963 	0.0213477	0.146966 
+73 	7     	0.0352109	0.0159086 	0.0213477	0.0787984
+74 	8     	0.032131 	0.0187056 	0.0213477	0.0962571
+75 	9     	0.033478 	0.0257992 	0.0213477	0.124038 
+76 	8     	0.0387988	0.0334707 	0.0213301	0.14773  
+77 	9     	0.0343973	0.0248607 	0.0213301	0.116415 
+78 	9     	0.0382501	0.0319811 	0.0196336	0.131642 
+79 	8     	0.0407598	0.0255989 	0.0196336	0.0948534
+80 	7     	0.0268188	0.0133671 	0.019202 	0.0701074
+81 	9     	0.0279806	0.0142144 	0.019202 	0.0587373
+82 	10    	0.0497622	0.0443455 	0.019202 	0.143975 
+83 	11    	0.0441815	0.0282224 	0.019202 	0.0989451
+84 	7     	0.0448637	0.0344898 	0.019202 	0.135099 
+85 	12    	0.0244159	0.0120618 	0.019202 	0.0662337
+86 	10    	0.0277245	0.013811  	0.0196336	0.0656347
+87 	4     	0.0246438	0.0128142 	0.0196336	0.0600003
+88 	13    	0.0472389	0.0363048 	0.0196336	0.120307 
+89 	11    	0.0303755	0.0263965 	0.0182041	0.115208 
+90 	9     	0.0311246	0.0241977 	0.0182041	0.0875744
+91 	8     	0.0326972	0.0233144 	0.0182041	0.0809681
+92 	6     	0.0314626	0.0336587 	0.0182041	0.142394 
+93 	11    	0.0489107	0.0302464 	0.0182041	0.10668  
+94 	10    	0.0585853	0.0484624 	0.0179414	0.164962 
+95 	9     	0.0331038	0.0309887 	0.0179414	0.118503 
+96 	11    	0.0312402	0.0236164 	0.0179414	0.0846848
+97 	14    	0.0288373	0.0237601 	0.0179414	0.102409 
+98 	4     	0.0254276	0.0238336 	0.0179414	0.11375  
+99 	9     	0.0217972	0.0144271 	0.0179414	0.0757784
+100	10    	0.0393317	0.0354237 	0.0179414	0.136476 
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="PyGMO">PyGMO<a class="anchor-link" href="#PyGMO">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>pip install pygmo
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[65]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pygmo</span> <span class="k">as</span> <span class="nn">pg</span>
+
+<span class="k">class</span> <span class="nc">beam_function</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dim</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">=</span> <span class="n">dim</span>
+    
+    <span class="k">def</span> <span class="nf">fitness</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">get_fitness_wrapper</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span>
+    
+    <span class="k">def</span> <span class="nf">get_bounds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">([</span><span class="mf">1e6</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">,</span> <span class="p">[</span><span class="mf">1e8</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;Beam Function&quot;</span>
+    
+    <span class="k">def</span> <span class="nf">get_extra_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">Dimensions: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">)</span>
+    
+<span class="k">class</span> <span class="nc">beam_function_binary</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dim</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dim</span> <span class="o">=</span> <span class="n">dim</span>
+    
+    <span class="k">def</span> <span class="nf">fitness</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">get_fitness_wrapper_binary</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span>
+    
+    <span class="k">def</span> <span class="nf">get_bounds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">([</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;Beam Function&quot;</span>
+    
+    <span class="k">def</span> <span class="nf">get_extra_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">Dimensions: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dim</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">get_nix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">3</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[67]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">prob</span> <span class="o">=</span> <span class="n">pg</span><span class="o">.</span><span class="n">problem</span><span class="p">(</span><span class="n">beam_function</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">algo</span> <span class="o">=</span> <span class="n">pg</span><span class="o">.</span><span class="n">algorithm</span><span class="p">(</span><span class="n">pg</span><span class="o">.</span><span class="n">sga</span><span class="p">(</span><span class="n">gen</span> <span class="o">=</span> <span class="mi">100</span><span class="p">))</span>
+<span class="n">pop</span> <span class="o">=</span> <span class="n">pg</span><span class="o">.</span><span class="n">population</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">pop</span> <span class="o">=</span> <span class="n">algo</span><span class="o">.</span><span class="n">evolve</span><span class="p">(</span><span class="n">pop</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pop</span><span class="o">.</span><span class="n">champion_x</span><span class="p">,</span> <span class="n">pop</span><span class="o">.</span><span class="n">champion_f</span><span class="p">)</span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1.19E+06 2.46E+06 1.72E+07 1.72E+07 9.78E+07] [1.15E-02]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Not working yet</span>
+<span class="n">prob</span> <span class="o">=</span> <span class="n">pg</span><span class="o">.</span><span class="n">problem</span><span class="p">(</span><span class="n">beam_function_binary</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+
+<span class="n">algo</span> <span class="o">=</span> <span class="n">pg</span><span class="o">.</span><span class="n">algorithm</span><span class="p">(</span><span class="n">pg</span><span class="o">.</span><span class="n">sga</span><span class="p">(</span><span class="n">gen</span> <span class="o">=</span> <span class="mi">20</span><span class="p">))</span>
+<span class="n">pop</span> <span class="o">=</span> <span class="n">pg</span><span class="o">.</span><span class="n">population</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">pop</span> <span class="o">=</span> <span class="n">algo</span><span class="o">.</span><span class="n">evolve</span><span class="p">(</span><span class="n">pop</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pop</span><span class="o">.</span><span class="n">champion_x</span><span class="p">,</span> <span class="n">pop</span><span class="o">.</span><span class="n">champion_f</span><span class="p">,</span> <span class="n">prob</span><span class="o">.</span><span class="n">get_fevals</span><span class="p">())</span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[72]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Not sure about number of function evaluations</span>
+<span class="n">prob</span> <span class="o">=</span> <span class="n">pg</span><span class="o">.</span><span class="n">problem</span><span class="p">(</span><span class="n">beam_function</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">algo</span> <span class="o">=</span> <span class="n">pg</span><span class="o">.</span><span class="n">algorithm</span><span class="p">(</span><span class="n">pg</span><span class="o">.</span><span class="n">simulated_annealing</span><span class="p">())</span>
+<span class="n">pop</span> <span class="o">=</span> <span class="n">pg</span><span class="o">.</span><span class="n">population</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">pop</span> <span class="o">=</span> <span class="n">algo</span><span class="o">.</span><span class="n">evolve</span><span class="p">(</span><span class="n">pop</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pop</span><span class="o">.</span><span class="n">champion_x</span><span class="p">,</span> <span class="n">pop</span><span class="o">.</span><span class="n">champion_f</span><span class="p">)</span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1.17E+06 3.62E+07 7.97E+07 8.32E+07 4.10E+07] [1.06E-01]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[68]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">prob</span> <span class="o">=</span> <span class="n">pg</span><span class="o">.</span><span class="n">problem</span><span class="p">(</span><span class="n">beam_function</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">algo</span> <span class="o">=</span> <span class="n">pg</span><span class="o">.</span><span class="n">algorithm</span><span class="p">(</span><span class="n">pg</span><span class="o">.</span><span class="n">de</span><span class="p">(</span><span class="n">gen</span> <span class="o">=</span> <span class="mi">100</span><span class="p">))</span>
+<span class="n">pop</span> <span class="o">=</span> <span class="n">pg</span><span class="o">.</span><span class="n">population</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">pop</span> <span class="o">=</span> <span class="n">algo</span><span class="o">.</span><span class="n">evolve</span><span class="p">(</span><span class="n">pop</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pop</span><span class="o">.</span><span class="n">champion_x</span><span class="p">,</span> <span class="n">pop</span><span class="o">.</span><span class="n">champion_f</span><span class="p">)</span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1.01E+06 6.22E+07 2.84E+06 2.33E+07 5.81E+07] [2.04E-03]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[74]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">prob</span> <span class="o">=</span> <span class="n">pg</span><span class="o">.</span><span class="n">problem</span><span class="p">(</span><span class="n">beam_function</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">algo</span> <span class="o">=</span> <span class="n">pg</span><span class="o">.</span><span class="n">algorithm</span><span class="p">(</span><span class="n">pg</span><span class="o">.</span><span class="n">pso</span><span class="p">(</span><span class="n">gen</span> <span class="o">=</span> <span class="mi">100</span><span class="p">))</span>
+<span class="n">pop</span> <span class="o">=</span> <span class="n">pg</span><span class="o">.</span><span class="n">population</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">pop</span> <span class="o">=</span> <span class="n">algo</span><span class="o">.</span><span class="n">evolve</span><span class="p">(</span><span class="n">pop</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pop</span><span class="o">.</span><span class="n">champion_x</span><span class="p">,</span> <span class="n">pop</span><span class="o">.</span><span class="n">champion_f</span><span class="p">)</span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1.00E+06 9.95E+07 3.24E+06 3.09E+07 9.63E+06] [2.59E-03]
 </pre>
 </div>
 </div>
