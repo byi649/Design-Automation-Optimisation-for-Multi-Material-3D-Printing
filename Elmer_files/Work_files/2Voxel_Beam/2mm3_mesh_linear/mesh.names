@@ -1,0 +1,11 @@
+! ----- names for bodies -----
+$ LHS_Mesh = 1
+$ RHS_Mesh = 2
+! ----- names for boundaries -----
+$ Front_Boundary = 1
+$ Back_Boundary = 2
+$ LHS_Boundary = 3
+$ RHS_Boundary = 4
+$ Top_Boundary = 5
+$ Bottom_Boundary = 6
+$ bnry9 = 7
