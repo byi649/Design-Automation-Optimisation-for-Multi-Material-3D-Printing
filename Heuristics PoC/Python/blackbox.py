@@ -11,6 +11,8 @@ def blackbox(E, rho):
     I = 1/12 * h * w**3
     A = w * h
 
+    E = E[0]
+
     def alphaFormula(n):
         if n in range(4):
             alpha = [1.875, 4.694, 7.855, 10.996]
@@ -31,7 +33,7 @@ def blackbox(E, rho):
 # Output: Fitness value (minimisation)
 # Currently uses L2 norm
 def fitness(freq, goal):
-    #goal = [53, 332, 930, 1822, 3013, 4501, 6287, 8370, 10751, 13429]
+    goal = [53, 332, 930, 1822, 3013, 4501, 6287, 8370, 10751, 13429]
     fitness = 0
     for i in range(10):
         fitness += (freq[i] - goal[i])**2
@@ -40,6 +42,18 @@ def fitness(freq, goal):
 
     return fitness
 
+def fitness2(E):
+    goal = [53, 332, 930, 1822, 3013, 4501, 6287, 8370, 10751, 13429]
+    freq = blackbox(E, 1.3e3)
+    fitness = 0
+    for i in range(10):
+        fitness += (freq[i] - goal[i])**2
+
+    fitness = math.sqrt(fitness/10)
+
+    return (fitness, )
+
 # Testing
-print(fitness(blackbox(3.5e9, 1.3e3), 1))
+# print(fitness(blackbox(3.5e9, 1.3e3), 1))
+# print(fitness2(3.5e9))
     
