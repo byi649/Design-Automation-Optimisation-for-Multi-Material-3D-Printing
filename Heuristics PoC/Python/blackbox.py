@@ -1,7 +1,7 @@
 import math
 
 # Inputs: Youngs modulus, density
-# Outputs: First 10 natural frequencies of a cantilever with no load
+# Output: List of first 10 natural frequencies of a cantilever with no load
 def blackbox(E, rho):
     #E = 3.5e9
     #rho = 1.3e3
@@ -27,7 +27,19 @@ def blackbox(E, rho):
 
     return freq
 
+# Inputs: List of 10 frequencies, list of 10 goal frequencies
+# Output: Fitness value (minimisation)
+# Currently uses L2 norm
+def fitness(freq, goal):
+    #goal = [53, 332, 930, 1822, 3013, 4501, 6287, 8370, 10751, 13429]
+    fitness = 0
+    for i in range(10):
+        fitness += (freq[i] - goal[i])**2
+
+    fitness = math.sqrt(fitness/10)
+
+    return fitness
 
 # Testing
-print(blackbox(3.5e9, 1.3e3))
+print(fitness(blackbox(3.5e9, 1.3e3), 1))
     
