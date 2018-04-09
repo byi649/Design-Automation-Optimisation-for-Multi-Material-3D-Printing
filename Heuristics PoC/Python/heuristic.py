@@ -1,5 +1,6 @@
 import blackbox
 import numpy as np
+import matplotlib.pyplot as plt
 
 from deap import base
 from deap import creator
@@ -38,7 +39,7 @@ N = 2
 # Not sure if we can set individual sigma
 # For now, scale rho down.
 # TODO: Scale all variables down to unity
-strategy = cma.Strategy(centroid=[5e9]*N, sigma=1e8, lambda_=20*N)
+strategy = cma.Strategy(centroid=[5e9]*N, sigma=1e9, lambda_=20*N)
 toolbox.register("generate", strategy.generate, creator.Individual)
 toolbox.register("update", strategy.update)
 
@@ -49,9 +50,64 @@ stats.register("std", np.std)
 stats.register("min", np.min)
 stats.register("max", np.max)
 
-algorithms.eaGenerateUpdate(toolbox, ngen=250, stats=stats, halloffame=hof)
+logbook = tools.Logbook()
+logbook.header = "gen", "evals", "std", "min", "avg", "max"
+
+NGEN = 250
+
+# Objects that will compile the data
+fbest = np.ndarray((NGEN,1))
+best = np.ndarray((NGEN,N))
+
+verbose = False
+for gen in range(NGEN):
+    # Generate a new population
+    population = toolbox.generate()
+    # Evaluate the individuals
+    fitnesses = toolbox.map(toolbox.evaluate, population)
+    for ind, fit in zip(population, fitnesses):
+        ind.fitness.values = fit
+    
+    # Update the strategy with the evaluated individuals
+    toolbox.update(population)
+    
+    # Update the hall of fame and the statistics with the
+    # currently evaluated population
+    hof.update(population)
+    record = stats.compile(population)
+    logbook.record(evals=len(population), gen=gen, **record)
+    
+    if verbose:
+        print(logbook.stream)
+    
+    # Save more data along the evolution for latter plotting
+    fbest[gen] = hof[0].fitness.values
+    best[gen, :N] = hof[0]
+
 print("Best solution: E = {0:.3e}, rho = {1:.3e}".format(hof[0][0], hof[0][1]*1e-6))
 
 freq = blackbox.blackbox(hof[0][0], hof[0][1]*1e-6)
 print("Natural frequencies:")
 print('\n'.join('{}: {} Hz'.format(*k) for k in enumerate(freq, 1)))
+
+# The x-axis will be the number of evaluations
+# Truncated at evaluation #2000 due to NaN shenanigans
+x = list(range(0, strategy.lambda_ * NGEN, strategy.lambda_))
+plt.figure()
+plt.subplot(2, 1, 1)
+plt.semilogy(x, fbest, "-c")
+plt.grid(True)
+plt.title("Best objective function")
+
+ax = plt.gca()
+ax.set_xlim(left=0, right=2000)
+
+plt.subplot(2, 1, 2)
+plt.plot(x, best)
+plt.grid(True)
+plt.title("Blue: E, orange: rho (*1e6)")
+
+ax = plt.gca()
+ax.set_xlim(left=0, right=2000)
+
+plt.show()
