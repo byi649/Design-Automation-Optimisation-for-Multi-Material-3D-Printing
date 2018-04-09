@@ -46,20 +46,20 @@ def fitness(freq, goal):
 
 # Input: List of [E, rho] where rho = true_rho * 1e6
 # Output: Fitness value (minimisation)
-# Currently uses L2 norm
+# Fitness value is average percentage error
 def fitness2(E):
     goal = [53.005922156059206, 332.20641980613505, 930.2811671037335, 1822.8783393540868, 3013.3294997485928, 4501.393450241724, 6287.070190833485, 8370.359721523866, 10751.262042312881, 13429.777153200515]
     freq = blackbox(E[0], E[1]*1e-6)
     fitness = 0
     for i in range(10):
-        fitness += (freq[i] - goal[i])**2
+        fitness += abs(freq[i] - goal[i]) / goal[i] * 100
 
-    fitness = math.sqrt(fitness/10.)
+    fitness = fitness/10.
 
     return (fitness, )
 
 # Testing
 # print(blackbox(3.5e9, 1.3e3))
 # print(fitness(blackbox(3.5e9, 1.3e3), 1))
-# print(fitness2(3.5e9))
+# print(fitness2(3.5e9, 1.3e9))
     

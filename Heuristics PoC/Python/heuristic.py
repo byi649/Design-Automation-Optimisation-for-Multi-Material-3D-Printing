@@ -17,7 +17,7 @@ toolbox.register("evaluate", blackbox.fitness2)
 
 def feasible(individual):
     # Maximum bounds to catch NaN errors
-    feasible = ((0 < individual[0] < 1e15) and (0 < individual[1] < 1e10))
+    feasible = ((0 < individual[0] < 1e15) and (0 < individual[1] < 1e15))
     return feasible
 
 def distance(individual):
@@ -39,7 +39,7 @@ N = 2
 # Not sure if we can set individual sigma
 # For now, scale rho down.
 # TODO: Scale all variables down to unity
-strategy = cma.Strategy(centroid=[5e9]*N, sigma=1e9, lambda_=20*N)
+strategy = cma.Strategy(centroid=[5e9]*N, sigma=1e10, lambda_=20*N)
 toolbox.register("generate", strategy.generate, creator.Individual)
 toolbox.register("update", strategy.update)
 
@@ -94,15 +94,23 @@ print('\n'.join('{}: {} Hz'.format(*k) for k in enumerate(freq, 1)))
 # Truncated at evaluation #2000 due to NaN shenanigans
 x = list(range(0, strategy.lambda_ * NGEN, strategy.lambda_))
 plt.figure()
-plt.subplot(2, 1, 1)
+plt.subplot(2, 2, 2)
 plt.semilogy(x, fbest, "-c")
 plt.grid(True)
-plt.title("Best objective function")
+plt.title("Average percentage error (log)")
 
 ax = plt.gca()
 ax.set_xlim(left=0, right=2000)
 
-plt.subplot(2, 1, 2)
+plt.subplot(2, 2, 1)
+plt.plot(x, fbest, "-c")
+plt.grid(True)
+plt.title("Average percentage error")
+
+ax = plt.gca()
+ax.set_xlim(left=0, right=2000)
+
+plt.subplot(2, 2, 3)
 plt.plot(x, best)
 plt.grid(True)
 plt.title("Blue: E, orange: rho (*1e6)")
