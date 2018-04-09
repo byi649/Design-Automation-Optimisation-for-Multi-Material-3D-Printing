@@ -44,6 +44,9 @@ def fitness(freq, goal):
 
     return fitness
 
+# Input: List of [E, rho] where rho = true_rho * 1e6
+# Output: Fitness value (minimisation)
+# Currently uses L2 norm
 def fitness2(E):
     goal = [53.005922156059206, 332.20641980613505, 930.2811671037335, 1822.8783393540868, 3013.3294997485928, 4501.393450241724, 6287.070190833485, 8370.359721523866, 10751.262042312881, 13429.777153200515]
     freq = blackbox(E[0], E[1]*1e-6)
@@ -51,7 +54,7 @@ def fitness2(E):
     for i in range(10):
         fitness += (freq[i] - goal[i])**2
 
-    #fitness = math.sqrt(fitness/10.)
+    fitness = math.sqrt(fitness/10.)
 
     return (fitness, )
 
