@@ -1,4 +1,5 @@
 import math
+from toolkit import *
 
 # Inputs: Youngs modulus, density
 # Output: List of first 10 natural frequencies of a cantilever with no load
@@ -50,6 +51,20 @@ def fitness(freq, goal):
 def fitness2(E):
     goal = [53.005922156059206, 332.20641980613505, 930.2811671037335, 1822.8783393540868, 3013.3294997485928, 4501.393450241724, 6287.070190833485, 8370.359721523866, 10751.262042312881, 13429.777153200515]
     freq = blackbox(E[0], E[1]*1e-6)
+    fitness = 0
+    for i in range(10):
+        fitness += abs(freq[i] - goal[i]) / goal[i] * 100
+
+    fitness = fitness/10.
+
+    return (fitness, )
+
+def fitness_binary(bin):
+    goal = [53.005922156059206, 332.20641980613505, 930.2811671037335, 1822.8783393540868, 3013.3294997485928, 4501.393450241724, 6287.070190833485, 8370.359721523866, 10751.262042312881, 13429.777153200515]
+
+    (E, rho) = binaryToVar(bin)
+    
+    freq = blackbox(E, rho*1e-6)
     fitness = 0
     for i in range(10):
         fitness += abs(freq[i] - goal[i]) / goal[i] * 100
