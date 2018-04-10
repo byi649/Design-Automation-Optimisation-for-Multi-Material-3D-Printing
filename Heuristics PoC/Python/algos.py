@@ -93,6 +93,7 @@ def GA(verbose=False, NGEN=250):
     creator.create("Individual", list, fitness=creator.FitnessMin)
 
     toolbox = base.Toolbox()
+
     # Attribute generator 
     toolbox.register("attr_bool", random.randint, 0, 1)
     # Structure initializers
@@ -132,7 +133,7 @@ def GA(verbose=False, NGEN=250):
         offspring = list(map(toolbox.clone, offspring))
 
         CXPB = 0.5
-        MUTPB = 0.2
+        MUTPB = 0.1
         # Apply crossover and mutation on the offspring
         for child1, child2 in zip(offspring[::2], offspring[1::2]):
             if random.random() < CXPB:
@@ -175,6 +176,7 @@ def GA_1(verbose=False, NGEN=250):
     creator.create("Individual", list, fitness=creator.FitnessMin)
 
     toolbox = base.Toolbox()
+
     # Attribute generator 
     toolbox.register("attr_bool", random.randint, 0, 1)
     # Structure initializers
