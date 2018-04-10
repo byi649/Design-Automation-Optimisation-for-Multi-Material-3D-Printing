@@ -7,13 +7,16 @@ from toolkit import *
 NGEN = 250
 verbose = False
 
-algorithm = "GA"
+algorithm = "GA_1"
 
 if algorithm == "GA":
     (E, fbest, best) = algos.GA(verbose, NGEN)
     (E, rho) = binaryToVar(E)
 elif algorithm == "CMA":
     (E, rho, fbest, best) = algos.CMA(verbose, NGEN)
+elif algorithm == "GA_1":
+    (E, fbest, best) = algos.GA_1(verbose, NGEN)
+    (E, rho) = binaryToVar(E)
 
 print("Best solution: E = {0:.3e}, rho = {1:.3e}".format(E, rho*1e-6))
 

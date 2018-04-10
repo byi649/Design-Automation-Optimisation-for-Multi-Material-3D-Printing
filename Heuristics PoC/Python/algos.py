@@ -168,3 +168,124 @@ def GA(verbose=False, NGEN=250):
 
 
     return (hof[0], fbest, best)
+
+def GA_1(verbose=False, NGEN=250):
+
+    creator.create("FitnessMin", base.Fitness, weights=(-1.0,))
+    creator.create("Individual", list, fitness=creator.FitnessMin)
+
+    toolbox = base.Toolbox()
+    # Attribute generator 
+    toolbox.register("attr_bool", random.randint, 0, 1)
+    # Structure initializers
+    toolbox.register("individual", tools.initRepeat, creator.Individual, toolbox.attr_bool, 100)
+    toolbox.register("population", tools.initRepeat, list, toolbox.individual)
+
+    toolbox.register("evaluate", blackbox.fitness_binary)
+    toolbox.register("mate", tools.cxTwoPoint)
+    toolbox.register("mutate", tools.mutFlipBit, indpb=0.05)
+    toolbox.register("select", tools.selTournament, tournsize=3)
+
+    hof = tools.HallOfFame(1)
+    stats = tools.Statistics(lambda ind: ind.fitness.values)
+    stats.register("avg", np.mean)
+    stats.register("std", np.std)
+    stats.register("min", np.min)
+    stats.register("max", np.max)
+
+    logbook = tools.Logbook()
+    logbook.header = "gen", "evals", "std", "min", "avg", "max"
+
+    # Objects that will compile the data
+    fbest = np.ndarray((NGEN,1))
+    best = np.ndarray((NGEN,2))
+
+    for gen in range(NGEN):
+        # Generate a new population
+        population = toolbox.population(n=40)
+        # Evaluate the individuals
+        fitnesses = toolbox.map(toolbox.evaluate, population)
+        for ind, fit in zip(population, fitnesses):
+            ind.fitness.values = fit
+
+        record = stats.compile(population)
+        fbar = record['avg']
+        fmin = record['min']
+        
+        # Select the next generation individuals
+        offspring = toolbox.select(population, len(population))
+        # Clone the selected individuals
+        offspring = list(map(toolbox.clone, offspring))
+
+        k1 = 1.0
+        k2 = 0.5
+        k3 = 1.0
+        k4 = 0.5
+        # Apply crossover and mutation on the offspring
+        for child1, child2 in zip(offspring[::2], offspring[1::2]):
+
+            child1Changed = False
+            child2Changed = False
+
+            f1 = child1.fitness.values[0]
+            f2 = child2.fitness.values[0]
+
+            if (f1 <= fbar):
+                MUTPB1 = k2 * (f1 - fmin) / (fbar - fmin)
+            else:
+                MUTPB1 = k4
+
+            if (f2 <= fbar):
+                MUTPB2 = k2 * (f2 - fmin) / (fbar - fmin)
+            else:
+                MUTPB2 = k4
+
+            MUTPB1 += 0.005
+            MUTPB2 += 0.005
+
+            fdash = min(child1.fitness.values, child2.fitness.values)[0]
+            if (fdash <= fbar):
+                CXPB = k1 * (fdash - fmin) / (fbar - fmin)
+            else:
+                CXPB = k3
+
+            if random.random() < CXPB:
+                toolbox.mate(child1, child2)
+                child1Changed = True
+                child2Changed = True
+
+            if random.random() < MUTPB1:
+                toolbox.mutate(child1)
+                child1Changed = True
+
+            if random.random() < MUTPB2:
+                toolbox.mutate(child2)
+                child2Changed = True
+
+            if child1Changed:
+                del child1.fitness.values
+            if child2Changed:
+                del child2.fitness.values
+
+        # Evaluate the individuals with an invalid fitness
+        invalid_ind = [ind for ind in offspring if not ind.fitness.valid]
+        fitnesses = map(toolbox.evaluate, invalid_ind)
+        for ind, fit in zip(invalid_ind, fitnesses):
+            ind.fitness.values = fit
+
+        population[:] = offspring
+        
+        # Update the hall of fame and the statistics with the
+        # currently evaluated population
+        hof.update(population)
+        record = stats.compile(population)
+        logbook.record(evals=len(population), gen=gen, **record)
+        
+        if verbose:
+            print(logbook.stream)
+        
+        # Save more data along the evolution for latter plotting
+        fbest[gen] = hof[0].fitness.values
+        best[gen, :2] = binaryToVar(hof[0])
+
+    return (hof[0], fbest, best)
