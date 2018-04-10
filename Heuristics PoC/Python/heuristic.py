@@ -33,33 +33,23 @@ errors = np.array(errors)
 
 print("Average error: {0:.3e}%".format(np.average(errors)))
 
-# The x-axis will be the number of evaluations
-# Truncated at evaluation #2000 due to NaN shenanigans
-x = list(range(0, 40 * NGEN, 40))
+# X-axis = generation
+x = list(range(NGEN))
 plt.figure()
 plt.subplot(2, 2, 2)
 plt.semilogy(x, fbest, "-c")
 plt.grid(True)
 plt.title("Average percentage error (log)")
 
-ax = plt.gca()
-ax.set_xlim(left=0, right=2000)
-
 plt.subplot(2, 2, 1)
 plt.plot(x, fbest, "-c")
 plt.grid(True)
 plt.title("Average percentage error")
 
-ax = plt.gca()
-ax.set_xlim(left=0, right=2000)
-
 plt.subplot(2, 2, 3)
 plt.plot(x, best)
 plt.grid(True)
 plt.title("Blue: E, orange: rho (*1e6)")
-
-ax = plt.gca()
-ax.set_xlim(left=0, right=2000)
 
 plt.subplot(2, 2, 4)
 plt.bar(x=range(1, 11), height=errors)
