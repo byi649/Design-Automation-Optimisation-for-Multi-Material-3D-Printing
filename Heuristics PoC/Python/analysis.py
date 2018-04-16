@@ -110,13 +110,8 @@ if __name__ == '__main__':
 
         ax = plt.subplot(3, 1, 3)
 
-<<<<<<< HEAD
-        nsets = 3
-        ind = np.arange(nsets)  # the x locations for the groups
-=======
         N = 4
         ind = np.arange(N)  # the x locations for the groups
->>>>>>> 43571c3e128d473862b7435803f25de2641b6aee
         width = 0.27       # the width of the bars
 
         rects1 = ax.bar(ind, [GA_first[0], CMA_first[0], GA_1_first[0], PSO_first[0]], width, color='r')
