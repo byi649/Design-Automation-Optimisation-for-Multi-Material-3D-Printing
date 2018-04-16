@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 import algos
 from toolkit import *
 
+N = 6
+
 if __name__ == '__main__': 
 
     NGEN = 250
@@ -27,9 +29,11 @@ if __name__ == '__main__':
     print('\n'.join('{}: {} Hz'.format(*k) for k in enumerate(freq, 1)))
 
     true_freq = [53.005922156059206, 332.20641980613505, 930.2811671037335, 1822.8783393540868, 3013.3294997485928, 4501.393450241724, 6287.070190833485, 8370.359721523866, 10751.262042312881, 13429.777153200515]
+    true_freq = true_freq[:N]
+
 
     errors = []
-    for i in range(10):
+    for i in range(N):
         errors.append(abs(freq[i] - true_freq[i]) / true_freq[i] * 100)
     errors = np.array(errors)
 
@@ -54,7 +58,7 @@ if __name__ == '__main__':
     plt.title("Blue: E, orange: rho (*1e6)")
 
     plt.subplot(2, 2, 4)
-    plt.bar(x=range(1, 11), height=errors)
+    plt.bar(x=range(1, N + 1), height=errors)
     print(errors)
     plt.title("Percentage error for each mode")
 

@@ -1,6 +1,9 @@
 import math
 from toolkit import *
 
+global N
+N = 6
+
 # Inputs: Youngs modulus, density
 # Output: List of first 10 natural frequencies of a cantilever with no load
 def blackbox(E, rho):
@@ -19,11 +22,11 @@ def blackbox(E, rho):
         return (2. * n - 1.) * math.pi / 2.
 
     alpha = []
-    for i in range(10):
+    for i in range(N):
         alpha.append(alphaFormula(i + 1))
 
     freq = []
-    for i in range(10):
+    for i in range(N):
         # Sometimes returns NaN ???
         freq.append(alpha[i]**2 / (2. * math.pi * L**2) * math.sqrt((E * I) / (rho * A)))
         # print(rho, A, rho*A)
@@ -50,9 +53,11 @@ def fitness(freq, goal):
 # Fitness value is average percentage error
 def fitness2(E):
     goal = [53.005922156059206, 332.20641980613505, 930.2811671037335, 1822.8783393540868, 3013.3294997485928, 4501.393450241724, 6287.070190833485, 8370.359721523866, 10751.262042312881, 13429.777153200515]
+    goal = goal[:N]
+
     freq = blackbox(E[0], E[1]*1e-6)
     fitness = 0
-    for i in range(10):
+    for i in range(N):
         fitness += abs(freq[i] - goal[i]) / goal[i] * 100
 
     fitness = fitness/10.
@@ -61,12 +66,13 @@ def fitness2(E):
 
 def fitness_binary(bin):
     goal = [53.005922156059206, 332.20641980613505, 930.2811671037335, 1822.8783393540868, 3013.3294997485928, 4501.393450241724, 6287.070190833485, 8370.359721523866, 10751.262042312881, 13429.777153200515]
+    goal = goal[:N]
 
     (E, rho) = binaryToVar(bin)
     
     freq = blackbox(E, rho*1e-6)
     fitness = 0
-    for i in range(10):
+    for i in range(N):
         fitness += abs(freq[i] - goal[i]) / goal[i] * 100
 
     fitness = fitness/10.

@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 if __name__ == '__main__': 
     global NGEN
-    NGEN = 250
+    NGEN = 30
 
     def algorithm_wrapper(algorithm):
         verbose = False
@@ -25,7 +25,7 @@ if __name__ == '__main__':
     CMA_runs = []
     GA_1_runs = []
 
-    niter = 50
+    niter = 10
     for i in range(niter):
         print("Evaluating iteration:", i)
         GA_runs.append(algorithm_wrapper("GA"))
@@ -87,8 +87,8 @@ if __name__ == '__main__':
 
         ax = plt.subplot(2, 2, 4)
 
-        N = 3
-        ind = np.arange(N)  # the x locations for the groups
+        nsets = 3
+        ind = np.arange(nsets)  # the x locations for the groups
         width = 0.27       # the width of the bars
 
         rects1 = ax.bar(ind, [GA_first[0], CMA_first[0], GA_1_first[0]], width, color='r')
