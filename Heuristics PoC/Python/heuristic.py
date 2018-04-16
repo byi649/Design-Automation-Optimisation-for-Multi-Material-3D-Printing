@@ -11,7 +11,7 @@ if __name__ == '__main__':
     NGEN = 250
     verbose = False
 
-    algorithm = "GA_1"
+    algorithm = "PSO"
 
     if algorithm == "GA":
         (E, fbest, best) = algos.GA(verbose, NGEN)
@@ -21,6 +21,8 @@ if __name__ == '__main__':
     elif algorithm == "GA_1":
         (E, fbest, best) = algos.GA_1(verbose, NGEN)
         (E, rho) = binaryToVar(E)
+    elif algorithm == "PSO":
+        (E, rho, fbest, best) = algos.PSO(verbose, NGEN)
 
     print("Best solution: E = {0:.3e}, rho = {1:.3e}".format(E, rho*1e-6))
 
