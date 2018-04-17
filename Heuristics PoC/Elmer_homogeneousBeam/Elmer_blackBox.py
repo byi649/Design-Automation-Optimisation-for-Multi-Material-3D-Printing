@@ -13,7 +13,7 @@ def Elmer_blackbox(E,rho, MPI = False, printToConsole = True):
 	
 	#Modify to change mesh/element order
 	#ElementOrder = 1 for 13500 Element linear mesh, 2 for 4000 element quadratic mesh
-	ElementOrder = 1
+	ElementOrder = 2
 	
 	#Number of natural frequencies to solve for
 	n = 6
