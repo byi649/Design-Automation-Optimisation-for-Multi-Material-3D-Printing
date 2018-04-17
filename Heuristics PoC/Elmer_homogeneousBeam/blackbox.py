@@ -118,10 +118,10 @@ def blackbox(E, rho):
 	#print(MPI)	
 	if MPI == True: #Execute ElmerSolver_mpi
 		if printToConsole == True:
-			subprocess.call('mpirun -np 4 ElmerSolver_mpi | tee log.txt',shell=True)
+			subprocess.call('mpirun -np 8 ElmerSolver_mpi | tee log.txt',shell=True)
 		else:
 			print('Running ElmerSolver_mpi...\n')
-			subprocess.call('mpirun -np 4 ElmerSolver_mpi > log.txt',shell=True)
+			subprocess.call('mpirun -np 8 ElmerSolver_mpi > log.txt',shell=True)
 
 	else: 
 		#Execute ElmerSolver and output to log.txt
