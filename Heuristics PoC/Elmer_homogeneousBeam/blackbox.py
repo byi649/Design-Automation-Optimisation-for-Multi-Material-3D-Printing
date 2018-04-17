@@ -24,7 +24,7 @@ def blackbox(E, rho):
 
 	printToConsole = False
 	#MPI run will use 8 partitions
-	MPI = True
+	MPI = False
 	#THIS ROUTINE MUST BE CALLED FROM AN ELMER WORKING DIRECTORY
 	
 	#Modify to change mesh/element order

@@ -13,7 +13,7 @@ if __name__ == '__main__':
     NGEN = 10
     verbose = False
 
-    algorithm = "CMA"
+    algorithm = "GA"
 
     if algorithm == "GA":
         (E, fbest, best) = algos.GA(verbose, NGEN)

@@ -55,14 +55,14 @@ Material 1
   Name = "Polylactic Acid (PLA)"
   Mesh Poisson ratio = 0.35
   Poisson ratio = 0.35
-  Youngs modulus = 132450405102166.000000
-  Density = 345778148.016581
+  Youngs modulus = 720417069631263.000000
+  Density = 261436538.469769
 End
 
 
 Body Force 1
   Name = "BodyForce 1"
-  Stress Bodyforce 2 = $ -9.81 * 345778148.016581
+  Stress Bodyforce 2 = $ -9.81 * 261436538.469769
 End
 
 Boundary Condition 1

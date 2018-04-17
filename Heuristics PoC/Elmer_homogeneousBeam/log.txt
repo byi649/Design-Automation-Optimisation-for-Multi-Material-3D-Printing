@@ -1,23 +1,17 @@
-ELMER SOLVER (v 8.3) STARTED AT: 2018/04/17 20:38:48
-ELMER SOLVER (v 8.3) STARTED AT: 2018/04/17 20:38:48
-ELMER SOLVER (v 8.3) STARTED AT: 2018/04/17 20:38:48
-ELMER SOLVER (v 8.3) STARTED AT: 2018/04/17 20:38:48
-ParCommInit:  Initialize #PEs:            4
-ParCommInit:  Initialize #PEs:            4
-ParCommInit:  Initialize #PEs:            4
+ELMER SOLVER (v 8.3) STARTED AT: 2018/04/18 10:16:53
+ParCommInit:  Initialize #PEs:            1
 MAIN: 
 MAIN: =============================================================
 MAIN: ElmerSolver finite element software, Welcome!
 MAIN: This program is free software licensed under (L)GPL
 MAIN: Copyright 1st April 1995 - , CSC - IT Center for Science Ltd.
 MAIN: Webpage http://www.csc.fi/elmer, Email elmeradm@csc.fi
-MAIN: Version: 8.3 (Rev: unknown, Compiled: 2018-03-10)
-MAIN:  Running in parallel using 4 tasks.
+MAIN: Version: 8.3 (Rev: unknown, Compiled: 2018-04-17)
+MAIN:  Running one task without MPI parallelization.
 MAIN:  Running with just one thread per task.
 MAIN:  HYPRE library linked in.
 MAIN:  MUMPS library linked in.
 MAIN: =============================================================
-ParCommInit:  Initialize #PEs:            4
 MAIN: 
 MAIN: 
 MAIN: -------------------------------------
@@ -27,20 +21,20 @@ LoadInputFile: Loading input file: case.sif
 LoadMesh: Starting
 ElmerAsciiMesh: Performing step: 1
 LoadMesh: Base mesh name: ./Linear_13500
-LoadMesh: Reading header info from file: ./Linear_13500/partitioning.4/part.1.header
-LoadMesh: Number of nodes in mesh: 4760
-LoadMesh: Number of bulk elements in mesh: 3353
-LoadMesh: Number of boundary elements in mesh: 2547
+LoadMesh: Reading header info from file: ./Linear_13500/mesh.header
+LoadMesh: Number of nodes in mesh: 18724
+LoadMesh: Number of bulk elements in mesh: 13500
+LoadMesh: Number of boundary elements in mesh: 10080
 LoadMesh: Initial number of max element nodes: 8
 ElmerAsciiMesh: Performing step: 2
-LoadMesh: Reading nodes from file: ./Linear_13500/partitioning.4/part.1.nodes
+LoadMesh: Reading nodes from file: ./Linear_13500/mesh.nodes
 LoadMesh: Performing coordinate mapping
 LoadMesh: Dimension of model is: 3
 LoadMesh: Dimension of mesh is: 3
 ElmerAsciiMesh: Performing step: 3
-LoadMesh: Reading bulk elements from file: ./Linear_13500/partitioning.4/part.1.elements
+LoadMesh: Reading bulk elements from file: ./Linear_13500/mesh.elements
 ElmerAsciiMesh: Performing step: 4
-LoadMesh: Reading boundary elements from file: ./Linear_13500/partitioning.4/part.1.boundary
+LoadMesh: Reading boundary elements from file: ./Linear_13500/mesh.boundary
 LoadMesh: Performing node mapping
 LoadMesh: Remapping bodies
 LoadMesh: Minimum initial body index: 1
@@ -49,12 +43,11 @@ LoadMesh: Remapping boundaries
 LoadMesh: Minimum initial boundary index: 1
 LoadMesh: Maximum initial boundary index: 6
 ElmerAsciiMesh: Performing step: 5
-LoadMesh: Reading nodes from file: ./Linear_13500/partitioning.4/part.1.shared
 ElmerAsciiMesh: Performing step: 6
 LoadMesh: Loading mesh done
-LoadMesh: Elapsed REAL time:     0.0193 (s)
+LoadMesh: Elapsed REAL time:     0.0432 (s)
 MeshStabParams: Computing stabilization parameters
-MeshStabParams: Elapsed REAL time:     0.0008 (s)
+MeshStabParams: Elapsed REAL time:     0.0029 (s)
 MAIN: -------------------------------------
 AddSolvers: Setting up 1 solvers
 AddSolvers: Setting up solver 1: stress analysis
@@ -67,7 +60,7 @@ Loading user function library: [StressSolve]...[StressSolver]
 AddEquationBasics: Creating standard variable: displacement
 OptimizeBandwidth: ---------------------------------------------------------
 OptimizeBandwidth: Computing matrix structure for: stress analysis...done.
-OptimizeBandwidth: Half bandwidth without optimization: 4723
+OptimizeBandwidth: Half bandwidth without optimization: 18574
 OptimizeBandwidth: 
 OptimizeBandwidth: Bandwidth Optimization ...done.
 OptimizeBandwidth: Half bandwidth after optimization: 249
@@ -79,9 +72,6 @@ MAIN: -------------------------------------
 MAIN:  Steady state iteration:            1
 MAIN: -------------------------------------
 MAIN: 
-ListToCRSMatrix: Matrix format changed from CRS to List
-List_ToCRSMatrix: Number of entries in CRS matrix: 911133
-ListToCRSMatrix: Matrix format changed from List to CRS
 SingleSolver: Attempting to call solver
 SingleSolver: Solver Equation string is: stress analysis
 StressSolve: 
@@ -91,3 +81,81 @@ StressSolve: --------------------------------------------------
 DefaultStart: Starting solver: stress analysis
 StressSolve: Starting assembly...
 StressSolve: Assembly:
+: ..Bulk assembly done
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+EnforceDirichletConditions: Applying Dirichlet conditions using scaled diagonal
+ScaleLinearSystem: Scaling diagonal entries to unity
+DefUtils::DefaultDirichletBCs: Dirichlet boundary conditions set
+StressSolve: Set boundaries done
+DefaultSolve: Solving linear system with default routines
+SolveSystem: Solving linear system
+SolveLinearSystem: Assuming real valued linear system
+ScaleLinearSystem: Scaling diagonal entries to unity
+EigenSolve: Arpack reverse communication calls: 1
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 2
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 3
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 4
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 5
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 6
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 7
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 8
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 9
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 10
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 11
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 12
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 13
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 14
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 15
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 16
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 17
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 18
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 19
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 20
+DirectSolver: Using direct method: mumps
+EigenSolve: 
+EigenSolve: Eigen system solution complete:
+EigenSolve: 
+EigenSolve: Convergence criterion is:    1.000E-03
+EigenSolve: Number of converged Ritz values is: 6
+EigenSolve: Number of update iterations taken: 1
+EigenSolve: 
+EigenSolve: Computed 6 Eigen Values
+EigenSolve: --------------------------------
+EigenSolve: 1:    1.255343E+05   0.000000E+00
+EigenSolve: 2:    4.899507E+06   0.000000E+00
+EigenSolve: 3:    1.049818E+07   0.000000E+00
+EigenSolve: 4:    1.077863E+07   0.000000E+00
+EigenSolve: 5:    3.837892E+07   0.000000E+00
+EigenSolve: 6:    9.855740E+07   0.000000E+00
+EigenSolve: --------------------------------
+ComputeNorm: Computing norm of solution
+DefaultFinish: Finished solver: stress analysis
+StressSolver: All done
+StressSolver: ------------------------------------------
+ComputeNorm: Computing norm of solution
+ComputeChange: SS (ITER=1) (NRM,RELC): (  0.0000000      0.0000000     ) :: stress analysis
+ReloadInputFile: Realoading input file
+LoadInputFile: Loading input file:
+ElmerSolver: *** Elmer Solver: ALL DONE ***
+ElmerSolver: The end
+SOLVER TOTAL TIME(CPU,REAL):         4.80        3.84
+ELMER SOLVER FINISHED AT: 2018/04/18 10:16:57
