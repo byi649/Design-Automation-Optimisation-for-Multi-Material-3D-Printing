@@ -1,4 +1,4 @@
-ELMER SOLVER (v 8.3) STARTED AT: 2018/04/17 16:49:42
+ELMER SOLVER (v 8.3) STARTED AT: 2018/04/17 17:56:13
 ParCommInit:  Initialize #PEs:            1
 MAIN: 
 MAIN: =============================================================
@@ -45,9 +45,9 @@ LoadMesh: Maximum initial boundary index: 6
 ElmerAsciiMesh: Performing step: 5
 ElmerAsciiMesh: Performing step: 6
 LoadMesh: Loading mesh done
-LoadMesh: Elapsed REAL time:     0.0614 (s)
+LoadMesh: Elapsed REAL time:     0.0591 (s)
 MeshStabParams: Computing stabilization parameters
-MeshStabParams: Elapsed REAL time:     0.0031 (s)
+MeshStabParams: Elapsed REAL time:     0.0030 (s)
 MAIN: -------------------------------------
 AddSolvers: Setting up 1 solvers
 AddSolvers: Setting up solver 1: stress analysis
@@ -157,5 +157,5 @@ ReloadInputFile: Realoading input file
 LoadInputFile: Loading input file:
 ElmerSolver: *** Elmer Solver: ALL DONE ***
 ElmerSolver: The end
-SOLVER TOTAL TIME(CPU,REAL):         7.69        8.52
-ELMER SOLVER FINISHED AT: 2018/04/17 16:49:51
+SOLVER TOTAL TIME(CPU,REAL):         7.33        8.15
+ELMER SOLVER FINISHED AT: 2018/04/17 17:56:22

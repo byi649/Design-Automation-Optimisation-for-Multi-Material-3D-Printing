@@ -2,11 +2,13 @@ import subprocess
 import math
 import re
 
-def Elmer_blackbox(E,rho, printToConsole = True):
-	#Returns vector of SIX natural frequencies[Hz] of a homogeneous cantilever beam with material properties:
+def Elmer_blackbox(E,rho, MPI = False, printToConsole = True):
+	#Returns vector of n natural frequencies[Hz] of a homogeneous cantilever beam with material properties:
 	#E		Youngs Modulus [Pa]
 	#rho	Density [kg/m3]
 
+	#MPI run will use 8 partitions
+	
 	#THIS ROUTINE MUST BE CALLED FROM AN ELMER WORKING DIRECTORY
 	
 	#Modify to change mesh/element order
@@ -99,72 +101,62 @@ def Elmer_blackbox(E,rho, printToConsole = True):
 		casefile.write('  Displacement 1 = 0\n')
 		casefile.write('End\n')
 	
-	#Execute ElmerSolver and output to log.txt
-	if printToConsole == True:
-		subprocess.call('ElmerSolver | tee log.txt',shell=True)
-	else:
-		print('Running ElmerSolver...\n')
-		subprocess.call('ElmerSolver > log.txt',shell=True)
+	if MPI == False:
+		#Execute ElmerSolver and output to log.txt
+		if printToConsole == True:
+			subprocess.call('ElmerSolver | tee log.txt',shell=True)
+		else:
+			print('Running ElmerSolver...\n')
+			subprocess.call('ElmerSolver > log.txt',shell=True)
+	else: #Execute ElmerSolver_mpi
+		if printToConsole == True:
+			subprocess.call('mpirun -np 8 ElmerSolver_mpi | tee log.txt',shell=True)
+		else:
+			print('Running ElmerSolver_mpi...\n')
+			subprocess.call('mpirun -np 8 ElmerSolver_mpi > log.txt',shell=True)
+		
 		
 
 	frequencies = []
 	r = re.compile(r'[\s:]+')
-
+	
+	#Log file output differs slightly if MPI is used. Check for this
+	if MPI == True:
+		stringCheck = 'EigenSolve:            1'
+		eigen_index = 3
+	else:
+		stringCheck = 'EigenSolve: 1:'
+		eigen_index = 2
+		
+	#String split usage
+	r = re.compile(r'[\s:]+')
+	
 	#Retrieve Eigenvalues from log.txt output
 	with open('log.txt','r') as logfile:
 		logfile.seek(0) #Return to start of logfile
 		ln = logfile.readline().rstrip()
-		print(ln)
-		while not ln.startswith('EigenSolve: 1:'):
+		#print(ln)
+		while not ln.startswith(stringCheck):
 			ln = logfile.readline().rstrip()
 			#print(ln)
 		for i in range(n):
 			line = r.split(ln)
-			frequencies.append(float(line[2]))
+			frequencies.append(float(line[eigen_index]))
 			ln = logfile.readline().rstrip()
 		
 	#Eigenvalues are omega^2. Convert to f [Hz] using omega = 2pi f
 	frequencies = [(freq**0.5)/(2*math.pi) for freq in frequencies]
+	
 	print(frequencies)
 	return frequencies
 	
-#def retrieveFrequencies(logfile):
-#	
-#	#with open('log.txt','r') as logfile:
-#	#	for line in logfile:
-#	#		print(line.startswith('EigenSolve'))
-#	##raise RuntimeError
-#	#Retrieve Eigenvalues from log output
-#	n = 6
-#	frequencies = []
-#	
-#	r = re.compile(r'[\s:]+')
-#
-#	with open('log.txt','r') as logfile:
-#		logfile.seek(0)
-#		ln = logfile.readline().rstrip()
-#		print(ln)
-#		while not ln.startswith('EigenSolve: 1:'):
-#			ln = logfile.readline().rstrip()
-#			#print(ln)
-#		for i in range(n):
-#			line = r.split(ln)
-#			frequencies.append(float(line[2]))
-#			ln = logfile.readline().rstrip()
-#		
-#			
-#	frequencies = [(freq**0.5)/(2*math.pi) for freq in frequencies]
-#	return frequencies
-
-
 #FOR DEBUGGING PURPOSES
 def main():
 	#PLA plastic parameters
 	E = 3.5e9
 	rho = 1.3e3
-	Elmer_blackbox(E,rho,False)
-	#frequencies = retrieveFrequencies('log.txt')
-	#print(frequencies)
+	Elmer_blackbox(E,rho,MPI = False, printToConsole = False)
+
 
 if __name__ == "__main__":
 	main()
