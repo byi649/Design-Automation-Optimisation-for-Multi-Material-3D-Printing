@@ -1,0 +1,74 @@
+Header
+  CHECK KEYWORDS Warn
+Mesh DB "." "Linear_13500"
+  Include Path ""
+  Results Directory ""
+End
+
+Simulation
+  Coordinate System = Cartesian
+  Coordinate Mapping(3) = 1 2 3
+  Simulation Type = Steady state
+  Steady State Max Iterations = 1
+  Solver Input File = case.sif
+End
+
+Body 1
+  Target Bodies(1) = 1
+  Name = "Beam Volume"
+  Equation = 1
+  Material = 1
+  Body Force = 1
+End
+
+Solver 1
+  Equation = "Stress Analysis"
+  Eigen System Values = 6
+  Variable = "Displacement"
+  Variable Dofs = 3
+  Eigen System Select = Smallest magnitude
+  Eigen Analysis = Logical True
+  Steady State Convergence Tolerance = 1.0e-5
+  Nonlinear System Convergence Tolerance = 1.0e-7
+  Nonlinear System Max Iterations = 1
+  Nonlinear System Newton After Iterations = 1
+  Nonlinear System Newton After Tolerance = 1.0e-3
+  Nonlinear System Relaxation Factor = 1
+  Linear System Solver = Direct
+  Linear System Direct Method = MUMPS
+  Linear System Iterative Method = BiCGStab
+  Linear System Max Iterations = 1
+  Linear System Convergence Tolerance = 1.0e-5
+  BiCGstabl polynomial degree = 2
+  Linear System Preconditioning = Diagonal
+  Linear System ILUT Tolerance = 1.0e-3
+  Linear System Abort Not Converged = True
+  Linear System Residual Output = 1
+  Linear System Precondition Recompute = 1
+End
+
+Equation 1
+  Stress Analysis = True
+End
+
+Material 1
+  Name = "Polylactic Acid (PLA)"
+  Mesh Poisson ratio = 0.35
+  Poisson ratio = 0.35
+  Youngs modulus = 3500000000.000000
+  Density = 1300.000000
+End
+
+
+Body Force 1
+  Name = "BodyForce 1"
+  Stress Bodyforce 2 = $ -9.81 * 1300.000000
+End
+
+Boundary Condition 1
+  Target Boundaries(1) = 1
+  Name = "fixed"
+  Displacement 3 = 0
+  Displacement 2 = 0
+  Displacement 1 = 0
+End
