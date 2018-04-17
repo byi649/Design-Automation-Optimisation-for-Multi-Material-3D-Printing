@@ -1,4 +1,4 @@
-ELMER SOLVER (v 8.3) STARTED AT: 2018/04/18 10:16:53
+ELMER SOLVER (v 8.3) STARTED AT: 2018/04/18 10:24:58
 ParCommInit:  Initialize #PEs:            1
 MAIN: 
 MAIN: =============================================================
@@ -6,7 +6,7 @@ MAIN: ElmerSolver finite element software, Welcome!
 MAIN: This program is free software licensed under (L)GPL
 MAIN: Copyright 1st April 1995 - , CSC - IT Center for Science Ltd.
 MAIN: Webpage http://www.csc.fi/elmer, Email elmeradm@csc.fi
-MAIN: Version: 8.3 (Rev: unknown, Compiled: 2018-04-17)
+MAIN: Version: 8.3 (Rev: unknown, Compiled: 2018-04-05)
 MAIN:  Running one task without MPI parallelization.
 MAIN:  Running with just one thread per task.
 MAIN:  HYPRE library linked in.
@@ -45,9 +45,9 @@ LoadMesh: Maximum initial boundary index: 6
 ElmerAsciiMesh: Performing step: 5
 ElmerAsciiMesh: Performing step: 6
 LoadMesh: Loading mesh done
-LoadMesh: Elapsed REAL time:     0.0432 (s)
+LoadMesh: Elapsed REAL time:     0.0392 (s)
 MeshStabParams: Computing stabilization parameters
-MeshStabParams: Elapsed REAL time:     0.0029 (s)
+MeshStabParams: Elapsed REAL time:     0.0026 (s)
 MAIN: -------------------------------------
 AddSolvers: Setting up 1 solvers
 AddSolvers: Setting up solver 1: stress analysis
@@ -81,7 +81,7 @@ StressSolve: --------------------------------------------------
 DefaultStart: Starting solver: stress analysis
 StressSolve: Starting assembly...
 StressSolve: Assembly:
-: ..Bulk assembly done
+: .Bulk assembly done
 DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
 EnforceDirichletConditions: Applying Dirichlet conditions using scaled diagonal
 ScaleLinearSystem: Scaling diagonal entries to unity
@@ -140,12 +140,12 @@ EigenSolve: Number of update iterations taken: 1
 EigenSolve: 
 EigenSolve: Computed 6 Eigen Values
 EigenSolve: --------------------------------
-EigenSolve: 1:    1.255343E+05   0.000000E+00
-EigenSolve: 2:    4.899507E+06   0.000000E+00
-EigenSolve: 3:    1.049818E+07   0.000000E+00
-EigenSolve: 4:    1.077863E+07   0.000000E+00
-EigenSolve: 5:    3.837892E+07   0.000000E+00
-EigenSolve: 6:    9.855740E+07   0.000000E+00
+EigenSolve: 1:    1.239084E+05   0.000000E+00
+EigenSolve: 2:    4.836052E+06   0.000000E+00
+EigenSolve: 3:    1.036221E+07   0.000000E+00
+EigenSolve: 4:    1.063904E+07   0.000000E+00
+EigenSolve: 5:    3.788186E+07   0.000000E+00
+EigenSolve: 6:    9.728095E+07   0.000000E+00
 EigenSolve: --------------------------------
 ComputeNorm: Computing norm of solution
 DefaultFinish: Finished solver: stress analysis
@@ -157,5 +157,5 @@ ReloadInputFile: Realoading input file
 LoadInputFile: Loading input file:
 ElmerSolver: *** Elmer Solver: ALL DONE ***
 ElmerSolver: The end
-SOLVER TOTAL TIME(CPU,REAL):         4.80        3.84
-ELMER SOLVER FINISHED AT: 2018/04/18 10:16:57
+SOLVER TOTAL TIME(CPU,REAL):         4.74        3.68
+ELMER SOLVER FINISHED AT: 2018/04/18 10:25:02

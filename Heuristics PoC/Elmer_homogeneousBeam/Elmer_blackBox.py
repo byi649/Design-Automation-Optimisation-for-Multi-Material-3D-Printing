@@ -13,7 +13,7 @@ def Elmer_blackbox(E,rho, MPI = False, printToConsole = True):
 	
 	#Modify to change mesh/element order
 	#ElementOrder = 1 for 13500 Element linear mesh, 2 for 4000 element quadratic mesh
-	ElementOrder = 2
+	ElementOrder = 1
 	
 	#Number of natural frequencies to solve for
 	n = 6
@@ -155,7 +155,7 @@ def main():
 	#PLA plastic parameters
 	E = 3.5e9
 	rho = 1.3e3
-	Elmer_blackbox(E,rho,MPI = False, printToConsole = False)
+	Elmer_blackbox(E,rho,MPI = False, printToConsole = True)
 
 
 if __name__ == "__main__":
