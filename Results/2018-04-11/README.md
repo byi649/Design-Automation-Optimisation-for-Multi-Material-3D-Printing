@@ -1,0 +1,1 @@
+Evolutionary algorithms using analytical solutions. 40 individuals per population, 250 generations. 50 iterations each algorithm for the comparison.

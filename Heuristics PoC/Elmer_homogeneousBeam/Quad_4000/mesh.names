@@ -1,9 +1,0 @@
-! ----- names for bodies -----
-$ CantileverBody = 1
-! ----- names for boundaries -----
-$ LHS-boundary = 1
-$ RHS-boundary = 2
-$ Front-boundary = 3
-$ Back-boundary = 4
-$ Top-boundary = 5
-$ Bottom-boundary = 6

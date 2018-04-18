@@ -1,0 +1,9 @@
+! ----- names for bodies -----
+$ palkki = 1
+! ----- names for boundaries -----
+$ left = 1
+$ right = 2
+$ top = 3
+$ bottom = 4
+$ front = 5
+$ back = 6

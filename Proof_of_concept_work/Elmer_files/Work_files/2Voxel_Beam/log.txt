@@ -1,0 +1,251 @@
+ELMER SOLVER (v 8.3) STARTED AT: 2018/04/04 00:18:27
+ParCommInit:  Initialize #PEs:            1
+MAIN: 
+MAIN: =============================================================
+MAIN: ElmerSolver finite element software, Welcome!
+MAIN: This program is free software licensed under (L)GPL
+MAIN: Copyright 1st April 1995 - , CSC - IT Center for Science Ltd.
+MAIN: Webpage http://www.csc.fi/elmer, Email elmeradm@csc.fi
+MAIN: Version: 8.3 (Rev: unknown, Compiled: 2018-03-10)
+MAIN:  Running one task without MPI parallelization.
+MAIN:  Running with just one thread per task.
+MAIN:  HYPRE library linked in.
+MAIN:  MUMPS library linked in.
+MAIN: =============================================================
+MAIN: 
+MAIN: 
+MAIN: -------------------------------------
+MAIN: Reading Model: case.sif
+LoadInputFile: Scanning input file: case.sif
+LoadInputFile: Loading input file: case.sif
+LoadMesh: Starting
+ElmerAsciiMesh: Performing step: 1
+LoadMesh: Base mesh name: ./.
+LoadMesh: Reading header info from file: ././mesh.header
+LoadMesh: Number of nodes in mesh: 22965
+LoadMesh: Number of bulk elements in mesh: 4000
+LoadMesh: Number of boundary elements in mesh: 4520
+LoadMesh: Initial number of max element nodes: 20
+ElmerAsciiMesh: Performing step: 2
+LoadMesh: Reading nodes from file: ././mesh.nodes
+LoadMesh: Performing coordinate mapping
+LoadMesh: Dimension of model is: 3
+LoadMesh: Dimension of mesh is: 3
+ElmerAsciiMesh: Performing step: 3
+LoadMesh: Reading bulk elements from file: ././mesh.elements
+ElmerAsciiMesh: Performing step: 4
+LoadMesh: Reading boundary elements from file: ././mesh.boundary
+LoadMesh: Performing node mapping
+LoadMesh: Remapping bodies
+LoadMesh: Minimum initial body index: 1
+LoadMesh: Maximum initial body index: 2
+LoadMesh: Remapping boundaries
+LoadMesh: Minimum initial boundary index: 1
+LoadMesh: Maximum initial boundary index: 7
+ElmerAsciiMesh: Performing step: 5
+ElmerAsciiMesh: Performing step: 6
+LoadMesh: Loading mesh done
+LoadMesh: Elapsed REAL time:     0.0520 (s)
+MeshStabParams: Computing stabilization parameters
+MeshStabParams: Elapsed REAL time:     0.0012 (s)
+MAIN: -------------------------------------
+AddVtuOutputSolverHack: Adding ResultOutputSolver to write VTU output in file: case
+AddVtuOutputSolverHanck: Increasing number of solver to: 2
+AddSolvers: Setting up 2 solvers
+AddSolvers: Setting up solver 1: stress analysis
+AddEquationBasics: Setting up keywords internally for legacy solver: stress analysis
+AddEquationBasics: Using procedure: StressSolve StressSolver
+AddEquationBasics: Setting up solver: stress analysis
+Loading user function library: [StressSolve]...[StressSolver_Init]
+Loading user function library: [StressSolve]...[StressSolver_bulk]
+Loading user function library: [StressSolve]...[StressSolver]
+AddEquationBasics: Creating standard variable: displacement
+OptimizeBandwidth: ---------------------------------------------------------
+OptimizeBandwidth: Computing matrix structure for: stress analysis...done.
+OptimizeBandwidth: Half bandwidth without optimization: 22955
+OptimizeBandwidth: 
+OptimizeBandwidth: Bandwidth Optimization ...done.
+OptimizeBandwidth: Half bandwidth after optimization: 462
+OptimizeBandwidth: ---------------------------------------------------------
+AddSolvers: Setting up solver 2: internalvtuoutputsolver
+AddEquationBasics: Using procedure: ResultOutputSolve ResultOutputSolver
+AddEquationBasics: Setting up solver: internalvtuoutputsolver
+Loading user function library: [ResultOutputSolve]...[ResultOutputSolver_Init]
+Loading user function library: [ResultOutputSolve]...[ResultOutputSolver_bulk]
+Loading user function library: [ResultOutputSolve]...[ResultOutputSolver]
+AddMeshCoordinatesAndTime: Setting mesh coordinates and time
+SetInitialConditions: Setting up initial conditions (if any)
+MAIN: 
+MAIN: -------------------------------------
+MAIN:  Steady state iteration:            1
+MAIN: -------------------------------------
+MAIN: 
+SingleSolver: Attempting to call solver
+SingleSolver: Solver Equation string is: stress analysis
+StressSolve: 
+StressSolve: --------------------------------------------------
+StressSolve: Solving displacements from linear elasticity model
+StressSolve: --------------------------------------------------
+DefaultStart: Starting solver: stress analysis
+StressSolve: Starting assembly...
+StressSolve: Assembly:
+: ..........Bulk assembly done
+DefUtils::DefaultDirichletBCs: Setting Dirichlet boundary conditions
+EnforceDirichletConditions: Applying Dirichlet conditions using scaled diagonal
+ScaleLinearSystem: Scaling diagonal entries to unity
+DefUtils::DefaultDirichletBCs: Dirichlet boundary conditions set
+StressSolve: Set boundaries done
+DefaultSolve: Solving linear system with default routines
+SolveSystem: Solving linear system
+SolveLinearSystem: Assuming real valued linear system
+ScaleLinearSystem: Scaling diagonal entries to unity
+EigenSolve: Arpack reverse communication calls: 1
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 2
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 3
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 4
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 5
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 6
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 7
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 8
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 9
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 10
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 11
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 12
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 13
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 14
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 15
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 16
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 17
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 18
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 19
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 20
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 21
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 22
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 23
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 24
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 25
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 26
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 27
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 28
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 29
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 30
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 31
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 32
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 33
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 34
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 35
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 36
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 37
+DirectSolver: Using direct method: mumps
+EigenSolve: Arpack reverse communication calls: 38
+DirectSolver: Using direct method: mumps
+EigenSolve: 
+EigenSolve: Eigen system solution complete:
+EigenSolve: 
+EigenSolve: Convergence criterion is:    1.000E-03
+EigenSolve: Number of converged Ritz values is: 12
+EigenSolve: Number of update iterations taken: 1
+EigenSolve: 
+EigenSolve: Computed 12 Eigen Values
+EigenSolve: --------------------------------
+EigenSolve: 1:    6.704694E+07   0.000000E+00
+EigenSolve: 2:    3.537089E+09   0.000000E+00
+EigenSolve: 3:    6.246888E+09   0.000000E+00
+EigenSolve: 4:    6.949667E+09   0.000000E+00
+EigenSolve: 5:    3.040987E+10   0.000000E+00
+EigenSolve: 6:    9.043385E+10   0.000000E+00
+EigenSolve: 7:    1.130147E+11   0.000000E+00
+EigenSolve: 8:    2.390227E+11   0.000000E+00
+EigenSolve: 9:    2.408598E+11   0.000000E+00
+EigenSolve: 10:    3.136981E+11   0.000000E+00
+EigenSolve: 11:    4.340328E+11   0.000000E+00
+EigenSolve: 12:    5.523856E+11   0.000000E+00
+EigenSolve: --------------------------------
+ComputeNorm: Computing norm of solution
+DefaultFinish: Finished solver: stress analysis
+StressSolver: All done
+StressSolver: ------------------------------------------
+ComputeNorm: Computing norm of solution
+ComputeChange: SS (ITER=1) (NRM,RELC): (  0.0000000      0.0000000     ) :: stress analysis
+SingleSolver: Attempting to call solver
+SingleSolver: Solver Equation string is: internalvtuoutputsolver
+ResultOutputSolver: -------------------------------------
+ResultOutputSolve: Saving with prefix: case
+ResultOutputSolver: Working on mesh: .
+ResultOutputSolver: Dimension of mesh is: 3
+ResultOutputSolver: Creating list for saving - if not present
+CreateListForSaving: Field Variables for Saving
+CreateListForSaving: Vector Field 1: displacement
+ResultOutputSolver: Saving in unstructured VTK XML (.vtu) format
+VtuOutputSolver: Saving results in VTK XML format with prefix: case
+VtuOutputSolver: Saving number of partitions: 1
+VtuOutputSolver: Full filename base is: ././case
+VtuOutputSolver: Number of active elements 8520 out of 8520
+VtuOutputSolver: Number of geometry nodes 22965 out of 22965
+VtuOutputSolver: Total number of geometry nodes to save:   22965
+VtuOutputSolver: Total number of dof nodes to save:   22965
+VtuOutputSolver: Total number of elements to save:    8520
+VtuOutputSolver: Maximum number of eigen/harmonic modes: 12
+VtuOutputSolver: Setting offset for boundary entities: 100
+VtuOutputSolver: Writing the vtu file: ././case0001.vtu
+AscBinWriteInit: Initializing buffered ascii/binary writing
+AscBinWriteInit: Writing in binary
+AscBinWriteInit: Writing in double precision
+AscBinWriteInit: Writing to unit number: 58
+AscBinWriteInit: Size of buffer is: 22965
+VtuOutputSolver: Writing nodal fields
+VtuOutputSolver: Saving variable: displacement
+VtuOutputSolver: Number of nodal fields written: 12
+VtuOutputSolver: Writing elemental fields
+VtuOutputSolver: Number of elemental fields written: 0
+VtuOutputSolver: Writing entity IDs for bodies and boundaries
+VtuOutputSolver: Writing coordinates for each used node
+VtuOutputSolver: Writing the elemental connectivity data
+VtuOutputSolver: Writing nodal fields
+VtuOutputSolver: Saving variable: displacement
+VtuOutputSolver: Writing elemental fields
+AscBinWriteInit: Terminating buffered ascii/binary writing
+VtuOutputSolver: All done for now
+ResultOutputSolver: -------------------------------------
+ReloadInputFile: Realoading input file
+LoadInputFile: Loading input file:
+ElmerSolver: *** Elmer Solver: ALL DONE ***
+ElmerSolver: The end
+SOLVER TOTAL TIME(CPU,REAL):        25.03       26.60
+ELMER SOLVER FINISHED AT: 2018/04/04 00:18:54

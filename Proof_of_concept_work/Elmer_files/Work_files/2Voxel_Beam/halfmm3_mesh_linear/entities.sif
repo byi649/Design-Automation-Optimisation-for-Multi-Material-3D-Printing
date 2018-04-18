@@ -1,0 +1,38 @@
+!------ Skeleton for body section -----
+Body 1
+  Name = LHS_Mesh
+End
+
+Body 2
+  Name = RHS_Mesh
+End
+
+!------ Skeleton for boundary section -----
+Boundary Condition 1
+  Name = Front_Boundary
+End
+
+Boundary Condition 2
+  Name = Back_Boundary
+End
+
+Boundary Condition 3
+  Name = LHS_Boundary
+End
+
+Boundary Condition 4
+  Name = RHS_Boundary
+End
+
+Boundary Condition 5
+  Name = Top_Boundary
+End
+
+Boundary Condition 6
+  Name = Bottom_Boundary
+End
+
+Boundary Condition 7
+  Name = bnry9
+End
+
