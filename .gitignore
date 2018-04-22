@@ -2,3 +2,5 @@ Heuristics PoC/Python/.vscode/launch.json
 *.pyc
 /__pycache__
 Thumbs.db
+case.sif
+log.txt
