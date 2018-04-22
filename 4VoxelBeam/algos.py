@@ -413,17 +413,20 @@ def GA_voxel(verbose=False, NGEN=10, nVoxels=4):
 
         CXPB = 0.5
         MUTPB = 0.1
-        # Apply crossover and mutation on the offspring
-        for child1, child2 in zip(offspring[::2], offspring[1::2]):
-            if random.random() < CXPB:
-                toolbox.mate(child1, child2)
-                del child1.fitness.values
-                del child2.fitness.values
 
-        for mutant in offspring:
-            if random.random() < MUTPB:
-                toolbox.mutate(mutant)
-                del mutant.fitness.values
+        # Stop evolving when we reach a reasonable accuracy
+        if hof[0].fitness.values > 1:
+            # Apply crossover and mutation on the offspring
+            for child1, child2 in zip(offspring[::2], offspring[1::2]):
+                if random.random() < CXPB:
+                    toolbox.mate(child1, child2)
+                    del child1.fitness.values
+                    del child2.fitness.values
+
+            for mutant in offspring:
+                if random.random() < MUTPB:
+                    toolbox.mutate(mutant)
+                    del mutant.fitness.values
 
         # Evaluate the individuals with an invalid fitness
         invalid_ind = [ind for ind in offspring if not ind.fitness.valid]
