@@ -11,7 +11,7 @@ N = 6
 if __name__ == '__main__': 
 
     NGEN = 10
-    verbose = False
+    verbose = True
     nVoxels = 4
 
     algorithm = "GA_voxel"
@@ -25,7 +25,8 @@ if __name__ == '__main__':
     print("Natural frequencies:")
     print('\n'.join('{}: {} Hz'.format(*k) for k in enumerate(freq, 1)))
 	
-    true_freq = [55.73843789146891, 348.21686728338096, 509.718646370548, 516.4824354644039, 974.5856546461372, 1561.7741652094128]
+    #true_freq = [55.73843789146891, 348.21686728338096, 509.718646370548, 516.4824354644039, 974.5856546461372, 1561.7741652094128]
+    true_freq = [56.87056214, 522.7659672, 637.69078, 656.4648486, 1306.01978, 2420.557282]
     true_freq = true_freq[:N]
 
     errors = []

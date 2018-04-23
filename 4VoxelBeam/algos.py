@@ -398,14 +398,14 @@ def GA_voxel(verbose=False, NGEN=10, nVoxels=4):
     fbest = np.ndarray((NGEN,1))
     best = np.ndarray((NGEN, nVoxels))
 
-    for gen in range(NGEN):
-        # Generate a new population
-        population = toolbox.population(n=10)
-        # Evaluate the individuals
-        fitnesses = toolbox.map(toolbox.evaluate, population)
-        for ind, fit in zip(population, fitnesses):
-            ind.fitness.values = fit
-        
+    # Generate a new population
+    population = toolbox.population(n=10)
+    # Evaluate the individuals
+    fitnesses = toolbox.map(toolbox.evaluate, population)
+    for ind, fit in zip(population, fitnesses):
+        ind.fitness.values = fit
+
+    for gen in range(NGEN):   
         # Select the next generation individuals
         offspring = toolbox.select(population, len(population))
         # Clone the selected individuals
@@ -415,7 +415,8 @@ def GA_voxel(verbose=False, NGEN=10, nVoxels=4):
         MUTPB = 0.1
 
         # Stop evolving when we reach a reasonable accuracy
-        if hof[0].fitness.values > 1:
+        hof.update(offspring)
+        if hof[0].fitness.values[0] > 1.0:
             # Apply crossover and mutation on the offspring
             for child1, child2 in zip(offspring[::2], offspring[1::2]):
                 if random.random() < CXPB:
@@ -427,6 +428,9 @@ def GA_voxel(verbose=False, NGEN=10, nVoxels=4):
                 if random.random() < MUTPB:
                     toolbox.mutate(mutant)
                     del mutant.fitness.values
+
+        else:
+            print("Skip generation:", gen)
 
         # Evaluate the individuals with an invalid fitness
         invalid_ind = [ind for ind in offspring if not ind.fitness.valid]
@@ -444,6 +448,7 @@ def GA_voxel(verbose=False, NGEN=10, nVoxels=4):
         
         if verbose:
             print(logbook.stream)
+            print("Best solution:", hof[0])
         
         # Save more data along the evolution for latter plotting
         fbest[gen] = hof[0].fitness.values
