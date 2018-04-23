@@ -120,14 +120,15 @@ def GA(verbose=False, NGEN=250):
     fbest = np.ndarray((NGEN,1))
     best = np.ndarray((NGEN,2))
 
+    # Generate a new population
+    population = toolbox.population(n=40)
+    # Evaluate the individuals
+    fitnesses = toolbox.map(toolbox.evaluate, population)
+    for ind, fit in zip(population, fitnesses):
+        ind.fitness.values = fit
+
     for gen in range(NGEN):
-        # Generate a new population
-        population = toolbox.population(n=40)
-        # Evaluate the individuals
-        fitnesses = toolbox.map(toolbox.evaluate, population)
-        for ind, fit in zip(population, fitnesses):
-            ind.fitness.values = fit
-        
+
         # Select the next generation individuals
         offspring = toolbox.select(population, len(population))
         # Clone the selected individuals
@@ -203,22 +204,23 @@ def GA_1(verbose=False, NGEN=250):
     fbest = np.ndarray((NGEN,1))
     best = np.ndarray((NGEN,2))
 
-    for gen in range(NGEN):
-        # Generate a new population
-        population = toolbox.population(n=40)
-        # Evaluate the individuals
-        fitnesses = toolbox.map(toolbox.evaluate, population)
-        for ind, fit in zip(population, fitnesses):
-            ind.fitness.values = fit
+    # Generate a new population
+    population = toolbox.population(n=40)
+    # Evaluate the individuals
+    fitnesses = toolbox.map(toolbox.evaluate, population)
+    for ind, fit in zip(population, fitnesses):
+        ind.fitness.values = fit
 
-        record = stats.compile(population)
-        fbar = record['avg']
-        fmin = record['min']
-        
+    for gen in range(NGEN):
+
         # Select the next generation individuals
         offspring = toolbox.select(population, len(population))
         # Clone the selected individuals
         offspring = list(map(toolbox.clone, offspring))
+
+        record = stats.compile(population)
+        fbar = record['avg']
+        fmin = record['min']
 
         k1 = 1.0
         k2 = 0.5
@@ -233,24 +235,27 @@ def GA_1(verbose=False, NGEN=250):
             f1 = child1.fitness.values[0]
             f2 = child2.fitness.values[0]
 
-            if (f1 <= fbar):
+            if (f1 < fbar):
                 MUTPB1 = k2 * (f1 - fmin) / (fbar - fmin)
             else:
                 MUTPB1 = k4
 
-            if (f2 <= fbar):
+            if (f2 < fbar):
                 MUTPB2 = k2 * (f2 - fmin) / (fbar - fmin)
             else:
                 MUTPB2 = k4
 
-            MUTPB1 += 0.005
-            MUTPB2 += 0.005
+            MUTPB1 += 0.05
+            MUTPB2 += 0.05
 
             fdash = min(child1.fitness.values, child2.fitness.values)[0]
-            if (fdash <= fbar):
+            if (fdash < fbar):
                 CXPB = k1 * (fdash - fmin) / (fbar - fmin)
             else:
                 CXPB = k3
+
+            #print(fbar, fmin)
+            #print(MUTPB1, MUTPB2, CXPB)
 
             if random.random() < CXPB:
                 toolbox.mate(child1, child2)

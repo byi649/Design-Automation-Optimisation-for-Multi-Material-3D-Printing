@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 if __name__ == '__main__': 
     global NGEN
-    NGEN = 30
+    NGEN = 250
 
     def algorithm_wrapper(algorithm):
         verbose = False
@@ -52,15 +52,15 @@ if __name__ == '__main__':
         GA_1_first[0] += np.argmax(GA_1_runs[i]<1)
         PSO_first[0] += np.argmax(PSO_runs[i]<1)
 
-        GA_first[1] += np.argmax(GA_runs[i]<0.1) if np.argmax(GA_runs[i]<0.1) > 0 else NGEN
-        CMA_first[1] += np.argmax(CMA_runs[i]<0.1) if np.argmax(CMA_runs[i]<0.1) > 0 else NGEN
-        GA_1_first[1] += np.argmax(GA_1_runs[i]<0.1) if np.argmax(GA_1_runs[i]<0.1) > 0 else NGEN
-        PSO_first[1] += np.argmax(PSO_runs[i]<0.1) if np.argmax(PSO_runs[i]<0.1) > 0 else NGEN
+        GA_first[1] += NGEN if (np.argmax(GA_runs[i]<0.1)==0 and GA_runs[i][0]>=0.1) else np.argmax(GA_runs[i]<0.1)
+        CMA_first[1] += NGEN if (np.argmax(CMA_runs[i]<0.1)==0 and CMA_runs[i][0]>=0.1) else np.argmax(CMA_runs[i]<0.1)
+        GA_1_first[1] += NGEN if (np.argmax(GA_1_runs[i]<0.1)==0 and GA_1_runs[i][0]>=0.1) else np.argmax(GA_1_runs[i]<0.1)
+        PSO_first[1] += NGEN if (np.argmax(PSO_runs[i]<0.1)==0 and PSO_runs[i][0]>=0.1) else np.argmax(PSO_runs[i]<0.1)
 
-        GA_first[2] += np.argmax(GA_runs[i]<0.01) if np.argmax(GA_runs[i]<0.01) > 0 else NGEN
-        CMA_first[2] += np.argmax(CMA_runs[i]<0.01) if np.argmax(CMA_runs[i]<0.01) > 0 else NGEN
-        GA_1_first[2] += np.argmax(GA_1_runs[i]<0.01) if np.argmax(GA_1_runs[i]<0.01) > 0 else NGEN
-        PSO_first[2] += np.argmax(PSO_runs[i]<0.01) if np.argmax(PSO_runs[i]<0.01) > 0 else NGEN
+        GA_first[2] += NGEN if (np.argmax(GA_runs[i]<0.01)==0 and GA_runs[i][0]>=0.01) else np.argmax(GA_runs[i]<0.01)
+        CMA_first[2] += NGEN if (np.argmax(CMA_runs[i]<0.01)==0 and CMA_runs[i][0]>=0.01) else np.argmax(CMA_runs[i]<0.01)
+        GA_1_first[2] += NGEN if (np.argmax(GA_1_runs[i]<0.01)==0 and GA_1_runs[i][0]>=0.01) else np.argmax(GA_1_runs[i]<0.01)
+        PSO_first[2] += NGEN if (np.argmax(PSO_runs[i]<0.01)==0 and PSO_runs[i][0]>=0.01) else np.argmax(PSO_runs[i]<0.01)
 
     GA_first[0] = GA_first[0] / niter
     CMA_first[0] = CMA_first[0] / niter
@@ -76,7 +76,6 @@ if __name__ == '__main__':
     CMA_first[2] = CMA_first[2] / niter
     GA_1_first[2] = GA_1_first[2] / niter
     PSO_first[2] = PSO_first[2] / niter
-
 
     x = list(range(NGEN))
     for i in range(niter):

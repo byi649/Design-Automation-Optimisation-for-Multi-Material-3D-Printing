@@ -12,7 +12,7 @@ from deap import algorithms
 import random
 from toolkit import *
 
-def CMA(verbose=False, NGEN=10):
+def CMA(verbose=False, NGEN=250):
     creator.create("FitnessMin", base.Fitness, weights=(-1.0, ))
     creator.create("Individual", list, fitness=creator.FitnessMin)
 
@@ -43,7 +43,7 @@ def CMA(verbose=False, NGEN=10):
     # Not sure if we can set individual sigma
     # For now, scale rho down.
     # TODO: Scale all variables down to unity
-    strategy = cma.Strategy(centroid=[5e9]*N, sigma=1e10, lambda_=10)
+    strategy = cma.Strategy(centroid=[5e9]*N, sigma=1e10, lambda_=20*N)
     toolbox.register("generate", strategy.generate, creator.Individual)
     toolbox.register("update", strategy.update)
 
@@ -88,7 +88,7 @@ def CMA(verbose=False, NGEN=10):
 
     return (hof[0][0], hof[0][1], fbest, best)
 
-def GA(verbose=False, NGEN=10):
+def GA(verbose=False, NGEN=250):
 
     creator.create("FitnessMin", base.Fitness, weights=(-1.0,))
     creator.create("Individual", list, fitness=creator.FitnessMin)
@@ -120,14 +120,15 @@ def GA(verbose=False, NGEN=10):
     fbest = np.ndarray((NGEN,1))
     best = np.ndarray((NGEN,2))
 
+    # Generate a new population
+    population = toolbox.population(n=40)
+    # Evaluate the individuals
+    fitnesses = toolbox.map(toolbox.evaluate, population)
+    for ind, fit in zip(population, fitnesses):
+        ind.fitness.values = fit
+
     for gen in range(NGEN):
-        # Generate a new population
-        population = toolbox.population(n=10)
-        # Evaluate the individuals
-        fitnesses = toolbox.map(toolbox.evaluate, population)
-        for ind, fit in zip(population, fitnesses):
-            ind.fitness.values = fit
-        
+
         # Select the next generation individuals
         offspring = toolbox.select(population, len(population))
         # Clone the selected individuals
@@ -171,7 +172,7 @@ def GA(verbose=False, NGEN=10):
 
     return (hof[0], fbest, best)
 
-def GA_1(verbose=False, NGEN=10):
+def GA_1(verbose=False, NGEN=250):
 
     creator.create("FitnessMin", base.Fitness, weights=(-1.0,))
     creator.create("Individual", list, fitness=creator.FitnessMin)
@@ -203,22 +204,23 @@ def GA_1(verbose=False, NGEN=10):
     fbest = np.ndarray((NGEN,1))
     best = np.ndarray((NGEN,2))
 
-    for gen in range(NGEN):
-        # Generate a new population
-        population = toolbox.population(n=10)
-        # Evaluate the individuals
-        fitnesses = toolbox.map(toolbox.evaluate, population)
-        for ind, fit in zip(population, fitnesses):
-            ind.fitness.values = fit
+    # Generate a new population
+    population = toolbox.population(n=40)
+    # Evaluate the individuals
+    fitnesses = toolbox.map(toolbox.evaluate, population)
+    for ind, fit in zip(population, fitnesses):
+        ind.fitness.values = fit
 
-        record = stats.compile(population)
-        fbar = record['avg']
-        fmin = record['min']
-        
+    for gen in range(NGEN):
+
         # Select the next generation individuals
         offspring = toolbox.select(population, len(population))
         # Clone the selected individuals
         offspring = list(map(toolbox.clone, offspring))
+
+        record = stats.compile(population)
+        fbar = record['avg']
+        fmin = record['min']
 
         k1 = 1.0
         k2 = 0.5
@@ -233,24 +235,27 @@ def GA_1(verbose=False, NGEN=10):
             f1 = child1.fitness.values[0]
             f2 = child2.fitness.values[0]
 
-            if (f1 <= fbar):
+            if (f1 < fbar):
                 MUTPB1 = k2 * (f1 - fmin) / (fbar - fmin)
             else:
                 MUTPB1 = k4
 
-            if (f2 <= fbar):
+            if (f2 < fbar):
                 MUTPB2 = k2 * (f2 - fmin) / (fbar - fmin)
             else:
                 MUTPB2 = k4
 
-            MUTPB1 += 0.005
-            MUTPB2 += 0.005
+            MUTPB1 += 0.05
+            MUTPB2 += 0.05
 
             fdash = min(child1.fitness.values, child2.fitness.values)[0]
-            if (fdash <= fbar):
+            if (fdash < fbar):
                 CXPB = k1 * (fdash - fmin) / (fbar - fmin)
             else:
                 CXPB = k3
+
+            #print(fbar, fmin)
+            #print(MUTPB1, MUTPB2, CXPB)
 
             if random.random() < CXPB:
                 toolbox.mate(child1, child2)
@@ -293,7 +298,7 @@ def GA_1(verbose=False, NGEN=10):
 
     return (hof[0], fbest, best)
 
-def PSO(verbose=False, NGEN=10):
+def PSO(verbose=False, NGEN=250):
     creator.create("FitnessMin", base.Fitness, weights=(-1.0,))
     creator.create("Particle", list, fitness=creator.FitnessMin, speed=list, 
         smin=None, smax=None, best=None)
@@ -328,7 +333,7 @@ def PSO(verbose=False, NGEN=10):
     toolbox.register("update", updateParticle, phi1=2.0, phi2=2.0)
     toolbox.register("evaluate", blackbox.fitness2)
 
-    pop = toolbox.population(n=10)
+    pop = toolbox.population(n=40)
     stats = tools.Statistics(lambda ind: ind.fitness.values)
     stats.register("avg", np.mean)
     stats.register("std", np.std)
