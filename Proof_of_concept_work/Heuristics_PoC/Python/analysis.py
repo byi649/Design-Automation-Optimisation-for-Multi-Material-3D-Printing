@@ -28,7 +28,7 @@ if __name__ == '__main__':
     GA_1_runs = []
     PSO_runs = []
 
-    niter = 10
+    niter = 50
     for i in range(niter):
         print("Evaluating iteration:", i)
         GA_runs.append(algorithm_wrapper("GA"))
@@ -79,12 +79,15 @@ if __name__ == '__main__':
 
     x = list(range(NGEN))
     for i in range(niter):
+        plt.tight_layout()
         plt.subplot(3, 2, 1)
         plt.semilogy(x, GA_runs[i])
         plt.title("Objective function (GA)")
 
         ax = plt.gca()
         ax.set_ylim(bottom = 1e-13, top = 1e2)
+        ax.set_ylabel('Error(%)')
+        ax.set_xlabel('Generation number')
 
         plt.subplot(3, 2, 2)
         plt.semilogy(x, CMA_runs[i])
@@ -92,6 +95,8 @@ if __name__ == '__main__':
 
         ax = plt.gca()
         ax.set_ylim(bottom = 1e-13, top = 1e2)
+        ax.set_ylabel('Error(%)')
+        ax.set_xlabel('Generation number')
 
         plt.subplot(3, 2, 3)
         plt.semilogy(x, GA_1_runs[i])
@@ -99,6 +104,8 @@ if __name__ == '__main__':
 
         ax = plt.gca()
         ax.set_ylim(bottom = 1e-13, top = 1e2)
+        ax.set_ylabel('Error(%)')
+        ax.set_xlabel('Generation number')
 
         plt.subplot(3, 2, 4)
         plt.semilogy(x, PSO_runs[i])
@@ -106,6 +113,8 @@ if __name__ == '__main__':
 
         ax = plt.gca()
         ax.set_ylim(bottom = 1e-13, top = 1e2)
+        ax.set_ylabel('Error(%)')
+        ax.set_xlabel('Generation number')
 
         ax = plt.subplot(3, 1, 3)
 
