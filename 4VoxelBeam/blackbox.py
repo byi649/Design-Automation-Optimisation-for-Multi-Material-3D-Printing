@@ -1,23 +1,19 @@
 import math
 from toolkit import *
 import subprocess
+import Elmer_benchmark
 import re
 
 global N
 global goal
-#goal = [55.73843789146891, 348.21686728338096, 509.718646370548, 516.4824354644039, 974.5856546461372, 1561.7741652094128]
-goal = [56.87056214, 522.7659672, 637.69078, 656.4648486, 1306.01978, 2420.557282]
+
+#Load benchmark goal from text file
+from numpy import loadtxt
+goal = loadtxt('benchmark_frequencies.txt')
 
 N = 6
-#4 Voxel Model Solution: material_array = [PLA, Al, Al, PLA] = [0 1 1 0]
-#f1[Hz]	=	56.87056214
-#f2[Hz]	=	522.7659672
-#f3[Hz]	=	637.69078
-#f4[Hz]	=	656.4648486
-#f5[Hz]	=	1306.01978
-#f6[Hz]	=	2420.557282
 
-def blackbox_4voxel(material_array, MPI = False, printToConsole = False):
+def blackbox_voxel(material_array, MPI = False, printToConsole = False):
 	#Returns list of n natural frequencies for a FOUR voxel beam.
 	
 	#Material array is a list of binary values
@@ -362,7 +358,7 @@ def fitness_binary(bin):
 def fitness_voxel(bin):
     freq_goal = goal[:N]
     
-    freq = blackbox_4voxel(bin)
+    freq = blackbox_voxel(bin)
 
     fitness = 0
     for i in range(N):
