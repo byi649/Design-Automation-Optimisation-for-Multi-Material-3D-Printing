@@ -1,1 +1,1 @@
-Contains figures from postprocessor utility Paraview.
+Mode shape solutions obtained for homogeneous PLA plastic
