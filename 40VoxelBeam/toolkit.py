@@ -17,3 +17,6 @@ def binaryToVar(bin):
     rho = int(rho, 2)
 
     return [E, rho]
+
+def binaryToStr(bin):
+    return "".join(str(x) for x in bin)

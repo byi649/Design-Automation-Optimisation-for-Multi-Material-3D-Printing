@@ -402,13 +402,15 @@ def GA_voxel(verbose=False, NGEN=10, nVoxels=4):
     # Objects that will compile the data
     fbest = np.ndarray((NGEN,1))
     best = np.ndarray((NGEN, nVoxels))
+    solutions = {}
 
     # Generate a new population
-    population = toolbox.population(n=10)
+    population = toolbox.population(n=40)
     # Evaluate the individuals
     fitnesses = toolbox.map(toolbox.evaluate, population)
     for ind, fit in zip(population, fitnesses):
         ind.fitness.values = fit
+        solutions[binaryToStr(ind)] = fit
 
     for gen in range(NGEN):   
         # Select the next generation individuals
@@ -438,10 +440,17 @@ def GA_voxel(verbose=False, NGEN=10, nVoxels=4):
             print("Skip generation:", gen)
 
         # Evaluate the individuals with an invalid fitness
+        count = 0
+        for ind in offspring:
+            if ind.fitness.valid == False and binaryToStr(ind) in solutions:
+                ind.fitness.values = solutions[binaryToStr(ind)]
+                count += 1
+
         invalid_ind = [ind for ind in offspring if not ind.fitness.valid]
         fitnesses = map(toolbox.evaluate, invalid_ind)
         for ind, fit in zip(invalid_ind, fitnesses):
             ind.fitness.values = fit
+            solutions[binaryToStr(ind)] = fit
 
         population[:] = offspring
         
@@ -454,6 +463,7 @@ def GA_voxel(verbose=False, NGEN=10, nVoxels=4):
         if verbose:
             print(logbook.stream)
             print("Best solution:", hof[0])
+            print("Number of fake evolutions:", count)
         
         # Save more data along the evolution for latter plotting
         fbest[gen] = hof[0].fitness.values

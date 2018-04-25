@@ -9,7 +9,7 @@ N = 6
 
 if __name__ == '__main__': 
 
-    NGEN = 10
+    NGEN = 250
     verbose = True
     nVoxels = 40
 
@@ -34,25 +34,39 @@ if __name__ == '__main__':
 
     print("Average error: {0:.3e}%".format(np.average(errors)))
 
+    gs = plt.GridSpec(4, 4)
+
     # X-axis = generation
     x = list(range(NGEN))
     plt.figure()
-    plt.subplot(2, 2, 2)
+    plt.subplot(gs[0:2,2:4])
     plt.semilogy(x, fbest, "-c")
     plt.grid(True)
     plt.title("Average percentage error (log)")
+    ax = plt.gca()
+    ax.set_ylabel('Error(%)')
+    ax.set_xlabel('Generation number')
 
-    plt.subplot(2, 2, 1)
+    plt.subplot(gs[0:2,0:2])
     plt.plot(x, fbest, "-c")
     plt.grid(True)
     plt.title("Average percentage error")
+    ax = plt.gca()
+    ax.set_ylabel('Error(%)')
+    ax.set_xlabel('Generation number')
 
-    # plt.subplot(2, 2, 3)
-    # plt.plot(x, best)
-    # plt.grid(True)
-    # plt.title("Blue: E, orange: rho (*1e6)")
+    plt.subplot(gs[2,0:2])
+    plt.imshow([bin])
+    plt.title("Beam voxels: yellow = AL, blue = PLA")
+    plt.axis("off")
 
-    plt.subplot(2, 2, 4)
+    goal = np.loadtxt('material_array.txt')
+    plt.subplot(gs[3,0:2])
+    plt.imshow([goal])
+    plt.title("True voxels: yellow = AL, blue = PLA")
+    plt.axis("off")
+
+    plt.subplot(gs[2:4,2:4])
     plt.bar(x=range(1, N + 1), height=errors)
     print(errors)
     plt.title("Percentage error for each mode")
@@ -60,4 +74,6 @@ if __name__ == '__main__':
     ax = plt.gca()
     ax.set_ylim(bottom=min(errors)-np.std(errors), top=max(errors)+np.std(errors))
 
+    plt.tight_layout()
+    plt.savefig('Heuristic output')
     plt.show()
