@@ -29,7 +29,7 @@ h = 20e-3 #height of beam (y co-ord)
 b = 2e-3 #depth of beam (z co-ord)
 
 #Number of voxels to use in x, y and z
-nVoxel_x = 40
+nVoxel_x = 160
 
 #Define characteristic voxel size
 voxel_dx = L/nVoxel_x #fixing dy, dz for the time being
@@ -126,7 +126,7 @@ for i in range(nVoxel_x):
 
 #Export mesh as UNV file
 try:
-  Mesh_1.ExportUNV( r'/home/kzho956/Documents/Design-Automation-Optimisation-for-Multi-Material-3D-Printing/Completed_mesh.unv' )
+  Mesh_1.ExportUNV( r'/home/kzho956/Documents/Design-Automation-Optimisation-for-Multi-Material-3D-Printing/%i_Voxel_Mesh.unv'%(nVoxel_x) )
   pass
 except:
   print 'ExportUNV() failed. Invalid file name?'
