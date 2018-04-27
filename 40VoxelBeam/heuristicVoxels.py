@@ -9,7 +9,7 @@ N = 6
 
 if __name__ == '__main__': 
 
-    NGEN = 250
+    NGEN = 10
     verbose = True
     nVoxels = 40
 
@@ -56,13 +56,13 @@ if __name__ == '__main__':
     ax.set_xlabel('Generation number')
 
     plt.subplot(gs[2,0:2])
-    plt.imshow([bin])
+    plt.imshow([bin[3::4], bin[2::4], bin[1::4], bin[0::4]])
     plt.title("Beam voxels: yellow = AL, blue = PLA")
     plt.axis("off")
 
     goal = np.loadtxt('material_array.txt')
     plt.subplot(gs[3,0:2])
-    plt.imshow([goal])
+    plt.imshow([goal[3::4], goal[2::4], goal[1::4], goal[0::4]])
     plt.title("True voxels: yellow = AL, blue = PLA")
     plt.axis("off")
 
@@ -76,4 +76,4 @@ if __name__ == '__main__':
 
     plt.tight_layout()
     plt.savefig('Heuristic output')
-    plt.show()
+    #plt.show()

@@ -1,6 +1,7 @@
 import blackbox
 import numpy as np
 import operator
+import multiprocessing
 
 from deap import base
 from deap import creator
@@ -388,6 +389,9 @@ def GA_voxel(verbose=False, NGEN=10, nVoxels=4):
     toolbox.register("mate", tools.cxTwoPoint)
     toolbox.register("mutate", tools.mutFlipBit, indpb=0.05)
     toolbox.register("select", tools.selTournament, tournsize=3)
+
+    pool = multiprocessing.Pool()
+    #toolbox.register("map", pool.map)
 
     hof = tools.HallOfFame(1)
     stats = tools.Statistics(lambda ind: ind.fitness.values)
