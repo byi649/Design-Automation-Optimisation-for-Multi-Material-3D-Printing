@@ -25,7 +25,7 @@ def runHeuristic():
         freq = blackbox.blackbox_voxel(bin)
 
         sol = binaryToStr(bin)
-        first = NGEN if (np.argmax(fbest<0.1)==0 and fbest[0]>=0.1) else np.argmax(fbest<0.1)
+        first = NGEN if (np.argmax(fbest<1)==0 and fbest[0]>=1) else np.argmax(fbest<1)
         timer = end - start
         frequencies = ", ".join(str(x) for x in freq)
 
