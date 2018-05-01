@@ -370,12 +370,11 @@ def fitness_voxel(bin):
     return (fitness, )
 
 def fitness_voxel_uniform(bin):
-    freq_goal = goal[:N]
     
     freq = blackbox_voxel(bin)
 
-	slope, intercept, r_value, p_value, std_err = stats.linregress(range(N), freq)
+    slope, intercept, r_value, p_value, std_err = stats.linregress(range(N), freq)
 	# r_value approaches 1 as data is more linear
-	fitness = 1./r_value
+    fitness = -r_value**2
 
     return (fitness, )

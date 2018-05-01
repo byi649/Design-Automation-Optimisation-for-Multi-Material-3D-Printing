@@ -513,7 +513,7 @@ def GA_voxel_uniform(verbose=False, NGEN=10, nVoxels=4):
     solutions = {}
 
     # Generate a new population
-    population = toolbox.population(n=40)
+    population = toolbox.population(n=15)
     # Evaluate the individuals
     fitnesses = toolbox.map(toolbox.evaluate, population)
     for ind, fit in zip(population, fitnesses):
@@ -529,23 +529,17 @@ def GA_voxel_uniform(verbose=False, NGEN=10, nVoxels=4):
         CXPB = 0.5
         MUTPB = 0.1
 
-        # Stop evolving when we reach a reasonable accuracy
-        hof.update(offspring)
-        if hof[0].fitness.values[0] > 1.0:
-            # Apply crossover and mutation on the offspring
-            for child1, child2 in zip(offspring[::2], offspring[1::2]):
-                if random.random() < CXPB:
-                    toolbox.mate(child1, child2)
-                    del child1.fitness.values
-                    del child2.fitness.values
+        # Apply crossover and mutation on the offspring
+        for child1, child2 in zip(offspring[::2], offspring[1::2]):
+            if random.random() < CXPB:
+                toolbox.mate(child1, child2)
+                del child1.fitness.values
+                del child2.fitness.values
 
-            for mutant in offspring:
-                if random.random() < MUTPB:
-                    toolbox.mutate(mutant)
-                    del mutant.fitness.values
-
-        else:
-            print("Skip generation:", gen)
+        for mutant in offspring:
+            if random.random() < MUTPB:
+                toolbox.mutate(mutant)
+                del mutant.fitness.values
 
         # Evaluate the individuals with an invalid fitness
         count = 0
