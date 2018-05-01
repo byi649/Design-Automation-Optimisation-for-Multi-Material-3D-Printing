@@ -3,6 +3,7 @@ from toolkit import *
 import subprocess
 import Elmer_benchmark
 import re
+from scipy import stats
 
 global N
 global goal
@@ -365,5 +366,16 @@ def fitness_voxel(bin):
         fitness += abs(freq[i] - freq_goal[i]) / freq_goal[i] * 100
 
     fitness = fitness/N
+
+    return (fitness, )
+
+def fitness_voxel_uniform(bin):
+    freq_goal = goal[:N]
+    
+    freq = blackbox_voxel(bin)
+
+	slope, intercept, r_value, p_value, std_err = stats.linregress(range(N), freq)
+	# r_value approaches 1 as data is more linear
+	fitness = 1./r_value
 
     return (fitness, )
