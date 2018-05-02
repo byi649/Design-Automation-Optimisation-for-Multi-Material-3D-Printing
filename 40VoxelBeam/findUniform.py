@@ -3,7 +3,7 @@ import blackbox
 from scipy import stats
 import matplotlib.pyplot as plt
 
-NGEN = 10
+NGEN = 15
 verbose = True
 nVoxels = 40
 
@@ -15,15 +15,18 @@ freq = blackbox.blackbox_voxel(bin)
 print("Natural frequencies:")
 print('\n'.join('{}: {} Hz'.format(*k) for k in enumerate(freq, 1)))
 
-slope, intercept, r_value, p_value, std_err = stats.linregress(range(6), freq)
+slope, intercept, r_value, p_value, std_err = stats.linregress(range(1,7), freq)
 
 print("Slope:", slope)
 print("Intercept:", intercept)
 print("r-squared:", r_value**2)
 
-xind = range(6)
+xind = range(1,7)
 y = [intercept + x*slope for x in xind]
 
-plt.bar(range(6), freq)
+plt.scatter(xind, freq)
 plt.plot(xind, y, 'r')
+plt.title("Natural frequencies from uniform-seeking objective function")
+plt.xlabel("Mode")
+plt.ylabel("Frequency (Hz)")
 plt.show()

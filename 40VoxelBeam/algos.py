@@ -48,6 +48,9 @@ def CMA(verbose=False, NGEN=250):
     toolbox.register("generate", strategy.generate, creator.Individual)
     toolbox.register("update", strategy.update)
 
+    pool = multiprocessing.Pool()
+    toolbox.register("map", pool.map)
+
     hof = tools.HallOfFame(1)
     stats = tools.Statistics(lambda ind: ind.fitness.values)
     stats.register("avg", np.mean)
@@ -106,6 +109,9 @@ def GA(verbose=False, NGEN=250):
     toolbox.register("mate", tools.cxTwoPoint)
     toolbox.register("mutate", tools.mutFlipBit, indpb=0.05)
     toolbox.register("select", tools.selTournament, tournsize=3)
+
+    pool = multiprocessing.Pool()
+    toolbox.register("map", pool.map)
 
     hof = tools.HallOfFame(1)
     stats = tools.Statistics(lambda ind: ind.fitness.values)
@@ -190,6 +196,9 @@ def GA_1(verbose=False, NGEN=250):
     toolbox.register("mate", tools.cxTwoPoint)
     toolbox.register("mutate", tools.mutFlipBit, indpb=0.05)
     toolbox.register("select", tools.selTournament, tournsize=3)
+
+    pool = multiprocessing.Pool()
+    toolbox.register("map", pool.map)
 
     hof = tools.HallOfFame(1)
     stats = tools.Statistics(lambda ind: ind.fitness.values)
@@ -334,6 +343,9 @@ def PSO(verbose=False, NGEN=250):
     toolbox.register("update", updateParticle, phi1=2.0, phi2=2.0)
     toolbox.register("evaluate", blackbox.fitness2)
 
+    pool = multiprocessing.Pool()
+    toolbox.register("map", pool.map)
+
     pop = toolbox.population(n=40)
     stats = tools.Statistics(lambda ind: ind.fitness.values)
     stats.register("avg", np.mean)
@@ -391,7 +403,7 @@ def GA_voxel(verbose=False, NGEN=10, nVoxels=4):
     toolbox.register("select", tools.selTournament, tournsize=3)
 
     pool = multiprocessing.Pool()
-    #toolbox.register("map", pool.map)
+    toolbox.register("map", pool.map)
 
     hof = tools.HallOfFame(1)
     stats = tools.Statistics(lambda ind: ind.fitness.values)
@@ -495,7 +507,7 @@ def GA_voxel_uniform(verbose=False, NGEN=10, nVoxels=4):
     toolbox.register("select", tools.selTournament, tournsize=3)
 
     pool = multiprocessing.Pool()
-    #toolbox.register("map", pool.map)
+    toolbox.register("map", pool.map)
 
     hof = tools.HallOfFame(1)
     stats = tools.Statistics(lambda ind: ind.fitness.values)
@@ -513,7 +525,7 @@ def GA_voxel_uniform(verbose=False, NGEN=10, nVoxels=4):
     solutions = {}
 
     # Generate a new population
-    population = toolbox.population(n=15)
+    population = toolbox.population(n=12)
     # Evaluate the individuals
     fitnesses = toolbox.map(toolbox.evaluate, population)
     for ind, fit in zip(population, fitnesses):
@@ -549,7 +561,7 @@ def GA_voxel_uniform(verbose=False, NGEN=10, nVoxels=4):
                 count += 1
 
         invalid_ind = [ind for ind in offspring if not ind.fitness.valid]
-        fitnesses = map(toolbox.evaluate, invalid_ind)
+        fitnesses = toolbox.map(toolbox.evaluate, invalid_ind)
         for ind, fit in zip(invalid_ind, fitnesses):
             ind.fitness.values = fit
             solutions[binaryToStr(ind)] = fit
