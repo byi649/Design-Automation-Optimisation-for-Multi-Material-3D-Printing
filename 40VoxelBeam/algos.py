@@ -525,7 +525,7 @@ def GA_voxel_uniform(verbose=False, NGEN=10, nVoxels=4):
     solutions = {}
 
     # Generate a new population
-    population = toolbox.population(n=12)
+    population = toolbox.population(n=24)
     # Evaluate the individuals
     fitnesses = toolbox.map(toolbox.evaluate, population)
     for ind, fit in zip(population, fitnesses):
