@@ -384,7 +384,7 @@ def PSO(verbose=False, NGEN=250):
     
     return (xybest[g, 0], xybest[g, 1], fbest, xybest)
 
-def GA_voxel(verbose=False, NGEN=10, nVoxels=4):
+def GA_voxel(verbose=False, NGEN=10, nVoxels=4, nPop=40):
 
     creator.create("FitnessMin", base.Fitness, weights=(-1.0,))
     creator.create("Individual", list, fitness=creator.FitnessMin)
@@ -421,7 +421,7 @@ def GA_voxel(verbose=False, NGEN=10, nVoxels=4):
     solutions = {}
 
     # Generate a new population
-    population = toolbox.population(n=40)
+    population = toolbox.population(n=nPop)
     # Evaluate the individuals
     fitnesses = toolbox.map(toolbox.evaluate, population)
     for ind, fit in zip(population, fitnesses):
