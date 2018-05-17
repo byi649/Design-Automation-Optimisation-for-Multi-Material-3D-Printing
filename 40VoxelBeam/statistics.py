@@ -9,7 +9,6 @@ def runHeuristic():
     NGEN = 100
     verbose = False
     nVoxels = 40
-    iter = 12
 
     fbestlist = []
     firstlist = []
@@ -18,11 +17,12 @@ def runHeuristic():
     freqlist = []
     poplist = []
 
-    popArray = [20, 20, 20, 40, 40, 40, 60, 60, 60, 80, 80, 80]
+    popArray =[20, 40, 60, 80, 100]
+    iters = 10
+    popArray = popArray * iters
 
-    for i in range(iter):
-        print("Running iteration:", i)
-        nPop = popArray[i]
+    for i, nPop in enumerate(popArray):
+        print("Running iteration: {}, population size: {}".format(i+1, nPop))
         start = time.time()
         (bin, fbest, best) = algos.GA_voxel(verbose, NGEN, nVoxels, nPop)
         end = time.time()

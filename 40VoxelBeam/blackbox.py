@@ -53,7 +53,8 @@ def blackbox_voxel(material_array, MPI = False, printToConsole = False):
 	#else:
 	#	meshDir = 'Quad_4000'
 	with tempfile.TemporaryDirectory() as tmpdirname:
-		print('Created temporary directory', tmpdirname)
+		if printToConsole:
+			print('Created temporary directory', tmpdirname)
 		shutil.copy('40VoxelMesh.unv', tmpdirname)
 		shutil.copy('ELMERSOLVER_STARTINFO', tmpdirname)
 		shutil.copytree('Linear_mesh', tmpdirname+'/Linear_mesh')
@@ -156,13 +157,13 @@ def blackbox_voxel(material_array, MPI = False, printToConsole = False):
 				if printToConsole == True:
 					subprocess.call('ElmerSolver | tee log.txt',shell=True)
 				else:
-					print('Running ElmerSolver...\n')
+					#print('Running ElmerSolver...\n')
 					subprocess.call('ElmerSolver > log.txt',shell=True)
 			else: #Execute ElmerSolver_mpi
 				if printToConsole == True:
 					subprocess.call('mpirun -np 8 ElmerSolver_mpi | tee log.txt',shell=True)
 				else:
-					print('Running ElmerSolver_mpi...\n')
+					#print('Running ElmerSolver_mpi...\n')
 					subprocess.call('mpirun -np 8 ElmerSolver_mpi > log.txt',shell=True)
 
 			frequencies = []
