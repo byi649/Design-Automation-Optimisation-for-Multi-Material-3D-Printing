@@ -4,7 +4,7 @@ import re
 
 #NOTE - the generated mesh must match nVoxels for this to be useful
 global nVoxels
-nVoxels = 40
+nVoxels = 800
 	
 def Elmer_blackbox_voxels(material_array, MPI = False, printToConsole = False):
 	#Returns list of n natural frequencies for a FOUR voxel beam.
