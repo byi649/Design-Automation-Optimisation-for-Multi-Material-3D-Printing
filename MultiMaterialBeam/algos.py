@@ -488,7 +488,7 @@ def GA_voxel(verbose=False, NGEN=10, nVoxels=4, nPop=40):
 
     return (hof[0], fbest, best)
 
-def GA_voxel_uniform(verbose=False, NGEN=10, nVoxels=4):
+def GA_voxel_uniform(verbose=False, NGEN=10, nVoxels=4, nPop=40, goal_f1=None, goal_grad=None):
 
     creator.create("FitnessMin", base.Fitness, weights=(-1.0,))
     creator.create("Individual", list, fitness=creator.FitnessMin)
@@ -501,7 +501,7 @@ def GA_voxel_uniform(verbose=False, NGEN=10, nVoxels=4):
     toolbox.register("individual", tools.initRepeat, creator.Individual, toolbox.attr_bool, nVoxels)
     toolbox.register("population", tools.initRepeat, list, toolbox.individual)
 
-    toolbox.register("evaluate", blackbox.fitness_voxel_uniform)
+    toolbox.register("evaluate", blackbox.fitness_voxel_uniform, goal_f1=goal_f1, goal_grad=goal_grad)
     toolbox.register("mate", tools.cxTwoPoint)
     toolbox.register("mutate", tools.mutFlipBit, indpb=0.05)
     toolbox.register("select", tools.selTournament, tournsize=3)
@@ -525,7 +525,7 @@ def GA_voxel_uniform(verbose=False, NGEN=10, nVoxels=4):
     solutions = {}
 
     # Generate a new population
-    population = toolbox.population(n=24)
+    population = toolbox.population(n=nPop)
     # Evaluate the individuals
     fitnesses = toolbox.map(toolbox.evaluate, population)
     for ind, fit in zip(population, fitnesses):

@@ -12,11 +12,12 @@ if __name__ == '__main__':
     NGEN = 10
     verbose = True
     nVoxels = 40
+    nPop = 10
 
     algorithm = "GA_voxel"
 
     if algorithm == "GA_voxel":
-        (bin, fbest, best) = algos.GA_voxel(verbose, NGEN, nVoxels)
+        (bin, fbest, best) = algos.GA_voxel_uniform(verbose, NGEN, nVoxels, nPop)
 
     print("Best solution:", bin)
 

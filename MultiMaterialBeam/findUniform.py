@@ -6,12 +6,16 @@ from toolkit import *
 import pandas as pd
 
 NGEN = 15
-verbose = False
+verbose = True
 nVoxels = 40
 iter = 15
+nPop = 10
+
+goal_f1 = None
+goal_grad = 800
 
 def single():
-    (bin, fbest, best) = algos.GA_voxel_uniform(verbose, NGEN, nVoxels)
+    (bin, fbest, best) = algos.GA_voxel_uniform(verbose, NGEN, nVoxels, nPop, goal_f1, goal_grad)
 
     print("Best solution:", bin)
 
@@ -48,7 +52,7 @@ def multi():
 
     for i in range(iter):
         print("Running iteration:", i)
-        (bin, fbest, best) = algos.GA_voxel_uniform(verbose, NGEN, nVoxels)
+        (bin, fbest, best) = algos.GA_voxel_uniform(verbose, NGEN, nVoxels, nPop)
         freq = blackbox.blackbox_voxel(bin)
         slope, intercept, r_value, p_value, std_err = stats.linregress(range(1,7), freq)
         sol = binaryToStr(bin)
@@ -66,7 +70,7 @@ def multi():
     df.to_csv("uniform.csv")
 
 def main():
-    multi()
+    single()
 
 if __name__ == "__main__":
 	main()
