@@ -381,7 +381,7 @@ def fitness_binary(bin):
     return (fitness, )
     
 def fitness_voxel(bin):
-    #goal = loadtxt('benchmark_frequencies.txt')
+    goal = loadtxt('benchmark_frequencies.txt')
     freq_goal = goal[:N]
     
     freq = blackbox_voxel(bin)
