@@ -453,7 +453,8 @@ def GA_voxel(verbose=False, NGEN=10, nVoxels=4, nPop=40):
                     del mutant.fitness.values
 
         else:
-            print("Skip generation:", gen)
+            if verbose:
+                print("Skip generation:", gen)
 
         # Evaluate the individuals with an invalid fitness
         count = 0

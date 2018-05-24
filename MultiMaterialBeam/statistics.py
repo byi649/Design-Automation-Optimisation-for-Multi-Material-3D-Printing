@@ -8,10 +8,10 @@ import time
 from scipy import stats
 
 def runHeuristic():
-    NGEN = 100
+    NGEN = 50
     verbose = False
     nVoxels = 40
-    iters = 5
+    iters = 20
 
     fbestlist = []
     #firstlist = []
@@ -22,7 +22,7 @@ def runHeuristic():
     f1list = []
     gradlist = []
 
-    popArray = [20, 25, 30, 35, 40, 45, 50, 55, 60]
+    popArray = [20, 25, 30, 35, 40, 45]
     f1Array = [200]
     gradArray = [600]
 
