@@ -13,6 +13,8 @@ from deap import algorithms
 import random
 from toolkit import *
 
+import time
+
 def CMA(verbose=False, NGEN=250):
     creator.create("FitnessMin", base.Fitness, weights=(-1.0, ))
     creator.create("Individual", list, fitness=creator.FitnessMin)
@@ -384,7 +386,9 @@ def PSO(verbose=False, NGEN=250):
     
     return (xybest[g, 0], xybest[g, 1], fbest, xybest)
 
-def GA_voxel(verbose=False, NGEN=10, nVoxels=4, nPop=40):
+def GA_voxel(verbose=False, NGEN=10, nVoxels=4, nPop=40, timeLimit=float("inf")):
+
+    start = time.time()
 
     creator.create("FitnessMin", base.Fitness, weights=(-1.0,))
     creator.create("Individual", list, fitness=creator.FitnessMin)
@@ -437,9 +441,10 @@ def GA_voxel(verbose=False, NGEN=10, nVoxels=4, nPop=40):
         CXPB = 0.5
         MUTPB = 0.1
 
-        # Stop evolving when we reach a reasonable accuracy
+        # Stop evolving when we reach a reasonable accuracy or time limit
+        end = time.time()
         hof.update(offspring)
-        if hof[0].fitness.values[0] > 1.0:
+        if hof[0].fitness.values[0] > 1.0 and (end - start < timeLimit):
             # Apply crossover and mutation on the offspring
             for child1, child2 in zip(offspring[::2], offspring[1::2]):
                 if random.random() < CXPB:

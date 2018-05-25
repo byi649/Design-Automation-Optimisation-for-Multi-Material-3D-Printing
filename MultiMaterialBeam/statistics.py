@@ -8,10 +8,10 @@ import time
 from scipy import stats
 
 def runHeuristic():
-    NGEN = 50
+    NGEN = 200
     verbose = False
     nVoxels = 40
-    iters = 20
+    iters = 8
 
     fbestlist = []
     #firstlist = []
@@ -22,18 +22,19 @@ def runHeuristic():
     f1list = []
     gradlist = []
 
-    popArray = [20, 25, 30, 35, 40, 45]
+    popArray = [25, 40]
     f1Array = [200]
     gradArray = [600]
+    timeLimitArray = [300, 600, 900, 1200, 1500]
 
-
-    for i, config in enumerate(list(itertools.product(popArray, f1Array, gradArray))*iters):
-        print("Running iteration: {}, population size: {}, f1: {}, grad: {}".format(i+1, config[0], config[1], config[2]))
+    print("Starting simulation - estimated time: {} hours ".format(len(popArray)*len(f1Array)*len(gradArray)*len(timeLimitArray)*iters*15.0/60.0))
+    for i, config in enumerate(list(itertools.product(popArray, f1Array, gradArray, timeLimitArray))*iters):
+        print("Running iteration: {}, population size: {}, f1: {}, grad: {}, time limit: {}s".format(i+1, config[0], config[1], config[2], config[3]))
         benchmark = [config[1] + config[2]*x for x in range(6)]
         np.savetxt('benchmark_frequencies.txt', benchmark, fmt = '%i')
 
         start = time.time()
-        (bin, fbest, best) = algos.GA_voxel(verbose, NGEN, nVoxels, config[0])
+        (bin, fbest, best) = algos.GA_voxel(verbose, NGEN, nVoxels, config[0], timeLimit=config[3])
         end = time.time()
         freq = blackbox.blackbox_voxel(bin)
 
