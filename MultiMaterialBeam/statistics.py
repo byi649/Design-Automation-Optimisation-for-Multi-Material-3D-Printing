@@ -8,10 +8,10 @@ import time
 from scipy import stats
 
 def runHeuristic():
-    NGEN = 200
+    NGEN = 1000
     verbose = False
-    nVoxels = 40
-    iters = 8
+    nVoxels = 800
+    iters = 1
 
     fbestlist = []
     #firstlist = []
@@ -22,12 +22,12 @@ def runHeuristic():
     f1list = []
     gradlist = []
 
-    popArray = [25, 40]
-    f1Array = [200]
-    gradArray = [600]
-    timeLimitArray = [300, 600, 900, 1200, 1500]
+    popArray = [40]
+    f1Array = [100, 200, 300, 400]
+    gradArray = [300, 400 ,500 ,600 ,700 ,800]
+    timeLimitArray = [1200]
 
-    print("Starting simulation - estimated time: {} hours ".format(len(popArray)*len(f1Array)*len(gradArray)*len(timeLimitArray)*iters*15.0/60.0))
+    print("Starting simulation - estimated time: {} hours ".format(len(popArray)*len(f1Array)*len(gradArray)*len(timeLimitArray)*iters*30.0/60.0))
     for i, config in enumerate(list(itertools.product(popArray, f1Array, gradArray, timeLimitArray))*iters):
         print("Running iteration: {}, population size: {}, f1: {}, grad: {}, time limit: {}s".format(i+1, config[0], config[1], config[2], config[3]))
         benchmark = [config[1] + config[2]*x for x in range(6)]
