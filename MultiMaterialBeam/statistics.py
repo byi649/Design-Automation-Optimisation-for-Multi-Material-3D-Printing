@@ -8,10 +8,10 @@ import time
 from scipy import stats
 
 def runHeuristic():
-    NGEN = 1000
+    NGEN = 5000
     verbose = False
     nVoxels = 800
-    iters = 1
+    iters = 6
 
     fbestlist = []
     #firstlist = []
@@ -21,20 +21,24 @@ def runHeuristic():
     poplist = []
     f1list = []
     gradlist = []
+    errorLimitlist = []
 
-    popArray = [40]
-    f1Array = [100, 200, 300, 400]
-    gradArray = [300, 400 ,500 ,600 ,700 ,800]
-    timeLimitArray = [1200]
+    popArray = [40, 80, 100]
+    f1Array = [200]
+    gradArray = [600]
+    timeLimitArray = [60*60]
+    errorLimitArray = [1, 5, 10, 15]
 
-    print("Starting simulation - estimated time: {} hours ".format(len(popArray)*len(f1Array)*len(gradArray)*len(timeLimitArray)*iters*30.0/60.0))
-    for i, config in enumerate(list(itertools.product(popArray, f1Array, gradArray, timeLimitArray))*iters):
-        print("Running iteration: {}, population size: {}, f1: {}, grad: {}, time limit: {}s".format(i+1, config[0], config[1], config[2], config[3]))
+    simu_count = len(popArray)*len(f1Array)*len(gradArray)*len(timeLimitArray)*len(errorLimitArray)*iters
+
+    print("Starting simulation - estimated time: {} hours ".format(simu_count*max(timeLimitArray)/3600))
+    for i, config in enumerate(list(itertools.product(popArray, f1Array, gradArray, timeLimitArray, errorLimitArray))*iters):
+        print("Running iteration: {}/{}, population size: {}, f1: {}, grad: {}, time limit: {}s, error limit: {}%".format(i+1, simu_count, config[0], config[1], config[2], config[3], config[4]))
         benchmark = [config[1] + config[2]*x for x in range(6)]
         np.savetxt('benchmark_frequencies.txt', benchmark, fmt = '%i')
 
         start = time.time()
-        (bin, fbest, best) = algos.GA_voxel(verbose, NGEN, nVoxels, config[0], timeLimit=config[3])
+        (bin, fbest, best) = algos.GA_voxel(verbose, NGEN, nVoxels, config[0], timeLimit=config[3], errorLimit=config[4])
         end = time.time()
         freq = blackbox.blackbox_voxel(bin)
 
@@ -52,8 +56,9 @@ def runHeuristic():
         poplist.append(config[0])
         f1list.append(config[1])
         gradlist.append(config[2])
+        errorLimitlist.append(config[4])
 
-    data = {'fbest': fbestlist,'sol': sollist, 'freq': freqlist, 'time': timelist, 'nPop': poplist, 'f1': f1list, 'grad': gradlist}
+    data = {'fbest': fbestlist,'sol': sollist, 'freq': freqlist, 'time': timelist, 'nPop': poplist, 'f1': f1list, 'grad': gradlist, 'errorLimit': errorLimitlist}
     df = pd.DataFrame(data)
     df.to_csv("data.csv")
 
