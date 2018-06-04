@@ -10,7 +10,7 @@ from scipy import stats
 def runHeuristic():
     NGEN = 5000
     verbose = False
-    nVoxels = 800
+    nVoxels = 40
     iters = 6
 
     fbestlist = []
