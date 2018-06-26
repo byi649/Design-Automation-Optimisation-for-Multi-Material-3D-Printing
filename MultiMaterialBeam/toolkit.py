@@ -20,3 +20,25 @@ def binaryToVar(bin):
 
 def binaryToStr(bin):
     return "".join(str(x) for x in bin)
+
+def ModalTwoPoint(ind1, ind2):
+    size = len(ind1)
+    cxpoint1 = int(round(1.0*size/3.0))
+    cxpoint2 = int(round(2.0*size/3.0))
+
+    ind1[cxpoint1:cxpoint2], ind2[cxpoint1:cxpoint2] = ind2[cxpoint1:cxpoint2], ind1[cxpoint1:cxpoint2]
+    return ind1, ind2
+
+def ModalSixPoint(ind1, ind2):
+    size = len(ind1)
+    cxpoint1 = int(round(1.0*size/7.0))
+    cxpoint2 = int(round(2.0*size/7.0))
+    cxpoint3 = int(round(3.0*size/7.0))
+    cxpoint4 = int(round(4.0*size/7.0))
+    cxpoint5 = int(round(5.0*size/7.0))
+    cxpoint6 = int(round(6.0*size/7.0))
+
+    ind1[cxpoint1:cxpoint2], ind2[cxpoint1:cxpoint2] = ind2[cxpoint1:cxpoint2], ind1[cxpoint1:cxpoint2]
+    ind1[cxpoint3:cxpoint4], ind2[cxpoint3:cxpoint4] = ind2[cxpoint3:cxpoint4], ind1[cxpoint3:cxpoint4]
+    ind1[cxpoint5:cxpoint6], ind2[cxpoint5:cxpoint6] = ind2[cxpoint5:cxpoint6], ind1[cxpoint5:cxpoint6]
+    return ind1, ind2

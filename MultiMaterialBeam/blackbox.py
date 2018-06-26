@@ -410,3 +410,14 @@ def fitness_voxel_uniform(bin, goal_f1=None, goal_grad=None):
     fitness = -r_value**2 * 3 + penalty
 
     return (fitness, )
+    
+def fitness_voxel_single(bin):
+    goal = loadtxt('benchmark_frequencies.txt')
+    freq_goal = goal[:N]
+    
+    freq = blackbox_voxel(bin)
+
+    i = 3 - 1
+    fitness = abs(freq[i] - freq_goal[i]) / freq_goal[i] * 100
+
+    return (fitness, )

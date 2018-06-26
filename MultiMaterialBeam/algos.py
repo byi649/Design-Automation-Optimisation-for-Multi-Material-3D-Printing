@@ -386,7 +386,7 @@ def PSO(verbose=False, NGEN=250):
     
     return (xybest[g, 0], xybest[g, 1], fbest, xybest)
 
-def GA_voxel(verbose=False, NGEN=10, nVoxels=4, nPop=40, timeLimit=float("inf"), errorLimit=1.0):
+def GA_voxel(verbose=False, NGEN=10, nVoxels=4, nPop=40, timeLimit=float("inf"), errorLimit=1.0, crossover='ModalTwoPoint'):
 
     start = time.time()
 
@@ -402,7 +402,12 @@ def GA_voxel(verbose=False, NGEN=10, nVoxels=4, nPop=40, timeLimit=float("inf"),
     toolbox.register("population", tools.initRepeat, list, toolbox.individual)
 
     toolbox.register("evaluate", blackbox.fitness_voxel)
-    toolbox.register("mate", tools.cxTwoPoint)
+
+    if crossover == 'ModalTwoPoint':
+        toolbox.register("mate", ModalTwoPoint)
+    else:
+        toolbox.register("mate", tools.cxTwoPoint)
+
     toolbox.register("mutate", tools.mutFlipBit, indpb=0.05)
     toolbox.register("select", tools.selTournament, tournsize=3)
 
@@ -591,3 +596,118 @@ def GA_voxel_uniform(verbose=False, NGEN=10, nVoxels=4, nPop=40, goal_f1=None, g
 
 
     return (hof[0], fbest, best)
+
+def GA_voxel_test(verbose=False, NGEN=10, nVoxels=4, nPop=40, timeLimit=float("inf"), errorLimit=1.0, crossover='ModalSixPoint'):
+
+    start = time.time()
+
+    creator.create("FitnessMin", base.Fitness, weights=(-1.0,))
+    creator.create("Individual", list, fitness=creator.FitnessMin)
+
+    toolbox = base.Toolbox()
+
+    # Attribute generator 
+    toolbox.register("attr_bool", random.randint, 0, 1)
+    # Structure initializers
+    toolbox.register("individual", tools.initRepeat, creator.Individual, toolbox.attr_bool, nVoxels)
+    toolbox.register("population", tools.initRepeat, list, toolbox.individual)
+
+    toolbox.register("evaluate", blackbox.fitness_voxel)
+
+    if crossover == 'ModalSixPoint':
+        toolbox.register("mate", ModalSixPoint)
+    else:
+        toolbox.register("mate", tools.cxTwoPoint)
+
+    toolbox.register("mutate", tools.mutFlipBit, indpb=0.05)
+    toolbox.register("select", tools.selTournament, tournsize=3)
+
+    pool = multiprocessing.Pool()
+    toolbox.register("map", pool.map)
+
+    hof = tools.HallOfFame(1)
+    stats = tools.Statistics(lambda ind: ind.fitness.values)
+    stats.register("avg", np.mean)
+    stats.register("std", np.std)
+    stats.register("min", np.min)
+    stats.register("max", np.max)
+
+    logbook = tools.Logbook()
+    logbook.header = "gen", "evals", "std", "min", "avg", "max"
+
+    # Objects that will compile the data
+    fbest = np.ndarray((NGEN,1))
+    best = np.ndarray((NGEN, nVoxels))
+    solutions = {}
+
+    # Generate a new population
+    population = toolbox.population(n=nPop)
+    # Evaluate the individuals
+    fitnesses = toolbox.map(toolbox.evaluate, population)
+    for ind, fit in zip(population, fitnesses):
+        ind.fitness.values = fit
+        solutions[binaryToStr(ind)] = fit
+
+    for gen in range(NGEN):   
+        # Select the next generation individuals
+        offspring = toolbox.select(population, len(population))
+        # Clone the selected individuals
+        offspring = list(map(toolbox.clone, offspring))
+
+        CXPB = 0.5
+        MUTPB = 0.1
+
+        # Stop evolving when we reach a reasonable accuracy or time limit
+        end = time.time()
+        hof.update(offspring)
+        if hof[0].fitness.values[0] > errorLimit and (end - start < timeLimit):
+            # Apply crossover and mutation on the offspring
+            for child1, child2 in zip(offspring[::2], offspring[1::2]):
+                if random.random() < CXPB:
+                    toolbox.mate(child1, child2)
+                    del child1.fitness.values
+                    del child2.fitness.values
+
+            for mutant in offspring:
+                if random.random() < MUTPB:
+                    toolbox.mutate(mutant)
+                    del mutant.fitness.values
+
+        else:
+            if verbose:
+                print("Skip generation:", gen)
+
+        # Evaluate the individuals with an invalid fitness
+        count = 0
+        for ind in offspring:
+            if ind.fitness.valid == False and binaryToStr(ind) in solutions:
+                ind.fitness.values = solutions[binaryToStr(ind)]
+                count += 1
+
+        invalid_ind = [ind for ind in offspring if not ind.fitness.valid]
+        fitnesses = toolbox.map(toolbox.evaluate, invalid_ind)
+        for ind, fit in zip(invalid_ind, fitnesses):
+            ind.fitness.values = fit
+            solutions[binaryToStr(ind)] = fit
+
+        population[:] = offspring
+        
+        # Update the hall of fame and the statistics with the
+        # currently evaluated population
+        hof.update(population)
+        record = stats.compile(population)
+        logbook.record(evals=len(population), gen=gen, **record)
+        
+        if verbose:
+            print(logbook.stream)
+            print("Best solution:", hof[0])
+            print("Number of fake evolutions:", count)
+        
+        # Save more data along the evolution for latter plotting
+        fbest[gen] = hof[0].fitness.values
+        best[gen, :nVoxels] = hof[0]
+
+
+    return (hof[0], fbest, best)
+
+    
