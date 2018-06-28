@@ -11,7 +11,7 @@ def runHeuristic():
     NGEN = 5000
     verbose = False
     nVoxels = 800
-    iters = 10
+    iters = 20
 
     fbestlist = []
     #firstlist = []
