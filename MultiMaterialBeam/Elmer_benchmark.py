@@ -204,7 +204,7 @@ def generate_benchmark_soln(): #Generate solution from a material array
 def main():
 	#generate_homogeneous_1(nVoxels)
 	#generate_homogeneous_0(nVoxels)
-	generate_random(nVoxels)	
+	#generate_random(nVoxels)	
 	generate_benchmark_soln()
 
 if __name__ == "__main__":

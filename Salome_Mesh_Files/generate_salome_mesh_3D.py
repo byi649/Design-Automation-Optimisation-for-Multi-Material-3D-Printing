@@ -23,10 +23,13 @@ from salome.geom import geomBuilder
 import math
 import SALOMEDS
 
+#Scale factor
+SF = 2.0
+
 #Define beam dimensions
-L = 100e-3 #Length of beam (x co-ord)
-h = 20e-3 #height of beam (y co-ord)
-b = 2e-3 #depth of beam (z co-ord)
+L = SF*100e-3 #Length of beam (x co-ord)
+h = SF*20e-3 #height of beam (y co-ord)
+b = SF*2e-3 #depth of beam (z co-ord)
 
 #Number of voxels to use in x, y and z
 nVoxel_x = 40
@@ -103,7 +106,7 @@ for i in range(len(Solids)):
 ###
 
 #Define characteristic dimensions of mesh elements
-mesh_dx = 0.67e-3
+mesh_dx = SF*0.67e-3
 import  SMESH, SALOMEDS
 from salome.smesh import smeshBuilder
 
