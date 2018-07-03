@@ -710,4 +710,24 @@ def GA_voxel_test(verbose=False, NGEN=10, nVoxels=4, nPop=40, timeLimit=float("i
 
     return (hof[0], fbest, best)
 
+def hill_climbing(verbose=False, nVoxels=4, parallel=40, timeLimit=float("inf"), errorLimit=1.0):
     
+    nVoxels=800
+
+    # Generate random solution
+    sol = list(np.random.randint(2, size=nVoxels))
+    fitness = blackbox.fitness_voxel(sol)
+    
+    # Do sweeps
+    # while(time < timeLimit and error > errorLimit):
+    while(True):
+        for i in range(nVoxels):
+            temp_sol = sol.copy()
+            temp_sol[i] = 1 - sol[i]
+            temp_fitness = blackbox.fitness_voxel(temp_sol)
+
+            if temp_fitness < fitness:
+                fitness = temp_fitness
+                sol = temp_sol.copy()
+
+            print(fitness)
