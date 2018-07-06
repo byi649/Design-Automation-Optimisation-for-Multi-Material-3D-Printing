@@ -10,8 +10,8 @@ from scipy import stats
 def runHeuristic():
     NGEN = 5000
     verbose = False
-    nVoxels = 800
-    iters = 20
+    nVoxels = 40
+    iters = 1
 
     fbestlist = []
     #firstlist = []
@@ -24,12 +24,12 @@ def runHeuristic():
     errorLimitlist = []
     crossoverlist = []
 
-    popArray = [100]
-    f1Array = [200]
-    gradArray = [600]
+    popArray = [40]
+    f1Array = [100, 150, 200, 250, 300, 350]
+    gradArray = [200, 400, 600, 800]
     timeLimitArray = [60*60]
-    errorLimitArray = [1]
-    crossoverArray = ['ModalSixPoint', 'NotModalSixPoint']
+    errorLimitArray = [0.1]
+    crossoverArray = ['NotModalSixPoint']
 
     simu_count = len(popArray)*len(f1Array)*len(gradArray)*len(timeLimitArray)*len(errorLimitArray)*len(crossoverArray)*iters
 
