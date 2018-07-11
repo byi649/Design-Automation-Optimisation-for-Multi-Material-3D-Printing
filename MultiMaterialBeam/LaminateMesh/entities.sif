@@ -1,0 +1,26 @@
+!------ Skeleton for body section -----
+Body 1
+  Name = Voxel_Body_1
+End
+
+Body 2
+  Name = Voxel_Body_2
+End
+
+Body 3
+  Name = Voxel_Body_3
+End
+
+Body 4
+  Name = Voxel_Body_4
+End
+
+!------ Skeleton for boundary section -----
+Boundary Condition 1
+  Name = LHS_boundary
+End
+
+Boundary Condition 2
+  Name = bnry6
+End
+

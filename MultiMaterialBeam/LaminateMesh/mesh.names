@@ -1,0 +1,8 @@
+! ----- names for bodies -----
+$ Voxel_Body_1 = 1
+$ Voxel_Body_2 = 2
+$ Voxel_Body_3 = 3
+$ Voxel_Body_4 = 4
+! ----- names for boundaries -----
+$ LHS_boundary = 1
+$ bnry6 = 2
