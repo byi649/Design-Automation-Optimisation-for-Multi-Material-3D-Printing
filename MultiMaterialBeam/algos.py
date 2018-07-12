@@ -15,38 +15,46 @@ from toolkit import *
 
 import time
 
-def CMA(verbose=False, NGEN=250):
+def CMA(verbose=False, NGEN=250, nVoxels=4, timeLimit=float("inf"), errorLimit=1.0):
+
+    start = time.time()
+
     creator.create("FitnessMin", base.Fitness, weights=(-1.0, ))
     creator.create("Individual", list, fitness=creator.FitnessMin)
 
     toolbox = base.Toolbox()
-    toolbox.register("evaluate", blackbox.fitness2)
+    toolbox.register("evaluate", blackbox.fitness_voxel_continuous)
+
+    # Number of variables (E, rho -> 2)
+    N = nVoxels * 2
 
     def feasible(individual):
         # Maximum bounds to catch NaN errors
-        feasible = ((0 < individual[0] < 1e15) and (0 < individual[1] < 1e15))
+        feasible = True
+        for i in range(N):
+            if not (7 < individual[i] < 15):
+                feasible = False
         return feasible
 
     def distance(individual):
         # Distance from feasibility
         # Sum of distances from zero if negative
         distance = 0
-        if individual[0] <= 0:
-            distance += individual[0]
-        if individual[1] <= 0:
-            distance += individual[1]
-        return -distance
+        for i in range(N):
+            if individual[i] <= 7:
+                distance += 7 - individual[i]
+            elif individual[i] >= 15:
+                distance += individual[i] - 15
+        return distance
 
     # 1e11 chosen as greater than maximum potential objective value
-    toolbox.decorate("evaluate", tools.DeltaPenalty(feasible, 1e11, distance))
-
-    # Number of variables (E, rho -> 2)
-    N = 2
+    # Not parallelisable
+    # toolbox.decorate("evaluate", tools.DeltaPenalty(feasible, 1e3, distance))
 
     # Not sure if we can set individual sigma
     # For now, scale rho down.
     # TODO: Scale all variables down to unity
-    strategy = cma.Strategy(centroid=[5e9]*N, sigma=1e10, lambda_=20*N)
+    strategy = cma.Strategy(centroid=[11]*N, sigma=1)
     toolbox.register("generate", strategy.generate, creator.Individual)
     toolbox.register("update", strategy.update)
 
@@ -67,16 +75,32 @@ def CMA(verbose=False, NGEN=250):
     fbest = np.ndarray((NGEN,1))
     best = np.ndarray((NGEN,N))
 
+    # Generate a new population
+    population = toolbox.generate()
+    # Evaluate the individuals
+    fitnesses = toolbox.map(toolbox.evaluate, population)
+    for ind, fit in zip(population, fitnesses):
+        ind.fitness.values = fit
+
     for gen in range(NGEN):
-        # Generate a new population
-        population = toolbox.generate()
-        # Evaluate the individuals
-        fitnesses = toolbox.map(toolbox.evaluate, population)
-        for ind, fit in zip(population, fitnesses):
-            ind.fitness.values = fit
-        
-        # Update the strategy with the evaluated individuals
-        toolbox.update(population)
+
+        end = time.time()
+        hof.update(population)
+        if hof[0].fitness.values[0] > errorLimit and (end - start < timeLimit):
+
+            # Generate a new population
+            population = toolbox.generate()
+            # Evaluate the individuals
+            fitnesses = toolbox.map(toolbox.evaluate, population)
+            for ind, fit in zip(population, fitnesses):
+                ind.fitness.values = fit
+            
+            # Update the strategy with the evaluated individuals
+            toolbox.update(population)
+
+        else:
+            if verbose:
+                print("Skip generation:", gen)
         
         # Update the hall of fame and the statistics with the
         # currently evaluated population
@@ -91,8 +115,7 @@ def CMA(verbose=False, NGEN=250):
         fbest[gen] = hof[0].fitness.values
         best[gen, :N] = hof[0]
 
-
-    return (hof[0][0], hof[0][1], fbest, best)
+    return (hof[0], fbest, best)
 
 def GA(verbose=False, NGEN=250):
 
