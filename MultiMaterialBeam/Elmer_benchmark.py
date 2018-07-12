@@ -4,7 +4,7 @@ import re
 
 #NOTE - the generated mesh must match nVoxels for this to be useful
 global nVoxels
-nVoxels = 40
+nVoxels = 4
 	
 def Elmer_blackbox_voxels(material_array, MPI = False, printToConsole = False):
 	#Returns list of n natural frequencies for a nVoxels beam.
@@ -89,8 +89,8 @@ def Elmer_blackbox_voxels(material_array, MPI = False, printToConsole = False):
 		casefile.write('  Name = "Polylactic Acid (PLA)"                    \n')
 		casefile.write('  Mesh Poisson ratio = 0.35                         \n')
 		casefile.write('  Poisson ratio = 0.35                              \n')
-		casefile.write('  Youngs modulus = 3.5e9                            \n')
-		casefile.write('  Density = 1.3e3                                   \n')
+		casefile.write('  Youngs modulus = 3e9                            \n')
+		casefile.write('  Density = 2950                                   \n')
 		casefile.write('End                                                 \n')
 		casefile.write('                                                    \n')
 		casefile.write('Material 2                                          \n')
@@ -112,7 +112,7 @@ def Elmer_blackbox_voxels(material_array, MPI = False, printToConsole = False):
 			casefile.write('                                                    \n')
 		casefile.write('Body Force 1                                        \n')
 		casefile.write('  Name = "PLA Body Force"                           \n')
-		casefile.write('  Stress Bodyforce 2 = $ -9.81 * 1.3e3              \n')
+		casefile.write('  Stress Bodyforce 2 = $ -9.81 * 2950              \n')
 		casefile.write('End                                                 \n')
 		casefile.write('                                                    \n')
 		casefile.write('Body Force 2                                        \n')
@@ -374,12 +374,12 @@ def generate_continuousSoln():
 
 def main():
 	#generate_homogeneous_1(nVoxels)
-	#generate_homogeneous_0(nVoxels)
+	generate_homogeneous_0(nVoxels)
 	#generate_random(nVoxels)
-	#generate_benchmark_soln()
+	generate_benchmark_soln()
 	
-	generate_continuousArray(nVoxels)
-	generate_continuousSoln()
+	#generate_continuousArray(nVoxels)
+	#generate_continuousSoln()
 
 if __name__ == "__main__":
 	main()
