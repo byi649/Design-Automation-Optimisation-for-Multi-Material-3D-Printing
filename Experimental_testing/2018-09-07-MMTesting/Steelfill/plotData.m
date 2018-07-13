@@ -2,7 +2,7 @@ clc
 clear
 
 %Read in from file
-fid = fopen('steelfill-sample26.txt','r');
+fid = fopen('steelfill-averaged.txt','r');
 
 data = textscan(fid, '%f %f %f','CommentStyle','*');
 f = data{1};
@@ -44,3 +44,5 @@ for i = 1:length(InPlane)
    l2.LineStyle = '--';
 end
 legend([p1,l1,l2],{'Data','Elmer Solutions','Analytic Solutions'})
+ylim([min(dB),max(dB)]);
+xlim([min(f),max(f)]);
