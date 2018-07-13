@@ -11,20 +11,23 @@ fclose(fid);
 
 %Solution data
 ElmerFreqs = [
-    39.69
-180.27
-218.13
-243.04
-661.19
-677.23
+61.45
+279.09
+337.70
+376.27
+1023.64
+1048.49
+
 ];
 
-InPlane = [38.763544022916
-242.927920662466
-680.057043841184
+InPlane = [
+    60.0271972
+376.1854744
+1053.100776
 ];
 
 %Plot
+figure(1)
 p1 = semilogx(f,dB);
 xlabel('Frequency [Hz]')
 ylabel('SPL [dB]')
@@ -46,3 +49,14 @@ end
 legend([p1,l1,l2],{'Data','Elmer Solutions','Analytic Solutions'})
 ylim([min(dB),max(dB)]);
 xlim([min(f),max(f)]);
+
+%fn vs n
+figure(2)
+plot(1:length(ElmerFreqs),ElmerFreqs,'--bo');
+hold on
+plot([1,4,5],InPlane,'*r','Linewidth',2);
+xlabel('Mode Number n')
+ylabel('Natural Frequency [Hz]')
+title('Flex - Natural Frequencies')
+xticks([1,2,3,4,5,6])
+legend('Elmer Solutions','In-Plane Bending Analytic Solutions')

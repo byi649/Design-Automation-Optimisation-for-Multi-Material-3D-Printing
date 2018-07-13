@@ -11,20 +11,21 @@ fclose(fid);
 
 %Solution data
 ElmerFreqs = [
-    185.33
-841.76
-1018.52
-1134.85
-3087.36
-3162.29
+208.58
+947.36
+1146.31
+1277.23
+3474.71
+3559.04
 ];
 
 InPlane = [
-    181.002880438105
-1134.33006416419
-3175.46516708348
+203.7120209
+1276.646367
+3573.868133
 ];
 %Plot
+figure(1)
 p1 = semilogx(f,dB);
 xlabel('Frequency [Hz]')
 ylabel('SPL [dB]')
@@ -46,3 +47,14 @@ end
 legend([p1,l1,l2],{'Data','Elmer Solutions','Analytic Solutions'})
 ylim([min(dB),max(dB)]);
 xlim([min(f),max(f)]);
+
+%fn vs n
+figure(2)
+plot(1:length(ElmerFreqs),ElmerFreqs,'--bo');
+hold on
+plot([1,4,5],InPlane,'*r','Linewidth',2);
+xlabel('Mode Number n')
+ylabel('Natural Frequency [Hz]')
+title('Steelfill - Natural Frequencies')
+xticks([1,2,3,4,5,6])
+legend('Elmer Solutions','In-Plane Bending Analytic Solutions')
