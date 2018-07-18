@@ -2,7 +2,7 @@ clc
 clear
 
 %Read in from file
-fid = fopen('PLA-averaged.txt','r');
+fid = fopen('PLA-averaged-2.txt','r');
 
 data = textscan(fid, '%f %f %f','CommentStyle','*');
 f = data{1};
@@ -11,18 +11,18 @@ fclose(fid);
 
 %Solution data
 ElmerFreqs = [
-225.08
-1022.31
-1236.99
-1378.27
-3749.59
-3840.58
+302.45
+1373.69
+1662.16
+1852.00
+5038.36
+5160.63
 ];
 
 InPlane = [
-219.8272345
-1377.639076
-3856.589045
+295.3839708
+1851.146886
+5182.135819
 ];
 %Plot
 figure(1)

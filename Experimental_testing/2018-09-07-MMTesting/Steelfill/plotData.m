@@ -2,7 +2,7 @@ clc
 clear
 
 %Read in from file
-fid = fopen('steelfill-averaged.txt','r');
+fid = fopen('steelfill-averaged-2.txt','r');
 
 data = textscan(fid, '%f %f %f','CommentStyle','*');
 f = data{1};
@@ -11,18 +11,18 @@ fclose(fid);
 
 %Solution data
 ElmerFreqs = [
-208.58
-947.36
-1146.31
-1277.23
-3474.71
-3559.04
+198.74
+902.68
+1092.24
+1216.99
+3310.83
+3391.18
 ];
 
 InPlane = [
-203.7120209
-1276.646367
-3573.868133
+194.1039648
+1216.433475
+3405.307017
 ];
 %Plot
 figure(1)

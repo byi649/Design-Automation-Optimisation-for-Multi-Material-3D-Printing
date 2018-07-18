@@ -2,7 +2,7 @@ clc
 clear
 
 %Read in from file
-fid = fopen('laminated-averaged.txt','r');
+fid = fopen('laminated-averaged-2.txt','r');
 
 data = textscan(fid, '%f %f %f','CommentStyle','*');
 f = data{1};
@@ -11,13 +11,12 @@ fclose(fid);
 
 %Solution data
 ElmerFreqs = [
-161.40
-737.76
-825.65
-893.67
-2188.59
-2208.46
-
+154.23
+709.64
+787.58
+857.98
+2108.53
+2127.11
 ];
 
 %Plot

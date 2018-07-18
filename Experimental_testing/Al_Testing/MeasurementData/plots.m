@@ -64,3 +64,6 @@ legend([p1,l1,l2],{'Data','Elmer Solutions','Analytic Solutions'})
 xlabel('Frequency [Hz]')
 ylabel('SPL [dB]')
 title('Frequency Spectrum - In-Plane Excitation Testing')
+
+figure(3)
+plot(1:6,ElmerFreqs,'--bo','Linewidth',2)

@@ -2,7 +2,7 @@ clc
 clear
 
 %Read in from file
-fid = fopen('flex-averaged.txt','r');
+fid = fopen('flex-averaged-2.txt','r');
 
 data = textscan(fid, '%f %f %f','CommentStyle','*');
 f = data{1};
@@ -11,19 +11,18 @@ fclose(fid);
 
 %Solution data
 ElmerFreqs = [
-61.45
-279.09
-337.70
-376.27
-1023.64
-1048.49
-
+60.18
+273.33
+330.73
+368.50
+1002.51
+1026.84
 ];
 
 InPlane = [
-    60.0271972
-376.1854744
-1053.100776
+58.78782522
+368.4184329
+1031.357572
 ];
 
 %Plot
