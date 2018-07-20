@@ -24,15 +24,15 @@ import math
 import SALOMEDS
 
 #Scale factor
-SF = 1000
+SF = 1
 
 #Define beam dimensions
 L = SF*100e-3 #Length of beam (x co-ord)
 h = SF*20e-3 #height of beam (y co-ord)
-b = SF*2e-3 #depth of beam (z co-ord)
+b = SF*4e-3 #depth of beam (z co-ord)
 
 #Number of voxels to use in x, y and z
-nVoxel_x = 20
+nVoxel_x = 10
 nVoxel_y = 4
 nVoxel_z = 1
 
@@ -150,7 +150,7 @@ LHS_boundary = Mesh_1.GroupOnFilter( SMESH.FACE, 'LHS_boundary', aFilter_1 )
 
 #Export mesh as UNV file
 try:
-  Mesh_1.ExportSTL( os.getcwd() + '/Completed_mesh.stl' )
+  Mesh_1.ExportUNV( os.getcwd() + '/Completed_mesh.unv' )
   pass
 except:
   print 'ExportUNV() failed. Invalid file name?'

@@ -4,7 +4,7 @@ import re
 
 #NOTE - the generated mesh must match nVoxels for this to be useful
 global nVoxels
-nVoxels = 4
+nVoxels = 40
 	
 def Elmer_blackbox_voxels(material_array, MPI = False, printToConsole = False):
 	#Returns list of n natural frequencies for a nVoxels beam.
@@ -374,7 +374,7 @@ def generate_continuousSoln():
 
 def main():
 	#generate_homogeneous_1(nVoxels)
-	#generate_homogeneous_0(nVoxels)
+	generate_homogeneous_0(nVoxels)
 	#generate_random(nVoxels)
 	generate_benchmark_soln()
 	
