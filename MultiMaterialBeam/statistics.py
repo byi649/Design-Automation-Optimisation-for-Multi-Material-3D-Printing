@@ -70,7 +70,7 @@ def runHeuristic_c():
     NGEN = 5000
     verbose = False
     nVoxels = 40
-    iters = 40
+    iters = 1
 
     fbestlist = []
     #firstlist = []
@@ -83,7 +83,7 @@ def runHeuristic_c():
 
     f1Array = [200]
     gradArray = [600]
-    timeLimitArray = [60*60]
+    timeLimitArray = [60*30]
     errorLimitArray = [0.1]
 
     simu_count = len(f1Array)*len(gradArray)*len(timeLimitArray)*len(errorLimitArray)*iters
@@ -95,13 +95,11 @@ def runHeuristic_c():
         np.savetxt('benchmark_frequencies.txt', benchmark, fmt = '%i')
 
         start = time.time()
-        (bin, fbest, best) = algos.CMA(verbose, NGEN, nVoxels, timeLimit=config[2], errorLimit=config[3])
+        (bin, fbest, best) = algos.CMA_ratio(verbose, NGEN, nVoxels, timeLimit=config[2], errorLimit=config[3])
         end = time.time()
 
-        E = bin[0:40]
-        E = [max(10**x, 1e6) for x in E]
-        rho = bin[40:80]
-        rho = [max(10**(x-6), 1e1) for x in rho]
+        E = [10**(3*x) for x in bin]
+        rho = [1e3]*40
         freq = blackbox.Elmer_blackbox_continuous(E, rho)
 
         #sol = binaryToStr(bin)
@@ -189,7 +187,7 @@ def runKMeans():
     df.to_csv("data.csv")
 
 def main():
-    runKMeans()
+    runHeuristic_c()
 
 if __name__ == "__main__":
 	main()

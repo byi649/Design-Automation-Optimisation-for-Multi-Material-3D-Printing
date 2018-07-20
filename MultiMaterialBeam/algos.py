@@ -117,6 +117,111 @@ def CMA(verbose=False, NGEN=250, nVoxels=4, timeLimit=float("inf"), errorLimit=1
 
     return (hof[0], fbest, best)
 
+def CMA_ratio(verbose=False, NGEN=250, nVoxels=4, timeLimit=float("inf"), errorLimit=1.0):
+
+    start = time.time()
+
+    creator.create("FitnessMin", base.Fitness, weights=(-1.0, ))
+    creator.create("Individual", list, fitness=creator.FitnessMin)
+
+    toolbox = base.Toolbox()
+    toolbox.register("evaluate", blackbox.fitness_voxel_continuous_ratio)
+
+    # Number of variables
+    N = nVoxels
+
+    UPPER_LIMIT = 4
+    LOWER_LIMIT = 2
+
+    def feasible(individual):
+        # Maximum bounds to catch NaN errors
+        feasible = True
+        for i in range(N):
+            if not (LOWER_LIMIT < individual[i] < UPPER_LIMIT):
+                feasible = False
+        return feasible
+
+    def distance(individual):
+        # Distance from feasibility
+        # Sum of distances from zero if negative
+        distance = 0
+        for i in range(N):
+            if individual[i] <= LOWER_LIMIT:
+                distance += LOWER_LIMIT - individual[i]
+            elif individual[i] >= UPPER_LIMIT:
+                distance += individual[i] - UPPER_LIMIT
+        return distance
+
+    # 1e11 chosen as greater than maximum potential objective value
+    # Not parallelisable
+    # toolbox.decorate("evaluate", tools.DeltaPenalty(feasible, 1e3, distance))
+
+    # Not sure if we can set individual sigma
+    # For now, scale rho down.
+    # TODO: Scale all variables down to unity
+    strategy = cma.Strategy(centroid=[(UPPER_LIMIT + LOWER_LIMIT) / 2]*N, sigma=((UPPER_LIMIT - LOWER_LIMIT) / 6))
+    toolbox.register("generate", strategy.generate, creator.Individual)
+    toolbox.register("update", strategy.update)
+
+    pool = multiprocessing.Pool()
+    toolbox.register("map", pool.map)
+
+    hof = tools.HallOfFame(1)
+    stats = tools.Statistics(lambda ind: ind.fitness.values)
+    stats.register("avg", np.mean)
+    stats.register("std", np.std)
+    stats.register("min", np.min)
+    stats.register("max", np.max)
+
+    logbook = tools.Logbook()
+    logbook.header = "gen", "evals", "std", "min", "avg", "max"
+
+    # Objects that will compile the data
+    fbest = np.ndarray((NGEN,1))
+    best = np.ndarray((NGEN,N))
+
+    # Generate a new population
+    population = toolbox.generate()
+    # Evaluate the individuals
+    fitnesses = toolbox.map(toolbox.evaluate, population)
+    for ind, fit in zip(population, fitnesses):
+        ind.fitness.values = fit
+
+    for gen in range(NGEN):
+
+        end = time.time()
+        hof.update(population)
+        if hof[0].fitness.values[0] > errorLimit and (end - start < timeLimit):
+
+            # Generate a new population
+            population = toolbox.generate()
+            # Evaluate the individuals
+            fitnesses = toolbox.map(toolbox.evaluate, population)
+            for ind, fit in zip(population, fitnesses):
+                ind.fitness.values = fit
+            
+            # Update the strategy with the evaluated individuals
+            toolbox.update(population)
+
+        else:
+            if verbose:
+                print("Skip generation:", gen)
+        
+        # Update the hall of fame and the statistics with the
+        # currently evaluated population
+        hof.update(population)
+        record = stats.compile(population)
+        logbook.record(evals=len(population), gen=gen, **record)
+        
+        if verbose:
+            print(logbook.stream)
+        
+        # Save more data along the evolution for latter plotting
+        fbest[gen] = hof[0].fitness.values
+        best[gen, :N] = hof[0]
+
+    return (hof[0], fbest, best)
+
 def GA(verbose=False, NGEN=250):
 
     creator.create("FitnessMin", base.Fitness, weights=(-1.0,))
@@ -735,11 +840,12 @@ def GA_voxel_test(verbose=False, NGEN=10, nVoxels=4, nPop=40, timeLimit=float("i
 
 def hill_climbing(verbose=False, nVoxels=4, parallel=40, timeLimit=float("inf"), errorLimit=1.0):
     
-    nVoxels=800
+    nVoxels=40
 
     # Generate random solution
     sol = list(np.random.randint(2, size=nVoxels))
-    fitness = blackbox.fitness_voxel(sol)
+
+    fitness = blackbox.fitness_voxel_uniform(sol, goal_f1=150)
     
     # Do sweeps
     # while(time < timeLimit and error > errorLimit):
@@ -747,10 +853,17 @@ def hill_climbing(verbose=False, nVoxels=4, parallel=40, timeLimit=float("inf"),
         for i in range(nVoxels):
             temp_sol = sol.copy()
             temp_sol[i] = 1 - sol[i]
-            temp_fitness = blackbox.fitness_voxel(temp_sol)
+            temp_fitness = blackbox.fitness_voxel_uniform(temp_sol, goal_f1=150)
 
             if temp_fitness < fitness:
                 fitness = temp_fitness
                 sol = temp_sol.copy()
 
             print(fitness)
+            print(sol)
+
+def main():
+    hill_climbing()
+
+if __name__ == "__main__":
+	main()

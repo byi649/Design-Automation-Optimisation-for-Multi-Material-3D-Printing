@@ -123,16 +123,16 @@ def blackbox_voxel(material_array, MPI = False, printToConsole = False):
                 casefile.write('  Name = "Polylactic Acid (PLA)"                    \n')
                 casefile.write('  Mesh Poisson ratio = 0.35                         \n')
                 casefile.write('  Poisson ratio = 0.35                              \n')
-                casefile.write('  Youngs modulus = 3.5e9                            \n')
-                casefile.write('  Density = 1.3e3                                   \n')
+                casefile.write('  Youngs modulus = 115e6                            \n')
+                casefile.write('  Density = 1072.5                                  \n')
                 casefile.write('End                                                 \n')
                 casefile.write('                                                    \n')
                 casefile.write('Material 2                                          \n')
                 casefile.write('  Name = "Aluminium (generic)"                      \n')
                 casefile.write('  Mesh Poisson ratio = 0.35                         \n')
                 casefile.write('  Poisson ratio = 0.35                              \n')
-                casefile.write('  Youngs modulus = 70e9                             \n')
-                casefile.write('  Density = 2700                                    \n')
+                casefile.write('  Youngs modulus = 3.45e9                           \n')
+                casefile.write('  Density = 2950                                    \n')
                 casefile.write('End                                                 \n')
                 casefile.write('                                                    \n')
                 for i in range(len(material_array)): #Write material allocations for each voxel
@@ -146,12 +146,12 @@ def blackbox_voxel(material_array, MPI = False, printToConsole = False):
                     casefile.write('                                                    \n')
                 casefile.write('Body Force 1                                        \n')
                 casefile.write('  Name = "PLA Body Force"                           \n')
-                casefile.write('  Stress Bodyforce 2 = $ -9.81 * 1.3e3              \n')
+                casefile.write('  Stress Bodyforce 2 = $ -9.81 * 1072.5             \n')
                 casefile.write('End                                                 \n')
                 casefile.write('                                                    \n')
                 casefile.write('Body Force 2                                        \n')
                 casefile.write('  Name = "Aluminium Body Force"                     \n')
-                casefile.write('  Stress Bodyforce 2 = $ -9.81 * 2700               \n')
+                casefile.write('  Stress Bodyforce 2 = $ -9.81 * 2950               \n')
                 casefile.write('End                                                 \n')
 
             
@@ -568,7 +568,7 @@ def fitness_voxel_uniform(bin, goal_f1=None, goal_grad=None):
     if goal_grad:
         penalty = penalty + (abs(goal_grad - slope)/goal_grad)
     #fitness = -r_value**2 + (abs(goal_f1 - slope - intercept)/goal_f1)**2 + (abs(goal_grad - slope)/goal_grad)**2
-    fitness = -r_value**2 * 3 + penalty
+    fitness = -r_value**2 + penalty
 
     return (fitness, )
     
@@ -616,3 +616,22 @@ def fitness_voxel_continuous_KM(E, rho):
     fitness = fitness/N
 
     return (fitness, freq)
+
+
+def fitness_voxel_continuous_ratio(bin):
+    goal = loadtxt('benchmark_frequencies.txt')
+    freq_goal = goal[:N]
+
+    # Max because constraints don't work
+    E = [10**(3*x) for x in bin]
+    rho = [1e3]*40
+
+    freq = Elmer_blackbox_continuous(E, rho)
+
+    fitness = 0
+    for i in range(N):
+        fitness += abs(freq[i] - freq_goal[i]) / freq_goal[i] * 100
+
+    fitness = fitness/N
+
+    return (fitness, )

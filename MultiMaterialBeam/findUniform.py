@@ -5,14 +5,14 @@ import matplotlib.pyplot as plt
 from toolkit import *
 import pandas as pd
 
-NGEN = 15
+NGEN = 50
 verbose = True
 nVoxels = 40
-iter = 15
-nPop = 10
+iter = 5
+nPop = 100
 
 goal_f1 = None
-goal_grad = 800
+goal_grad = None
 
 def single():
     (bin, fbest, best) = algos.GA_voxel_uniform(verbose, NGEN, nVoxels, nPop, goal_f1, goal_grad)
@@ -70,7 +70,7 @@ def multi():
     df.to_csv("uniform.csv")
 
 def main():
-    single()
+    multi()
 
 if __name__ == "__main__":
 	main()
