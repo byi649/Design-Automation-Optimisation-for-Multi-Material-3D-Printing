@@ -3,7 +3,7 @@ from matplotlib import pyplot as plt
 
 def PlotMaterialArray(MaterialArray,nx,ny,nz):
 	#Re-shapes a 1D material array of voxel allocations into a 3D array shape for plotting corresponding to nx ny and nz no. of voxels in the respective directions
-	fig, ax = plt.subplots(nz,1)
+	fig, ax = plt.subplots(nz,1,squeeze=False)
 	#ax.plot(x, y)
 	#ax.set_title('Simple plot')
 	#plt.text(0,-40,'Voxel allocation in cantilever: Yellow = Al, Purple = PLA',fontsize=16)
