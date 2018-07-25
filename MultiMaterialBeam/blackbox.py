@@ -123,8 +123,8 @@ def blackbox_voxel(material_array, MPI = False, printToConsole = False):
                 casefile.write('  Name = "Polylactic Acid (PLA)"                    \n')
                 casefile.write('  Mesh Poisson ratio = 0.35                         \n')
                 casefile.write('  Poisson ratio = 0.35                              \n')
-                casefile.write('  Youngs modulus = 115e6                            \n')
-                casefile.write('  Density = 1072.5                                  \n')
+                casefile.write('  Youngs modulus = 3.25e9                            \n')
+                casefile.write('  Density = 1200                                  \n')
                 casefile.write('End                                                 \n')
                 casefile.write('                                                    \n')
                 casefile.write('Material 2                                          \n')
@@ -146,7 +146,7 @@ def blackbox_voxel(material_array, MPI = False, printToConsole = False):
                     casefile.write('                                                    \n')
                 casefile.write('Body Force 1                                        \n')
                 casefile.write('  Name = "PLA Body Force"                           \n')
-                casefile.write('  Stress Bodyforce 2 = $ -9.81 * 1072.5             \n')
+                casefile.write('  Stress Bodyforce 2 = $ -9.81 * 1200             \n')
                 casefile.write('End                                                 \n')
                 casefile.write('                                                    \n')
                 casefile.write('Body Force 2                                        \n')
@@ -199,7 +199,7 @@ def blackbox_voxel(material_array, MPI = False, printToConsole = False):
     #Eigenvalues are omega^2. Convert to f [Hz] using omega = 2pi f
     frequencies = [(freq**0.5)/(2*math.pi) for freq in frequencies]
     
-    #print(frequencies)
+    print(frequencies)
     return frequencies
 
 def Elmer_blackbox_continuous(E_array, rho_array, MPI = False, printToConsole = False):

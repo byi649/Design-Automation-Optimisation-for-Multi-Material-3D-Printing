@@ -167,7 +167,7 @@ def Elmer_blackbox_voxels(material_array, MPI = False, printToConsole = False):
 	#Eigenvalues are omega^2. Convert to f [Hz] using omega = 2pi f
 	frequencies = [(freq**0.5)/(2*math.pi) for freq in frequencies]
 	
-	#print(frequencies)
+	print(frequencies)
 	return frequencies
 
 def Elmer_blackbox_continuous(E_array, rho_array, MPI = False, printToConsole = False):
@@ -374,10 +374,14 @@ def generate_continuousSoln():
 
 def main():
 	#generate_homogeneous_1(nVoxels)
-	generate_homogeneous_0(nVoxels)
+	#generate_homogeneous_0(nVoxels)
 	#generate_random(nVoxels)
-	generate_benchmark_soln()
-	
+	#generate_benchmark_soln()
+	mat = [0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+	#mat = [1-x for x in mat]
+	print(mat)
+	Elmer_blackbox_voxels(mat)
+
 	#generate_continuousArray(nVoxels)
 	#generate_continuousSoln()
 
