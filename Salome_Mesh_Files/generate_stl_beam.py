@@ -58,7 +58,7 @@ Voxels = []
 Voxels.append(geompy.MakeBoxDXDYDZ(voxel_dx, voxel_dy, voxel_dz))
 for i in range(len(bin)):
 	if(bin[i] == 0):
-		Voxels.append(geompy.MakeTranslation(Voxels[0],((i+1)//nVoxel_y)*nVoxel_x,(i+1)%nVoxel_y,0))
+		Voxels.append(geompy.MakeTranslation(Voxels[0], (i//nVoxel_y)*voxel_dx, (i%nVoxel_y)*voxel_dy,0))
 		
 del Voxels[0]
 
