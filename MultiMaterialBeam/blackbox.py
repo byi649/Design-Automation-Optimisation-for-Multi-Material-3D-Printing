@@ -7,6 +7,8 @@ from scipy import stats
 import tempfile
 import shutil
 import os
+import numpy as np
+from sklearn.cluster import KMeans
 
 from contextlib import contextmanager
 
@@ -611,27 +613,69 @@ def fitness_voxel_continuous_KM(E, rho):
 
     fitness = 0
     for i in range(N):
-        fitness += abs(freq[i] - freq_goal[i]) / freq_goal[i] * 100
+        fitness += (abs(freq[i] - freq_goal[i]) / freq_goal[i] * 100)**2
 
-    fitness = fitness/N
+    fitness = np.sqrt(fitness)
 
     return (fitness, freq)
 
 
-def fitness_voxel_continuous_ratio(bin):
+def fitness_voxel_continuous_ratio(bin, clusters=0):
     goal = loadtxt('benchmark_frequencies.txt')
     freq_goal = goal[:N]
 
-    # Max because constraints don't work
-    E = [10**(3*x) for x in bin]
     rho = [1e3]*40
+
+    if clusters == 0:
+        # Max because constraints don't work
+        E = [10**(3*x) for x in bin]
+    
+    else:
+
+        kmeans = KMeans(n_clusters=clusters)
+        s_array = np.array(bin).reshape(-1, 1)
+        kmeans.fit_predict(s_array) 
+        s_labels = kmeans.labels_
+        s_centers = kmeans.cluster_centers_
+
+        E = [10**(3*s_centers[s_labels[x]][0]) for x in range(40)]
 
     freq = Elmer_blackbox_continuous(E, rho)
 
     fitness = 0
     for i in range(N):
-        fitness += abs(freq[i] - freq_goal[i]) / freq_goal[i] * 100
+        fitness += (abs(freq[i] - freq_goal[i]) / freq_goal[i] * 100)**2
 
-    fitness = fitness/N
+    fitness = np.sqrt(fitness)
 
     return (fitness, )
+
+def fitness_voxel_continuous_ratio_KM(bin, clusters=0):
+    goal = loadtxt('benchmark_frequencies.txt')
+    freq_goal = goal[:N]
+
+    rho = [1e3]*40
+
+    if clusters == 0:
+        # Max because constraints don't work
+        E = [10**(3*x) for x in bin]
+    
+    else:
+
+        kmeans = KMeans(n_clusters=clusters)
+        s_array = np.array(bin).reshape(-1, 1)
+        kmeans.fit_predict(s_array) 
+        s_labels = kmeans.labels_
+        s_centers = kmeans.cluster_centers_
+
+        E = [10**(3*s_centers[s_labels[x]][0]) for x in range(40)]
+
+    freq = Elmer_blackbox_continuous(E, rho)
+
+    fitness = 0
+    for i in range(N):
+        fitness += (abs(freq[i] - freq_goal[i]) / freq_goal[i] * 100)**2
+
+    fitness = np.sqrt(fitness)
+
+    return (fitness, freq, [s_centers[s_labels[x]][0] for x in range(40)])

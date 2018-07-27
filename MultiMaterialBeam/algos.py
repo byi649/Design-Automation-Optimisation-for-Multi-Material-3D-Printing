@@ -15,6 +15,7 @@ from toolkit import *
 
 import time
 
+
 def CMA(verbose=False, NGEN=250, nVoxels=4, timeLimit=float("inf"), errorLimit=1.0):
 
     start = time.time()
@@ -117,7 +118,7 @@ def CMA(verbose=False, NGEN=250, nVoxels=4, timeLimit=float("inf"), errorLimit=1
 
     return (hof[0], fbest, best)
 
-def CMA_ratio(verbose=False, NGEN=250, nVoxels=4, timeLimit=float("inf"), errorLimit=1.0):
+def CMA_ratio(verbose=False, NGEN=250, nVoxels=4, timeLimit=float("inf"), errorLimit=1.0, clusters=None):
 
     start = time.time()
 
@@ -125,7 +126,7 @@ def CMA_ratio(verbose=False, NGEN=250, nVoxels=4, timeLimit=float("inf"), errorL
     creator.create("Individual", list, fitness=creator.FitnessMin)
 
     toolbox = base.Toolbox()
-    toolbox.register("evaluate", blackbox.fitness_voxel_continuous_ratio)
+    toolbox.register("evaluate", blackbox.fitness_voxel_continuous_ratio, clusters=clusters)
 
     # Number of variables
     N = nVoxels
