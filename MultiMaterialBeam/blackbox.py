@@ -201,7 +201,7 @@ def blackbox_voxel(material_array, MPI = False, printToConsole = False):
     #Eigenvalues are omega^2. Convert to f [Hz] using omega = 2pi f
     frequencies = [(freq**0.5)/(2*math.pi) for freq in frequencies]
     
-    #print(frequencies)
+    print(frequencies)
     return frequencies
 
 def Elmer_blackbox_continuous(E_array, rho_array, MPI = False, printToConsole = False):

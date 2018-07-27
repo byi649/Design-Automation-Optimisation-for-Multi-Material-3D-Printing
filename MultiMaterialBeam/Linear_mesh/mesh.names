@@ -40,5 +40,5 @@ $ Voxel_Body_38 = 38
 $ Voxel_Body_39 = 39
 $ Voxel_Body_40 = 40
 ! ----- names for boundaries -----
-$ LHS-boundary = 1
+$ LHS_boundary = 1
 $ bnry42 = 2
