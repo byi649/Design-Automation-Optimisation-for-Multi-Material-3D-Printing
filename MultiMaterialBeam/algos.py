@@ -118,7 +118,7 @@ def CMA(verbose=False, NGEN=250, nVoxels=4, timeLimit=float("inf"), errorLimit=1
 
     return (hof[0], fbest, best)
 
-def CMA_ratio(verbose=False, NGEN=250, nVoxels=4, timeLimit=float("inf"), errorLimit=1.0, clusters=None):
+def CMA_ratio(verbose=False, NGEN=250, nVoxels=4, timeLimit=float("inf"), errorLimit=1.0, clusters=0):
 
     start = time.time()
 
