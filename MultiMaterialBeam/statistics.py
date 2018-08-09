@@ -12,9 +12,11 @@ def runHeuristic():
     NGEN = 5000
     verbose = False
     nVoxels = 40
-    iters = 1
+    iters = 5
 
     fbestlist = []
+    fhistorylist = []
+    fhistorylistbk = []
     #firstlist = []
     sollist = []
     timelist = []
@@ -26,11 +28,11 @@ def runHeuristic():
     crossoverlist = []
 
     popArray = [40]
-    f1Array = [100, 150, 200, 250, 300, 350]
-    gradArray = [200, 400, 600, 800]
+    f1Array = [25, 50, 75]
+    gradArray = [100, 150, 200, 250]
     timeLimitArray = [60*60]
-    errorLimitArray = [0.1]
-    crossoverArray = ['NotModalSixPoint']
+    errorLimitArray = [0.01]
+    crossoverArray = ['ModalSixPoint']
 
     simu_count = len(popArray)*len(f1Array)*len(gradArray)*len(timeLimitArray)*len(errorLimitArray)*len(crossoverArray)*iters
 
@@ -51,6 +53,8 @@ def runHeuristic():
         frequencies = ", ".join(str(x) for x in freq)
 
         fbestlist.append(fbest[-1])
+        fhistorylist.append(fbest)
+        fhistorylistbk.append(list(fbest))
         # fbestlist.append(fbest)
         #firstlist.append(first)
         sollist.append(sol)
@@ -62,7 +66,7 @@ def runHeuristic():
         errorLimitlist.append(config[4])
         crossoverlist.append(config[5])
 
-    data = {'fbest': fbestlist,'sol': sollist, 'freq': freqlist, 'time': timelist, 'nPop': poplist, 'f1': f1list, 'grad': gradlist, 'errorLimit': errorLimitlist, 'crossover': crossoverlist}
+    data = {'fbest': fbestlist,'sol': sollist, 'freq': freqlist, 'time': timelist, 'nPop': poplist, 'f1': f1list, 'grad': gradlist, 'errorLimit': errorLimitlist, 'crossover': crossoverlist, 'fhistory': fhistorylist, 'fhistorybk': fhistorylistbk}
     df = pd.DataFrame(data)
     df.to_csv("data.csv")
 
@@ -200,8 +204,9 @@ def runKMeans():
     df.to_csv("data.csv")
 
 def main():
+    runHeuristic()
     # runHeuristic_c()
-    runKMeans()
+    # runKMeans()
 
 if __name__ == "__main__":
 	main()

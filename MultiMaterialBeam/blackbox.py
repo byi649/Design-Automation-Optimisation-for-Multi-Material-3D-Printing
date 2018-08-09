@@ -201,7 +201,7 @@ def blackbox_voxel(material_array, MPI = False, printToConsole = False):
     #Eigenvalues are omega^2. Convert to f [Hz] using omega = 2pi f
     frequencies = [(freq**0.5)/(2*math.pi) for freq in frequencies]
     
-    print(frequencies)
+    # print(frequencies)
     return frequencies
 
 def Elmer_blackbox_continuous(E_array, rho_array, MPI = False, printToConsole = False):
@@ -514,22 +514,20 @@ def blackbox(E, rho):
 
 # Input: List of [E, rho] where rho = true_rho * 1e6
 # Output: Fitness value (minimisation)
-# Fitness value is average percentage error
 def fitness2(E):
-    #goal = [55.73843789146891, 348.21686728338096, 509.718646370548, 516.4824354644039, 974.5856546461372, 1561.7741652094128]
     freq_goal = goal[:N]
 
     freq = blackbox(E[0], E[1]*1e-6)
     fitness = 0
     for i in range(N):
-        fitness += abs(freq[i] - freq_goal[i]) / freq_goal[i] * 100
+        fitness += (abs(freq[i] - freq_goal[i]) / freq_goal[i] * 100)**2
 
-    fitness = fitness/N
+    fitness = np.sqrt(fitness)
 
     return (fitness, )
 
+# CMA-ES binary input
 def fitness_binary(bin):
-    #goal = [55.73843789146891, 348.21686728338096, 509.718646370548, 516.4824354644039, 974.5856546461372, 1561.7741652094128]
     freq_goal = goal[:N]
 
     (E, rho) = binaryToVar(bin)
@@ -537,9 +535,9 @@ def fitness_binary(bin):
     freq = blackbox(E, rho*1e-6)
     fitness = 0
     for i in range(N):
-        fitness += abs(freq[i] - freq_goal[i]) / freq_goal[i] * 100
+        fitness += (abs(freq[i] - freq_goal[i]) / freq_goal[i] * 100)**2
 
-    fitness = fitness/N
+    fitness = np.sqrt(fitness)
 
     return (fitness, )
     
@@ -551,9 +549,9 @@ def fitness_voxel(bin):
 
     fitness = 0
     for i in range(N):
-        fitness += abs(freq[i] - freq_goal[i]) / freq_goal[i] * 100
+        fitness += (abs(freq[i] - freq_goal[i]) / freq_goal[i] * 100)**2
 
-    fitness = fitness/N
+    fitness = np.sqrt(fitness)
 
     return (fitness, )
 
@@ -599,9 +597,9 @@ def fitness_voxel_continuous(bin):
 
     fitness = 0
     for i in range(N):
-        fitness += abs(freq[i] - freq_goal[i]) / freq_goal[i] * 100
+        fitness += (abs(freq[i] - freq_goal[i]) / freq_goal[i] * 100)**2
 
-    fitness = fitness/N
+    fitness = np.sqrt(fitness)
 
     return (fitness, )
 

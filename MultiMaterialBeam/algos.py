@@ -846,7 +846,7 @@ def hill_climbing(verbose=False, nVoxels=4, parallel=40, timeLimit=float("inf"),
     # Generate random solution
     sol = list(np.random.randint(2, size=nVoxels))
 
-    fitness = blackbox.fitness_voxel_uniform(sol)
+    fitness = blackbox.fitness_voxel(sol)
     
     # Do sweeps
     # while(time < timeLimit and error > errorLimit):
@@ -854,7 +854,7 @@ def hill_climbing(verbose=False, nVoxels=4, parallel=40, timeLimit=float("inf"),
         for i in range(nVoxels):
             temp_sol = sol.copy()
             temp_sol[i] = 1 - sol[i]
-            temp_fitness = blackbox.fitness_voxel_uniform(temp_sol)
+            temp_fitness = blackbox.fitness_voxel(temp_sol)
 
             if temp_fitness < fitness:
                 fitness = temp_fitness
