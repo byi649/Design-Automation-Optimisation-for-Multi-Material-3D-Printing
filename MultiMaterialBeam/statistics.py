@@ -12,12 +12,10 @@ def runHeuristic():
     NGEN = 5000
     verbose = False
     nVoxels = 40
-    iters = 5
+    iters = 8
 
     fbestlist = []
     fhistorylist = []
-    fhistorylistbk = []
-    #firstlist = []
     sollist = []
     timelist = []
     freqlist = []
@@ -26,10 +24,11 @@ def runHeuristic():
     gradlist = []
     errorLimitlist = []
     crossoverlist = []
+    currenttimelist = []
 
-    popArray = [40]
-    f1Array = [25, 50, 75]
-    gradArray = [100, 150, 200, 250]
+    popArray = [25, 30, 35, 40, 45, 50, 55, 60]
+    f1Array = [75]
+    gradArray = [150]
     timeLimitArray = [60*60]
     errorLimitArray = [0.01]
     crossoverArray = ['ModalSixPoint']
@@ -43,7 +42,7 @@ def runHeuristic():
         np.savetxt('benchmark_frequencies.txt', benchmark, fmt = '%i')
 
         start = time.time()
-        (bin, fbest, best) = algos.GA_voxel_test(verbose, NGEN, nVoxels, config[0], timeLimit=config[3], errorLimit=config[4], crossover=config[5])
+        (bin, fbest, best, currenttime) = algos.GA_voxel_test(verbose, NGEN, nVoxels, config[0], timeLimit=config[3], errorLimit=config[4], crossover=config[5])
         end = time.time()
         freq = blackbox.blackbox_voxel(bin)
 
@@ -53,8 +52,8 @@ def runHeuristic():
         frequencies = ", ".join(str(x) for x in freq)
 
         fbestlist.append(fbest[-1])
-        fhistorylist.append(fbest)
-        fhistorylistbk.append(list(fbest))
+        fhistorylist.append(list(fbest))
+        currenttimelist.append(list(currenttime))
         # fbestlist.append(fbest)
         #firstlist.append(first)
         sollist.append(sol)
@@ -66,7 +65,7 @@ def runHeuristic():
         errorLimitlist.append(config[4])
         crossoverlist.append(config[5])
 
-    data = {'fbest': fbestlist,'sol': sollist, 'freq': freqlist, 'time': timelist, 'nPop': poplist, 'f1': f1list, 'grad': gradlist, 'errorLimit': errorLimitlist, 'crossover': crossoverlist, 'fhistory': fhistorylist, 'fhistorybk': fhistorylistbk}
+    data = {'fbest': fbestlist,'sol': sollist, 'freq': freqlist, 'time': timelist, 'nPop': poplist, 'f1': f1list, 'grad': gradlist, 'errorLimit': errorLimitlist, 'crossover': crossoverlist, 'fhistory': fhistorylist, 'currenttime': currenttimelist}
     df = pd.DataFrame(data)
     df.to_csv("data.csv")
 

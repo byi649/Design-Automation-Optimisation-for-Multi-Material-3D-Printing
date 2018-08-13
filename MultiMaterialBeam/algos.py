@@ -768,6 +768,7 @@ def GA_voxel_test(verbose=False, NGEN=10, nVoxels=4, nPop=40, timeLimit=float("i
     fbest = np.ndarray((NGEN,1))
     best = np.ndarray((NGEN, nVoxels))
     solutions = {}
+    currenttime = np.ndarray((NGEN,1))
 
     # Generate a new population
     population = toolbox.population(n=nPop)
@@ -835,9 +836,10 @@ def GA_voxel_test(verbose=False, NGEN=10, nVoxels=4, nPop=40, timeLimit=float("i
         # Save more data along the evolution for latter plotting
         fbest[gen] = hof[0].fitness.values
         best[gen, :nVoxels] = hof[0]
+        currenttime[gen] = time.time() - start
 
 
-    return (hof[0], fbest, best)
+    return (hof[0], fbest, best, currenttime)
 
 def hill_climbing(verbose=False, nVoxels=4, parallel=40, timeLimit=float("inf"), errorLimit=1.0):
     
