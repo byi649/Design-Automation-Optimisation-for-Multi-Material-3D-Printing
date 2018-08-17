@@ -12,7 +12,7 @@ def runHeuristic():
     NGEN = 5000
     verbose = False
     nVoxels = 40
-    iters = 8
+    iters = 10
 
     fbestlist = []
     fhistorylist = []
@@ -26,7 +26,7 @@ def runHeuristic():
     crossoverlist = []
     currenttimelist = []
 
-    popArray = [25, 30, 35, 40, 45, 50, 55, 60]
+    popArray = [10, 15, 20, 25, 30, 35, 40, 50, 60]
     f1Array = [75]
     gradArray = [150]
     timeLimitArray = [60*60]
