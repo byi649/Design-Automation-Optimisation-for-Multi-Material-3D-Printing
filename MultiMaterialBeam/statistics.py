@@ -12,7 +12,7 @@ def runHeuristic():
     NGEN = 5000
     verbose = False
     nVoxels = 40
-    iters = 10
+    iters = 30
 
     fbestlist = []
     fhistorylist = []
@@ -26,12 +26,12 @@ def runHeuristic():
     crossoverlist = []
     currenttimelist = []
 
-    popArray = [10, 15, 20, 25, 30, 35, 40, 50, 60]
+    popArray = [40]
     f1Array = [75]
     gradArray = [150]
-    timeLimitArray = [60*60]
+    timeLimitArray = [60*60*3]
     errorLimitArray = [0.01]
-    crossoverArray = ['ModalSixPoint']
+    crossoverArray = ['NotModalSixPoint']
 
     simu_count = len(popArray)*len(f1Array)*len(gradArray)*len(timeLimitArray)*len(errorLimitArray)*len(crossoverArray)*iters
 
