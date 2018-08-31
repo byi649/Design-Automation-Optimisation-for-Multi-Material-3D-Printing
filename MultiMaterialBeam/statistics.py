@@ -11,7 +11,7 @@ from sklearn.cluster import KMeans
 def runHeuristic():
     NGEN = 5000
     verbose = False
-    nVoxels = 40
+    nVoxels = 800
     iters = 30
 
     fbestlist = []
@@ -31,7 +31,7 @@ def runHeuristic():
     gradArray = [150]
     timeLimitArray = [60*60*3]
     errorLimitArray = [0.01]
-    crossoverArray = ['NotModalSixPoint']
+    crossoverArray = ['ModalSixPoint']
 
     simu_count = len(popArray)*len(f1Array)*len(gradArray)*len(timeLimitArray)*len(errorLimitArray)*len(crossoverArray)*iters
 
