@@ -180,6 +180,7 @@ def CMA_ratio(verbose=False, NGEN=250, nVoxels=4, timeLimit=float("inf"), errorL
     # Objects that will compile the data
     fbest = np.ndarray((NGEN,1))
     best = np.ndarray((NGEN,N))
+    currenttime = np.ndarray((NGEN,1))
 
     # Generate a new population
     population = toolbox.generate()
@@ -220,8 +221,9 @@ def CMA_ratio(verbose=False, NGEN=250, nVoxels=4, timeLimit=float("inf"), errorL
         # Save more data along the evolution for latter plotting
         fbest[gen] = hof[0].fitness.values
         best[gen, :N] = hof[0]
+        currenttime[gen] = time.time() - start
 
-    return (hof[0], fbest, best)
+    return (hof[0], fbest, best, currenttime)
 
 def GA(verbose=False, NGEN=250):
 
@@ -745,6 +747,8 @@ def GA_voxel_test(verbose=False, NGEN=10, nVoxels=4, nPop=40, timeLimit=float("i
 
     if crossover == 'ModalSixPoint':
         toolbox.register("mate", ModalSixPoint)
+    elif crossover == 'Modal40Point':
+        toolbox.register("mate", Modal40Point)
     else:
         toolbox.register("mate", tools.cxTwoPoint)
 

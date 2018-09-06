@@ -11,7 +11,7 @@ from sklearn.cluster import KMeans
 def runHeuristic():
     NGEN = 5000
     verbose = False
-    nVoxels = 800
+    nVoxels = 40
     iters = 30
 
     fbestlist = []
@@ -29,9 +29,9 @@ def runHeuristic():
     popArray = [40]
     f1Array = [75]
     gradArray = [150]
-    timeLimitArray = [60*60*3]
+    timeLimitArray = [60*60]
     errorLimitArray = [0.01]
-    crossoverArray = ['ModalSixPoint']
+    crossoverArray = ['Modal40Point']
 
     simu_count = len(popArray)*len(f1Array)*len(gradArray)*len(timeLimitArray)*len(errorLimitArray)*len(crossoverArray)*iters
 
@@ -138,29 +138,31 @@ def runKMeans():
     timeLimit = 60*60
 
     fbestlist = []
+    fhistorylist = []
     sollist = []
     freqlist = []
     f1list = []
     gradlist = []
     clusterlist = []
+    currenttimelist = []
 
-    f1Array = [50, 200, 400]
-    gradArray = [200, 400, 600]
-    clusterArray = [0, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+    f1Array = [50, 75, 100, 125]
+    gradArray = [100, 150, 200, 250]
+    clusterArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
 
     simu_count = len(f1Array)*len(gradArray)*iters
 
-    print("Starting simulation - estimated time: {} hours ".format(simu_count+(5*len(clusterArray))/3600))
+    print("Starting simulation - estimated time: {} hours ".format((simu_count*timeLimit+(5*len(clusterArray)))/3600))
     for i, config in enumerate(list(itertools.product(f1Array, gradArray, clusterArray))*iters):
         print("Running iteration: {}/{}, f1: {}, grad: {}, clusters: {}".format(i+1, simu_count*len(clusterArray), config[0], config[1], config[2]))
         benchmark = [config[0] + config[1]*x for x in range(6)]
         np.savetxt('benchmark_frequencies.txt', benchmark, fmt = '%i')
 
+        start = time.time()
+
         if (config[2] == 0):
 
-            (bin, fbest, best) = algos.CMA_ratio(verbose=verbose, NGEN=5000, nVoxels=nVoxels, timeLimit=timeLimit, errorLimit=0.1)
-            # bin = [2.808656126220426, 4.660962727729024, 2.3636172988154587, 3.316311270665622, 3.35142768510695, 3.7902972491483853, 2.753118039543312, 3.7380126576190693, 3.0384099695119975, 2.4737431008208124, 4.02632647695612, 3.109547093312928, 4.273884023468331, 3.1076252209040285, 3.340720386258119, 3.0881891242502855, 3.765003347867056, 4.301153775556621, 5.198151425485613, 3.3132885646634826, 3.009273859474627, 3.0395426477073593, 4.062077538371861, 2.9023028398810142, 3.388319545288303, 4.202841833941897, 2.952292743243537, 2.824184734723291, 2.5446150537640775, 3.802644074279686, 2.6881394215499967, 2.7523547947460187, 3.441620350125819, 3.9708299567397765, 2.384567331151244, 3.196860742812609, 4.615062661055728, 2.961349099370517, 3.0662807596891217, 3.0234206578153193]
-            # fbest = [[5.282643763622793]]
+            (bin, fbest, best, currenttime) = algos.CMA_ratio(verbose=verbose, NGEN=5000, nVoxels=nVoxels, timeLimit=timeLimit, errorLimit=0.1)
 
             E = [10**(3*x) for x in bin]
             rho = [1e3]*40
@@ -187,25 +189,28 @@ def runKMeans():
 
             fbest, freq = blackbox.fitness_voxel_continuous_KM(E_fake, rho_fake)
             fbest = [[fbest]]
+            currenttime = [time.time() - start]
 
         sol = bin
         frequencies = ", ".join(str(x) for x in freq)
 
         fbestlist.append(fbest[-1])
+        fhistorylist.append(list(fbest))
+        currenttimelist.append(list(currenttime))
         sollist.append(sol)
         freqlist.append(frequencies)
         f1list.append(config[0])
         gradlist.append(config[1])
         clusterlist.append(config[2])
 
-    data = {'fbest': fbestlist,'sol': sollist, 'freq': freqlist, 'f1': f1list, 'grad': gradlist, 'cluster': clusterlist}
+    data = {'fbest': fbestlist,'sol': sollist, 'freq': freqlist, 'f1': f1list, 'grad': gradlist, 'cluster': clusterlist, 'fhistory': fhistorylist, 'currenttime': currenttimelist}
     df = pd.DataFrame(data)
     df.to_csv("data.csv")
 
 def main():
-    runHeuristic()
+    # runHeuristic()
     # runHeuristic_c()
-    # runKMeans()
+    runKMeans()
 
 if __name__ == "__main__":
 	main()

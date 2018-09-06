@@ -40,3 +40,22 @@ def ModalSixPoint(ind1, ind2):
     ind1[cxpoint3:cxpoint4], ind2[cxpoint3:cxpoint4] = ind2[cxpoint3:cxpoint4], ind1[cxpoint3:cxpoint4]
     ind1[cxpoint5:cxpoint6], ind2[cxpoint5:cxpoint6] = ind2[cxpoint5:cxpoint6], ind1[cxpoint5:cxpoint6]
     return ind1, ind2
+
+def Modal40Point(ind1, ind2):
+    size = len(ind1)
+    cxpoint1 = int(round(1.0*size/10.0))
+    cxpoint2 = int(round(2.0*size/10.0))
+    cxpoint3 = int(round(3.0*size/10.0))
+    cxpoint4 = int(round(4.0*size/10.0))
+    cxpoint5 = int(round(5.0*size/10.0))
+    cxpoint6 = int(round(6.0*size/10.0))
+    cxpoint7 = int(round(7.0*size/10.0))
+    cxpoint8 = int(round(8.0*size/10.0))
+    cxpoint9 = int(round(9.0*size/10.0))
+
+    ind1[cxpoint1:cxpoint2], ind2[cxpoint1:cxpoint2] = ind2[cxpoint1:cxpoint2], ind1[cxpoint1:cxpoint2]
+    ind1[cxpoint3:cxpoint4], ind2[cxpoint3:cxpoint4] = ind2[cxpoint3:cxpoint4], ind1[cxpoint3:cxpoint4]
+    ind1[cxpoint5:cxpoint6], ind2[cxpoint5:cxpoint6] = ind2[cxpoint5:cxpoint6], ind1[cxpoint5:cxpoint6]
+    ind1[cxpoint7:cxpoint8], ind2[cxpoint7:cxpoint8] = ind2[cxpoint7:cxpoint8], ind1[cxpoint7:cxpoint8]
+    ind1[cxpoint9:size], ind2[cxpoint9:size] = ind2[cxpoint9:size], ind1[cxpoint9:size]
+    return ind1, ind2
