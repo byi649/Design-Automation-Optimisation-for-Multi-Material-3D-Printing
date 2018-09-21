@@ -134,7 +134,7 @@ def runHeuristic_c():
 def runKMeans():
     verbose = False
     nVoxels = 40
-    iters = 10
+    iters = 30
     timeLimit = 60*60
 
     fbestlist = []
@@ -146,9 +146,9 @@ def runKMeans():
     clusterlist = []
     currenttimelist = []
 
-    f1Array = [50, 75, 100, 125]
-    gradArray = [100, 150, 200, 250]
-    clusterArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+    f1Array = [75]
+    gradArray = [150]
+    clusterArray = list(range(40))
 
     simu_count = len(f1Array)*len(gradArray)*iters
 
