@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+#This script is to be imported using a working Salome installation to export a voxelised cantilever geometry in .unv format
 
 ###
 ### This file is generated automatically by SALOME v8.4.0 with dump python functionality
@@ -40,6 +40,10 @@ nVoxel_z = 1
 voxel_dx = L/nVoxel_x 
 voxel_dy = h/nVoxel_y
 voxel_dz = b/nVoxel_z
+
+#Define characteristic dimensions of mesh elements
+mesh_dx = SF*0.67e-3
+
 
 geompy = geomBuilder.New(theStudy)
 #Global co-ordinate axes
@@ -105,8 +109,6 @@ for i in range(len(Solids)):
 ### SMESH component
 ###
 
-#Define characteristic dimensions of mesh elements
-mesh_dx = SF*0.67e-3
 import  SMESH, SALOMEDS
 from salome.smesh import smeshBuilder
 

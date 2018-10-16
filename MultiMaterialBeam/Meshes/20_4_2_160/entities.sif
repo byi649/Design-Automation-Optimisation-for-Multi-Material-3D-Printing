@@ -1,0 +1,650 @@
+!------ Skeleton for body section -----
+Body 1
+  Name = Voxel_Body_1
+End
+
+Body 2
+  Name = Voxel_Body_2
+End
+
+Body 3
+  Name = Voxel_Body_3
+End
+
+Body 4
+  Name = Voxel_Body_4
+End
+
+Body 5
+  Name = Voxel_Body_5
+End
+
+Body 6
+  Name = Voxel_Body_6
+End
+
+Body 7
+  Name = Voxel_Body_7
+End
+
+Body 8
+  Name = Voxel_Body_8
+End
+
+Body 9
+  Name = Voxel_Body_9
+End
+
+Body 10
+  Name = Voxel_Body_10
+End
+
+Body 11
+  Name = Voxel_Body_11
+End
+
+Body 12
+  Name = Voxel_Body_12
+End
+
+Body 13
+  Name = Voxel_Body_13
+End
+
+Body 14
+  Name = Voxel_Body_14
+End
+
+Body 15
+  Name = Voxel_Body_15
+End
+
+Body 16
+  Name = Voxel_Body_16
+End
+
+Body 17
+  Name = Voxel_Body_17
+End
+
+Body 18
+  Name = Voxel_Body_18
+End
+
+Body 19
+  Name = Voxel_Body_19
+End
+
+Body 20
+  Name = Voxel_Body_20
+End
+
+Body 21
+  Name = Voxel_Body_21
+End
+
+Body 22
+  Name = Voxel_Body_22
+End
+
+Body 23
+  Name = Voxel_Body_23
+End
+
+Body 24
+  Name = Voxel_Body_24
+End
+
+Body 25
+  Name = Voxel_Body_25
+End
+
+Body 26
+  Name = Voxel_Body_26
+End
+
+Body 27
+  Name = Voxel_Body_27
+End
+
+Body 28
+  Name = Voxel_Body_28
+End
+
+Body 29
+  Name = Voxel_Body_29
+End
+
+Body 30
+  Name = Voxel_Body_30
+End
+
+Body 31
+  Name = Voxel_Body_31
+End
+
+Body 32
+  Name = Voxel_Body_32
+End
+
+Body 33
+  Name = Voxel_Body_33
+End
+
+Body 34
+  Name = Voxel_Body_34
+End
+
+Body 35
+  Name = Voxel_Body_35
+End
+
+Body 36
+  Name = Voxel_Body_36
+End
+
+Body 37
+  Name = Voxel_Body_37
+End
+
+Body 38
+  Name = Voxel_Body_38
+End
+
+Body 39
+  Name = Voxel_Body_39
+End
+
+Body 40
+  Name = Voxel_Body_40
+End
+
+Body 41
+  Name = Voxel_Body_41
+End
+
+Body 42
+  Name = Voxel_Body_42
+End
+
+Body 43
+  Name = Voxel_Body_43
+End
+
+Body 44
+  Name = Voxel_Body_44
+End
+
+Body 45
+  Name = Voxel_Body_45
+End
+
+Body 46
+  Name = Voxel_Body_46
+End
+
+Body 47
+  Name = Voxel_Body_47
+End
+
+Body 48
+  Name = Voxel_Body_48
+End
+
+Body 49
+  Name = Voxel_Body_49
+End
+
+Body 50
+  Name = Voxel_Body_50
+End
+
+Body 51
+  Name = Voxel_Body_51
+End
+
+Body 52
+  Name = Voxel_Body_52
+End
+
+Body 53
+  Name = Voxel_Body_53
+End
+
+Body 54
+  Name = Voxel_Body_54
+End
+
+Body 55
+  Name = Voxel_Body_55
+End
+
+Body 56
+  Name = Voxel_Body_56
+End
+
+Body 57
+  Name = Voxel_Body_57
+End
+
+Body 58
+  Name = Voxel_Body_58
+End
+
+Body 59
+  Name = Voxel_Body_59
+End
+
+Body 60
+  Name = Voxel_Body_60
+End
+
+Body 61
+  Name = Voxel_Body_61
+End
+
+Body 62
+  Name = Voxel_Body_62
+End
+
+Body 63
+  Name = Voxel_Body_63
+End
+
+Body 64
+  Name = Voxel_Body_64
+End
+
+Body 65
+  Name = Voxel_Body_65
+End
+
+Body 66
+  Name = Voxel_Body_66
+End
+
+Body 67
+  Name = Voxel_Body_67
+End
+
+Body 68
+  Name = Voxel_Body_68
+End
+
+Body 69
+  Name = Voxel_Body_69
+End
+
+Body 70
+  Name = Voxel_Body_70
+End
+
+Body 71
+  Name = Voxel_Body_71
+End
+
+Body 72
+  Name = Voxel_Body_72
+End
+
+Body 73
+  Name = Voxel_Body_73
+End
+
+Body 74
+  Name = Voxel_Body_74
+End
+
+Body 75
+  Name = Voxel_Body_75
+End
+
+Body 76
+  Name = Voxel_Body_76
+End
+
+Body 77
+  Name = Voxel_Body_77
+End
+
+Body 78
+  Name = Voxel_Body_78
+End
+
+Body 79
+  Name = Voxel_Body_79
+End
+
+Body 80
+  Name = Voxel_Body_80
+End
+
+Body 81
+  Name = Voxel_Body_81
+End
+
+Body 82
+  Name = Voxel_Body_82
+End
+
+Body 83
+  Name = Voxel_Body_83
+End
+
+Body 84
+  Name = Voxel_Body_84
+End
+
+Body 85
+  Name = Voxel_Body_85
+End
+
+Body 86
+  Name = Voxel_Body_86
+End
+
+Body 87
+  Name = Voxel_Body_87
+End
+
+Body 88
+  Name = Voxel_Body_88
+End
+
+Body 89
+  Name = Voxel_Body_89
+End
+
+Body 90
+  Name = Voxel_Body_90
+End
+
+Body 91
+  Name = Voxel_Body_91
+End
+
+Body 92
+  Name = Voxel_Body_92
+End
+
+Body 93
+  Name = Voxel_Body_93
+End
+
+Body 94
+  Name = Voxel_Body_94
+End
+
+Body 95
+  Name = Voxel_Body_95
+End
+
+Body 96
+  Name = Voxel_Body_96
+End
+
+Body 97
+  Name = Voxel_Body_97
+End
+
+Body 98
+  Name = Voxel_Body_98
+End
+
+Body 99
+  Name = Voxel_Body_99
+End
+
+Body 100
+  Name = Voxel_Body_100
+End
+
+Body 101
+  Name = Voxel_Body_101
+End
+
+Body 102
+  Name = Voxel_Body_102
+End
+
+Body 103
+  Name = Voxel_Body_103
+End
+
+Body 104
+  Name = Voxel_Body_104
+End
+
+Body 105
+  Name = Voxel_Body_105
+End
+
+Body 106
+  Name = Voxel_Body_106
+End
+
+Body 107
+  Name = Voxel_Body_107
+End
+
+Body 108
+  Name = Voxel_Body_108
+End
+
+Body 109
+  Name = Voxel_Body_109
+End
+
+Body 110
+  Name = Voxel_Body_110
+End
+
+Body 111
+  Name = Voxel_Body_111
+End
+
+Body 112
+  Name = Voxel_Body_112
+End
+
+Body 113
+  Name = Voxel_Body_113
+End
+
+Body 114
+  Name = Voxel_Body_114
+End
+
+Body 115
+  Name = Voxel_Body_115
+End
+
+Body 116
+  Name = Voxel_Body_116
+End
+
+Body 117
+  Name = Voxel_Body_117
+End
+
+Body 118
+  Name = Voxel_Body_118
+End
+
+Body 119
+  Name = Voxel_Body_119
+End
+
+Body 120
+  Name = Voxel_Body_120
+End
+
+Body 121
+  Name = Voxel_Body_121
+End
+
+Body 122
+  Name = Voxel_Body_122
+End
+
+Body 123
+  Name = Voxel_Body_123
+End
+
+Body 124
+  Name = Voxel_Body_124
+End
+
+Body 125
+  Name = Voxel_Body_125
+End
+
+Body 126
+  Name = Voxel_Body_126
+End
+
+Body 127
+  Name = Voxel_Body_127
+End
+
+Body 128
+  Name = Voxel_Body_128
+End
+
+Body 129
+  Name = Voxel_Body_129
+End
+
+Body 130
+  Name = Voxel_Body_130
+End
+
+Body 131
+  Name = Voxel_Body_131
+End
+
+Body 132
+  Name = Voxel_Body_132
+End
+
+Body 133
+  Name = Voxel_Body_133
+End
+
+Body 134
+  Name = Voxel_Body_134
+End
+
+Body 135
+  Name = Voxel_Body_135
+End
+
+Body 136
+  Name = Voxel_Body_136
+End
+
+Body 137
+  Name = Voxel_Body_137
+End
+
+Body 138
+  Name = Voxel_Body_138
+End
+
+Body 139
+  Name = Voxel_Body_139
+End
+
+Body 140
+  Name = Voxel_Body_140
+End
+
+Body 141
+  Name = Voxel_Body_141
+End
+
+Body 142
+  Name = Voxel_Body_142
+End
+
+Body 143
+  Name = Voxel_Body_143
+End
+
+Body 144
+  Name = Voxel_Body_144
+End
+
+Body 145
+  Name = Voxel_Body_145
+End
+
+Body 146
+  Name = Voxel_Body_146
+End
+
+Body 147
+  Name = Voxel_Body_147
+End
+
+Body 148
+  Name = Voxel_Body_148
+End
+
+Body 149
+  Name = Voxel_Body_149
+End
+
+Body 150
+  Name = Voxel_Body_150
+End
+
+Body 151
+  Name = Voxel_Body_151
+End
+
+Body 152
+  Name = Voxel_Body_152
+End
+
+Body 153
+  Name = Voxel_Body_153
+End
+
+Body 154
+  Name = Voxel_Body_154
+End
+
+Body 155
+  Name = Voxel_Body_155
+End
+
+Body 156
+  Name = Voxel_Body_156
+End
+
+Body 157
+  Name = Voxel_Body_157
+End
+
+Body 158
+  Name = Voxel_Body_158
+End
+
+Body 159
+  Name = Voxel_Body_159
+End
+
+Body 160
+  Name = Voxel_Body_160
+End
+
+!------ Skeleton for boundary section -----
+Boundary Condition 1
+  Name = LHS_boundary
+End
+
+Boundary Condition 2
+  Name = bnry162
+End
+

@@ -1,0 +1,24 @@
+! ----- names for bodies -----
+$ Voxel_Body_1 = 1
+$ Voxel_Body_2 = 2
+$ Voxel_Body_3 = 3
+$ Voxel_Body_4 = 4
+$ Voxel_Body_5 = 5
+$ Voxel_Body_6 = 6
+$ Voxel_Body_7 = 7
+$ Voxel_Body_8 = 8
+$ Voxel_Body_9 = 9
+$ Voxel_Body_10 = 10
+$ Voxel_Body_11 = 11
+$ Voxel_Body_12 = 12
+$ Voxel_Body_13 = 13
+$ Voxel_Body_14 = 14
+$ Voxel_Body_15 = 15
+$ Voxel_Body_16 = 16
+$ Voxel_Body_17 = 17
+$ Voxel_Body_18 = 18
+$ Voxel_Body_19 = 19
+$ Voxel_Body_20 = 20
+! ----- names for boundaries -----
+$ LHS_boundary = 1
+$ bnry22 = 2

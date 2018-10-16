@@ -1,4 +1,7 @@
-# -*- coding: utf-8 -*-
+#This Salome Python script will regenerate a voxel beam cantilever solution from a material allocation array
+#Exports an inclusion and matrix stl file for 3D-printer import
+#Inclusion - flex
+#Matrix - steelfill
 
 ###
 ### This file is generated automatically by SALOME v8.4.0 with dump python functionality
@@ -28,6 +31,7 @@ import SALOMEDS
 #1 - stiff, matrix material
 bin = [0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 0]
 
+#Scale factor m and mm conversion
 SF = 1000
 
 #Define beam dimensions
